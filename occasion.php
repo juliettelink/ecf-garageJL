@@ -1,8 +1,12 @@
 <?php 
 require __DIR__ ."/templates/header.php";
+
 require __DIR__. "/lib/car.php";
+
 ?>
 <h1> presentation des occasions</h1>
+
+<p>mettre les filtres en place</p>
 
   <div class="row text-center ">
     <?php foreach($cars as $key => $car){ 
