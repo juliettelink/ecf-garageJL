@@ -1,11 +1,5 @@
 <?php 
-    $mainMenu = [
-        "index.php"=> [ "title"=>"Accueil", "head_title"=> "Accueil Garage V.Parrot", "meta_description"=>"Garage V.Parrot, la confiance est notre priorité"],
-        "service.php"=> ["title"=>"Nos Services", "head_title"=> "Services Garage V.Parrot","meta_description"=>"Découvrer nos services"],
-        "occasion.php"=> ["title"=>"Nos Occasions", "head_title"=> "Occasions Garage V.Parrot","meta_description"=>"Découvrer nos occasions"],
-        "opening-time.php"=>["title"=>"Nos Horaires","head_title"=> "Horaires Garage V.Parrot","meta_description"=>"Nos horaires d'ouvertures"],
-        
-    ];
+   require __DIR__ . '/../lib/menu.php';
 
     $currentPage = basename($_SERVER["SCRIPT_NAME"]);
 ?>
@@ -37,11 +31,15 @@
 
             <ul class="nav nav-pills col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <?php
-                    foreach($mainMenu as $key =>$menuItem){?>
+                    foreach($mainMenu as $key => $menuItem){
+                        if(!$menuItem["exclude"]){
+                        ?>
                     <li class="nav-item"><a href="<?= $key?>" class="nav-link px-2 <?php 
                         if($key === $currentPage){ echo "active";}
                         ?>"><?=$menuItem["title"]; ?></a></li>
-                <?php } ?>
+                <?php }
+                } 
+                ?>
             </ul>
             
 
