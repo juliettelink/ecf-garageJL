@@ -1,6 +1,5 @@
 <?php 
    require __DIR__ . '/../lib/menu.php';
-
     $currentPage = basename($_SERVER["SCRIPT_NAME"]);
 ?>
 
@@ -15,9 +14,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;400&family=Barlow:wght@100&family=Rajdhani:wght@300&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"> 
-    <link rel="stylesheet" href="assets/css/override-bootstrap.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
 </head>
 <body>
     <div class="container">
@@ -45,7 +44,7 @@
 
             <div class="col-md-3 text-end">
                 <button type="button" class="btn btn-outline-primary me-2">Espace Pro</button>
-                <button type="button" class="btn btn-primary">Avis</button>
+                <a href="opinion.php" type="button" class="btn btn-primary">Avis</a>
             </div>
         </header>
         <!--fin navbar-->
