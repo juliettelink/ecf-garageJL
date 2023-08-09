@@ -1,5 +1,7 @@
-<?php 
-require __DIR__ ."/templates/header.php";
+<?php
+require_once __DIR__ . "/lib/opinion.php";
+require_once __DIR__ . "/templates/header.php";
+
 ?>
 <h1>Vos Avis</h1>
 <form action= "" method="post">
@@ -26,6 +28,6 @@ require __DIR__ ."/templates/header.php";
     </div>
 
 </form>
-<?php 
-require __DIR__ ."/templates/footer.php";
+<?php
+require_once __DIR__ . "/templates/footer.php";
 ?>

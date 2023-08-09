@@ -44,7 +44,7 @@
 
             <div class="col-md-3 text-end">
                 <button type="button" class="btn btn-outline-primary me-2">Espace Pro</button>
-                <a href="opinion.php" type="button" class="btn btn-primary">Avis</a>
+                <a href="opinions.php" type="button" class="btn btn-primary">Avis</a>
             </div>
         </header>
         <!--fin navbar-->
