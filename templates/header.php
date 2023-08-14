@@ -1,5 +1,5 @@
 <?php 
-   require __DIR__ . '/../lib/menu.php';
+   require_once __DIR__ . '/../lib/menu.php';
     $currentPage = basename($_SERVER["SCRIPT_NAME"]);
 ?>
 
@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="<?= $mainMenu[$currentPage]["meta_description"] ?>">
+    <meta name="description" content="<?=$mainMenu[$currentPage]["meta_description"] ?>">
     <title><?= $mainMenu[$currentPage]["head_title"]?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,11 +31,11 @@
             <ul class="nav nav-pills col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <?php
                     foreach($mainMenu as $key => $menuItem){
-                        if(!$menuItem["exclude"]){
+                        if(!array_key_exists("exclude", $menuItem)){
                         ?>
                     <li class="nav-item"><a href="<?= $key?>" class="nav-link px-2 <?php 
                         if($key === $currentPage){ echo "active";}
-                        ?>"><?=$menuItem["title"]; ?></a></li>
+                        ?>"><?=$menuItem["menu_title"]; ?></a></li>
                 <?php }
                 } 
                 ?>

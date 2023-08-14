@@ -1,7 +1,8 @@
 <?php 
-require __DIR__ ."/templates/header.php";
-require __DIR__ . "/lib/menu.php";
-require __DIR__. "/lib/car.php";
+require_once __DIR__ . "/lib/menu.php";
+require_once __DIR__ ."/templates/header.php";
+
+require_once __DIR__. "/lib/car.php";
 
 ?>
 <h1> presentation des occasions</h1>

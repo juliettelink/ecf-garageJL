@@ -1,5 +1,8 @@
 <?php
+require_once __DIR__ . '/lib/menu.php';
 require_once __DIR__ . "/lib/opinion.php";
+
+$mainMenu["opinions.php"] = ["head_title" => "title", "meta_description" => "a mettre", "exclude" => true];
 require_once __DIR__ . "/templates/header.php";
 
 ?>
@@ -10,8 +13,8 @@ require_once __DIR__ . "/templates/header.php";
         <input type="name" class="form-control" id="name" placeholder="votre nom">
     </div>
     <div class="form-group">
-        <label for="exampleFormControlTextarea1">Votre commentaire</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <label for="comment">Votre commentaire</label>
+        <textarea class="form-control" name="comment" id="comment" rows="3"></textarea>
     </div>
 
 

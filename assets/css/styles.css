@@ -78,6 +78,7 @@ h1, h2{
     
 }
 
+
 /*slogan*/
 .presentation{ 
         display: inline-block;
@@ -110,8 +111,24 @@ h1, h2{
 
 /* FIN PAGE D ACCEUIL*/
 
+/* nos services*/
+.two_columns{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.two_columns li{
+    flex-basis: 50%;
+}
+
+
+
+
 /* PAGE D AVIS */
+
+
 /* notation par les étoiles*/
+
 
 .form-group{
     margin-top: 40px;

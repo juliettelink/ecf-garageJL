@@ -1,9 +1,9 @@
 <?php
-
+require_once __DIR__ . "/lib/menu.php";
 require_once __DIR__ . "/lib/car.php";
-require_once __DIR__ . '/lib/menu.php';
+
 require_once __DIR__ . "/lib/opinion.php";
-require_once __DIR__ . '/templates/header.php';
+require_once __DIR__ . "/templates/header.php";
 
 
 ?>
@@ -32,7 +32,6 @@ require_once __DIR__ . '/templates/header.php';
           </p>
           <div class="d-grid gap-2 d-md-flex justify-content-md-start">
             <a href="#footer" class="btn btn-primary btn-lg px-4 me-md-2">Horaires</a>
-            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Avis</button>
           </div>
         </div>
       </div>
@@ -51,7 +50,13 @@ require_once __DIR__ . '/templates/header.php';
           <p class="lead">De l'entretien courant à la mécanique en passant par les travaux de carrosserie, notre garage
             effectue toutes les prestations nécessaires à la mobilité de votre véhicule:
           </p>
-          <p><strong> Entretien et réparation mécanique</strong></p>
+          <ul class="two_columns">
+            <li>Climatisation</li>
+            <li>Vidange</li>
+            <li>Carroserie et tôlerie</li>
+            <li>Distribution</li>
+            <li>Vitrage et phare</li>
+          </ul>
           <div class="d-grid gap-2 d-md-flex justify-content-md-start">
             <a href="services.php"  class="btn btn-primary btn-lg px-4 me-md-2">Tous nos services</a>
           </div>
@@ -62,7 +67,7 @@ require_once __DIR__ . '/templates/header.php';
 
  <!-- presentation des occasion-->
   <section classe="occasion">
-    <h2>Nos occasions</h2>
+    <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 ">Nos occasions</h2>
 
     <div class="row text-center ">
       <?php foreach ($cars as $key => $car) {
