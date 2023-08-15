@@ -1,9 +1,17 @@
 <?php
+require_once __DIR__ . "/lib/config.php";
+require_once __DIR__ . "/lib/pdo.php";
+
 require_once __DIR__ . "/lib/menu.php";
 require_once __DIR__ . "/lib/car.php";
 
 require_once __DIR__ . "/lib/opinion.php";
 require_once __DIR__ . "/templates/header.php";
+
+
+$cars = getCars($pdo);
+$pictures = getPictures($pdo);
+var_dump($pictures)
 
 
 ?>

@@ -29,8 +29,11 @@ require_once __DIR__ . "/templates/header.php";
         <input type="hidden" name="note" id="note" value="0">
         <button class="btn btn-primary" type="submit">Valider</button>
     </div>
-
 </form>
+<h2>votre commentaire</h2>
+<!-- contre le file xss-->
+<?= htmlentities($_POST["comment"]);?>
+
 <?php
 require_once __DIR__ . "/templates/footer.php";
 ?>
