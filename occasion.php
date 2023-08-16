@@ -1,7 +1,14 @@
 <?php 
+require_once __DIR__ ."/lib/config.php";
+require_once __DIR__ ."/lib/pdo.php";
 require_once __DIR__ ."/lib/car.php";
+
 $id = $_GET["id"];
-$car = $cars[$id];
+$car = $cars["$id"];
+
+var_dump(getCarById($pdo, 2));
+
+//$car = getCarById($pdo, $id);
 
 require_once __DIR__ ."/lib/menu.php";
 

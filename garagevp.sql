@@ -391,3 +391,7 @@ insert into
 values (1, 'vparrot@gmail.com'), (2, 'JPlantin@gmail.com'), (2, 'JCracos@gmail.com'), (2, 'MBenard@gmail.com'), (2, 'GBoutin@gmail.com');
 
 # requete SQL 
+# jointure entre cars et pictures
+select * 
+from cars c 
+join pictures p on c.car_id  = p.picture_id;

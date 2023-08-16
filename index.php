@@ -8,18 +8,13 @@ require_once __DIR__ . "/lib/car.php";
 require_once __DIR__ . "/lib/opinion.php";
 require_once __DIR__ . "/templates/header.php";
 
+$cars = getCars($pdo, _HOME_CARS_LIMIT_);
 
-$cars = getCars($pdo);
-$pictures = getPictures($pdo);
-var_dump($pictures)
 
 
 ?>
-
-
-
-     <!-- presentation-->
-     <section classe="presentation">
+      <!-- presentation-->
+    <section classe="presentation">
       <div class="row flex-lg-row align-items-center g-5 py-5">
         <div class= "presentation col-10 col-sm-8 col-lg-6">
           <img src="assets/images/presentation.jpg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
