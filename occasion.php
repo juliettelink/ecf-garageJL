@@ -14,8 +14,18 @@ if(isset($_GET["id"])) {
     $id = $_GET["id"];
     $car = getCarById($pdo, $id);
 
-    if ($car){
-        $imagePath = getCarImageDefault ($car["image1"]);
+    if ($car){ // revoir ce passage avec les images en plus pour que quand il n'y en a pas mettre une image par defautl
+        $imagePaths = [];
+        for ($i = 1; $i <=3; $i++){
+            $image = $car["image" . $i];
+            if ($image === null) {
+                // Utilisez l'image par défaut lorsque l'image est null
+                $imagePaths[] = getCarImageDefault(null);
+            } else {
+                $imagePaths[] = getCarImageDefault($image);
+            }
+       }
+ 
         $mainMenu["occasion.php"] = ["head_title" => $car["model"], "meta_description" => htmlentities(substr($car["model"],0,250)), "exclude" => true];
     } else {
         $error = true;
@@ -25,7 +35,7 @@ if(isset($_GET["id"])) {
 }
 
 // var_dump($error);
-// die;
+//  die;
 
 
 require_once __DIR__ ."/templates/header.php";
@@ -35,7 +45,10 @@ require_once __DIR__ ."/templates/header.php";
 <!-- cas où il n'y a pas d'erreur-->
 <?php if(!$error) { ?>
 <div class="container col-xxl-8 px-4 py-5">
+
+     <?php foreach ($imagePaths as $imagePath) { ?>
     <img src="<?=$imagePath?>" class="d-block mx-lg-auto img-fluid" alt="<?=htmlentities($car["model"])?>" width="700" loading="lazy">
+    <?php } ?>
     <div class="row flex-lg-row align-items-center g-5 py-5">
         <div class="col-lg-12">
             <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3"><?=htmlentities($car["model"])?></h1>  

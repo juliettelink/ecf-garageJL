@@ -43,7 +43,7 @@
     $query->execute();
     $car = $query->fetch(PDO::FETCH_ASSOC);
 
-    return $car;
+    return $car ?: null;
 }
 
 //function pour l'image par défault
