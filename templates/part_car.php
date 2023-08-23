@@ -1,5 +1,5 @@
 <?php
-$imagePath = getCarImageDefault ($car["image1"]);
+$imagePath = getCarImage($car["image1"]);
 ?>
 
 <div class="col-md-4 my-2">

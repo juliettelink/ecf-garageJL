@@ -43,15 +43,15 @@
     $query->execute();
     $car = $query->fetch(PDO::FETCH_ASSOC);
 
-    return $car ?: null;
+    return $car;
 }
 
 //function pour l'image par défault
 
-function getCarImageDefault(string|null $image):string
+function getCarImage(string|null $image):string
 {
   if ($image === null){
-   return _ASSETS_IMAGES_FOLDER_."default_car.jpg";
+   return _ASSETS_IMAGES_FOLDER_."null.jpg";
 } else {
     return _CARS_IMAGES_FOLDER_.htmlentities($image);
 }
