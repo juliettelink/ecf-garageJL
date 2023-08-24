@@ -1,31 +1,22 @@
 <?php 
 require_once __DIR__. "/lib/config.php";
 require_once __DIR__. "/lib/pdo.php";
+require_once __DIR__. "/lib/user.php";
 require_once __DIR__ . "/lib/menu.php";
 require_once __DIR__ ."/templates/header.php";
 
+$errors = [];
 
 if (isset($_POST["loginUser"])){
     $email = $_POST["email"];
-    var_dump($email);
     $password = $_POST["password"];
-    
-    $query = $pdo->prepare("SELECT *
-                            FROM users u
-                            WHERE mail_id = :email");
-    $query->bindValue(":email", $email, PDO::PARAM_STR);
-    $query->execute();
-    $user = $query->fetch(PDO::FETCH_ASSOC);
 
-    if($user && password_verify($password, $user["password"])){
-        var_dump("connexion ok");
-    
+    $user = verifyUserLoginPassword($pdo, $email, $password);
+    if ($user){
+
     }else{
-        //login ou mot de passe incorrect
-        var_dump("mot de passe ou login incorrect");
+        $errors[] = "Email ou mot de passe incorrect";
     }
-    var_dump($user);
-
 }
 
 
@@ -33,7 +24,7 @@ if (isset($_POST["loginUser"])){
 
 ?>
 <h1>Login</h1>
-<form methode="post">
+<form method="POST">
     <div class="m-3">
         <label class="form-label" for="email">Email</label>
         <input type="email" name="email" id="email" class="form-control" required>
