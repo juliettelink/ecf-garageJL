@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . "/lib/config.php";
+require_once __DIR__ . "/lib/session.php";
 require_once __DIR__ . "/lib/pdo.php";
 
 require_once __DIR__ . "/lib/menu.php";
@@ -124,7 +125,7 @@ $cars = getCars($pdo, _HOME_CARS_LIMIT_);
     </button>
   </div> 
   <div>
-  <a href="opinions.php" type="button" class="btn btn-primary">Avis</a>
+  <a href="opinions.php" type="button" class="btn btn-primary">Donner votre avis</a>
   </div>
 </article>
 
