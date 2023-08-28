@@ -1,6 +1,5 @@
 <?php 
-require_once __DIR__. "/lib/config.php";
-require_once __DIR__. "/lib/session.php";
+require_once __DIR__ ."/lib/config.php";
 require_once __DIR__. "/lib/pdo.php";
 require_once __DIR__. "/lib/user.php";
 require_once __DIR__ . "/lib/menu.php";
@@ -10,13 +9,14 @@ $errors = [];
 
 if (isset($_POST["loginUser"])){
     $email = $_POST["email"];
-    var_dump($email);
+var_dump($email);
     $password = $_POST["password"];
-    var_dump($password);
+var_dump($password);
 
     $user = verifyUserLoginPassword($pdo, $email, $password);
     if ($user){
-        session_regenerate_id(true); // cree un id de session renouvelé securité en plus
+        // cree un id de session renouvelé securité en plus
+        session_regenerate_id(true); 
         $_SESSION["user"] = $user;
         if ($user["role_name"] === "employe"){
             header("location: admin/index.php");

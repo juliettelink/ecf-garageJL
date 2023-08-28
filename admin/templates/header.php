@@ -1,3 +1,11 @@
+<?php 
+    require_once __DIR__ ."/../../lib/config.php";
+    require_once __DIR__ ."/../../lib/session.php";
+
+   // adminOnly();
+   
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,47 +19,45 @@
     <link rel="stylesheet" href="../assets/css/override-bootstrap.css">  
     <link rel="stylesheet" href="../assets/css/styles.css">
     
-    
-
-
 </head>
 <body>
+
     <div class="container d-flex">
         <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-            <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-            <span class="fs-4">Garage Vincent Parrot</span>
+            <a href="index.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+                <span class="fs-4">Garage Vincent Parrot</span>
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
                 <a href="#" class="nav-link active" aria-current="page">
-                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-                Login
+                    <i class="fa-solid fa-arrow-right-to-bracket fa-sm me-2" style="color: #ffffff;"></i> 
+                    Création de compte
+                </a>
+            </li>
+            <li>
+                <a href="cars.php" class="nav-link text-white">
+                    <i class="fa-solid fa-car fa-sm me-2" style="color: #ffffff;"></i>
+                    Voitures
                 </a>
             </li>
             <li>
                 <a href="#" class="nav-link text-white">
-                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                Voitures
+                    <i class="fa-solid fa-gauge fa-sm me-2" style="color: #ffffff;"></i>
+                    Services
                 </a>
             </li>
             <li>
                 <a href="#" class="nav-link text-white">
-                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                Services
+                    <i class="fa-solid fa-pen-to-square fa-sm me-2" style="color: #ffffff;"></i>
+                    Avis
                 </a>
             </li>
             <li>
                 <a href="#" class="nav-link text-white">
-                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                Avis
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link text-white">
-                <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                Customers
+                    <i class="fa-solid fa-calendar-days fa-sm me-2" style="color: #ffffff;"></i>
+                    Horaires
                 </a>
             </li>
             </ul>

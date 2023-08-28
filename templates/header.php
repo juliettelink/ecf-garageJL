@@ -1,5 +1,6 @@
 <?php 
-   require_once __DIR__ . '/../lib/menu.php';
+    require_once __DIR__. "/../lib/session.php";
+    require_once __DIR__ . '/../lib/menu.php';
     $currentPage = basename($_SERVER["SCRIPT_NAME"]);
 ?>
 
@@ -43,7 +44,12 @@
             
 
             <div class="col-md-3 text-end">
-                <a href="login.php" type="button" class="btn btn-outline-primary me-2">Espace Pro</a>
+                <?php if(isset($_SESSION["user"])){ ?>
+                    <a href= "logout.php" type= "button" class="btn btn-outline-primary me-2">Déconnexion</a>
+                <?php } else{?>
+                    <a href="login.php" type="button" class="btn btn-outline-primary me-2">Espace Pro</a>
+                <?php } ?>
+                
                 <a href="opinions.php" type="button" class="btn btn-primary">Avis</a>
             </div>
         </header>

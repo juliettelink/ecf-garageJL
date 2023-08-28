@@ -1,18 +1,21 @@
 <?php 
 
-//probleme
-//function getCarById(PDO $pdo, $id): array // je n'arrive pas à faire |bool
 
 // fonction card cars
-function getCars(PDO $pdo, int $limit = null):array
+function getCars(PDO $pdo, int $limit = null, int $page = null):array
 {
   $sql = "SELECT c.*, p.* 
           FROM cars c 
           INNER JOIN pictures p 
           ON c.car_id = p.car_id 
           ORDER BY c.car_id DESC";
-  if ($limit) {
+
+  if ($limit && !$page) {
     $sql .= " LIMIT :limit ";
+  }
+  // uniquement pour ajouter des pages dans admin car
+  if ($page){
+    $sql .= " LIMIT :offset, :limit";
   }
 
   $query = $pdo->prepare($sql);
@@ -21,6 +24,11 @@ function getCars(PDO $pdo, int $limit = null):array
     // securité pour passer les variables
     //  $limit limite dans l'index pour avoir 3 annonces
     $query->bindValue(":limit", $limit, PDO::PARAM_INT);
+  }
+  // aussi uniquement pour ajouter  des page dans admin car
+  if ($page) {
+    $offset = ($page -1) * $limit;
+    $query->bindValue(":offset", $offset, PDO::PARAM_INT);
   }
   $query->execute();
   $cars = $query->fetchAll(PDO::FETCH_ASSOC);

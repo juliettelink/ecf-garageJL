@@ -8,4 +8,5 @@ define("_DB_PASSSWORD_", "");
 define("_ASSETS_IMAGES_FOLDER_", "./uploads/occasion/");
 define("_CARS_IMAGES_FOLDER_", "./uploads/occasion/");
 define("_HOME_CARS_LIMIT_", 3);
+define("_ADMIN_ITEM_PER_PAGE_", 5);
 
