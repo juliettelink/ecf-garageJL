@@ -5,12 +5,15 @@ require_once __DIR__. "/../lib/pdo.php";
 require_once __DIR__. "/../lib/car.php";
 
 if (isset($_GET["page"])) {
-    $page = (int)$_GET["page"];
+    $currentPage = (int)$_GET["page"];
 } else {
-    $page = 1;
+    $currentPage = 1;
 }
 
-$cars = getCars($pdo, _ADMIN_ITEM_PER_PAGE_, $page);
+$cars = getCars($pdo, _ADMIN_ITEM_PER_PAGE_, $currentPage);
+
+$totalCars = getTotalCar($pdo);
+$totalPages = ceil($totalCars / _ADMIN_ITEM_PER_PAGE_ );
 
 ?>
 
@@ -51,6 +54,15 @@ $cars = getCars($pdo, _ADMIN_ITEM_PER_PAGE_, $page);
     </tbody>
     </table>
 
+    <?php if($totalPages > 1){?>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <?php  for ($i = 1; $i <= $totalPages; $i++){ ?>
+                <li class="page-item <?php if($i === $currentPage) { echo "active";}?>"><a class="page-link" href="?page=<?=$i;?>"><?=$i;?></a></li>
+            <?php } ?>
+        </ul>
+    </nav>
+    <?php } ?>
 
 
 

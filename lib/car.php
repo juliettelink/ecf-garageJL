@@ -36,6 +36,20 @@ function getCars(PDO $pdo, int $limit = null, int $page = null):array
   return $cars;
 }
 
+// fonction pour la pagination
+function getTotalCar(PDO $pdo):int
+{
+  $sql = "SELECT COUNT(*) as total
+          FROM cars";
+
+  $query = $pdo->prepare($sql);
+
+  $query->execute();
+  $result = $query->fetch(PDO::FETCH_ASSOC);
+
+  return $result["total"];
+}
+
 // fonction pour présentation d'une voiture
 function getCarById(PDO $pdo, $id):array|bool
 {

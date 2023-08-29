@@ -10,8 +10,7 @@ function verifyUserLoginPassword(PDO $pdo, string $email, string $password):arra
     $query->bindValue(":email", $email, PDO::PARAM_STR);
     $query->execute();
     $user = $query->fetch(PDO::FETCH_ASSOC);
-
-    return $user;
+    
  // verifie le mot de passe et le compare avec le hach
     if($user && password_verify($password, $user["password"])){
         return $user;
