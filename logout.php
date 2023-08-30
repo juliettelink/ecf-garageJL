@@ -4,6 +4,6 @@ require_once __DIR__ . "/lib/session.php";
 //pour la deconnection
 session_destroy();
 unset($_SESSION);
-header('location: login.php');
+header('Location: login.php');
 
 

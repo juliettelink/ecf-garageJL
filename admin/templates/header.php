@@ -30,8 +30,8 @@
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item">
-                <a href="#" class="nav-link active" aria-current="page">
+            <li class="inscription.php">
+                <a href="inscription.php" class="nav-link active" aria-current="page">
                     <i class="fa-solid fa-arrow-right-to-bracket fa-sm me-2" style="color: #ffffff;"></i> 
                     Création de compte
                 </a>

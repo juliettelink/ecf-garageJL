@@ -1,8 +1,10 @@
 <?php 
-require_once __DIR__. "/templates/header.php";
+require_once __DIR__. "/../lib/config.php";
+require_once __DIR__. "/../lib/session.php";
 
 require_once __DIR__. "/../lib/pdo.php";
 require_once __DIR__. "/../lib/car.php";
+require_once __DIR__. "/templates/header.php";
 
 if (isset($_GET["page"])) {
     $currentPage = (int)$_GET["page"];
@@ -19,6 +21,11 @@ $totalPages = ceil($totalCars / _ADMIN_ITEM_PER_PAGE_ );
 
 <h1 class="py-3">Listes des voitures</h1>
 
+<div class="d-flex gap-é justify-content-left py-5">
+    <a class="btn btn-primary d-inline-flex align-items-left" href="car.php">
+        Ajouter un modéle
+    </a>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -48,7 +55,10 @@ $totalPages = ceil($totalCars / _ADMIN_ITEM_PER_PAGE_ );
         <td><?= $car["image1"] ?></td>
         <td><?= $car["image2"] ?></td>
         <td><?= $car["image3"] ?></td>
-        <td>Modifier | Supprimer</td>
+        <td>
+            <a href="car.php?id=<?=$car['car_id']?>">Modifier</a>
+            <a href="car_delete.php?id=<?=$car['car_id']?>" onclick="return confirm('Etes-vous sur de vouloir supprimer ce modéle')">Supprimer</a>
+        </td>
         <?php } ?>
         </tr>
     </tbody>
@@ -58,7 +68,7 @@ $totalPages = ceil($totalCars / _ADMIN_ITEM_PER_PAGE_ );
     <nav aria-label="Page navigation">
         <ul class="pagination">
             <?php  for ($i = 1; $i <= $totalPages; $i++){ ?>
-                <li class="page-item <?php if($i === $currentPage) { echo "active";}?>"><a class="page-link" href="?page=<?=$i;?>"><?=$i;?></a></li>
+                <li class="page-item  <?php if($i === $currentPage) { echo "active";}?>"><a class="page-link" href="?page=<?=$i;?>"><?=$i;?></a></li>
             <?php } ?>
         </ul>
     </nav>
