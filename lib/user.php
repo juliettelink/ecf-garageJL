@@ -1,39 +1,95 @@
 <?php
+ // mot de passe
+function isStrongPassword($password) {
+    // Vérifie si le mot de passe contient au moins une minuscule
+    if (!preg_match('/[a-z]/', $password)) {
+        return false;
+    }
 
+    // Vérifie si le mot de passe contient au moins une majuscule
+    if (!preg_match('/[A-Z]/', $password)) {
+        return false;
+    }
 
-function addUser(PDO $pdo, string $mail_id, string $name,  string $firstname,  string $password, $role ="employe"){
-    //hach du mot de passe
+    // Vérifie si le mot de passe contient au moins un caractère spécial
+    if (!preg_match('/[!@#$%^&*(),.?":{}|<>]/', $password)) {
+        return false;
+    }
+
+    // Vérifie si le mot de passe a une longueur minimale (par exemple, 8 caractères)
+    if (strlen($password) < 8) {
+        return false;
+    }
+
+    return true;
+}
+
+// nouvel employé
+function addUser(PDO $pdo, string $mail_id, string $name, string $firstname, string $password) {
+    // Hachage du mot de passe
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    // Insérer l'employé dans la bdd
+    // Insérer l'employé dans la table users
     $sqlInsertUser = "INSERT INTO users (mail_id, name, firstname, password) 
                         VALUES (:mail_id, :name, :firstname, :password)";
-    
+
     $queryInsertUser = $pdo->prepare($sqlInsertUser);
     $queryInsertUser->bindValue(":mail_id", $mail_id, PDO::PARAM_STR);
     $queryInsertUser->bindValue(":name", $name, PDO::PARAM_STR);
     $queryInsertUser->bindValue(":firstname", $firstname, PDO::PARAM_STR);
     $queryInsertUser->bindValue(":password", $hashedPassword, PDO::PARAM_STR);
-    $queryInsertUser->execute();
 
+    // Exécute la requête pour insérer l'utilisateur dans la table users
+    if ($queryInsertUser->execute()) {
+        // Insérer le rôle "employé" dans la table users_role
+        $roleId = 2; 
+        $sqlInsertUserRole = "INSERT INTO users_role (mail_id, role_id) 
+                                VALUES (:mail_id, :role_id)";
+        $queryInsertUserRole = $pdo->prepare($sqlInsertUserRole);
+        $queryInsertUserRole->bindValue(":mail_id", $mail_id, PDO::PARAM_STR);
+        $queryInsertUserRole->bindValue(":role_id", $roleId, PDO::PARAM_INT);
 
+        // Exécute la requête pour insérer le rôle de l'employé dans la table users_role
+        if ($queryInsertUserRole->execute()) {
+            // Inscription réussie, retournez true
+            return true;
+        } else {
+            // Erreur lors de l'insertion du rôle
+            return false;
+        }
+    } else {
+        // Erreur lors de l'insertion de l'utilisateur
+        return false;
+    }
+}
 
-    // Récupérer l'ID du rôle à partir de son nom
+// Fonction pour obtenir l'ID du rôle par son nom
+function getRoleIdByName(PDO $pdo, string $roleName) {
     $sqlSelectRoleId = "SELECT role_id FROM role WHERE name = :role";
-
     $querySelectRoleId = $pdo->prepare($sqlSelectRoleId);
-    $querySelectRoleId->bindValue(":role", $role, PDO::PARAM_STR);
+    $querySelectRoleId->bindValue(":role", $roleName, PDO::PARAM_STR);
     $querySelectRoleId->execute();
-    $roleId = $querySelectRoleId->fetchColumn();
+    return $querySelectRoleId->fetchColumn();
+}
 
-    // insere le rôle dans la table des users_role
-    $sqlInsertUserRole = "INSERT INTO users_role (mail_id, role_id) 
-                            VALUES (:mail_id, :role_id)";
 
-    $queryInsertUserRole = $pdo->prepare($sqlInsertUserRole);
-    $queryInsertUserRole->bindValue(":mail_id", $mail_id, PDO::PARAM_STR);
-    $queryInsertUserRole->bindValue(":role_id", $roleId, PDO::PARAM_INT);
-    $queryInsertUserRole->execute();
+// eviter un mail qui existe
+function emailAlreadyExists(PDO $pdo, string $email) {
+    
+    $sql = "SELECT COUNT(*) FROM users WHERE mail_id = :email";
+
+    // lie le paramètre :email
+    $query = $pdo->prepare($sql);
+    $query->bindParam(":email", $email, PDO::PARAM_STR);
+
+
+    $query->execute();
+
+    // Récupérez le résultat sous forme de nombre de lignes correspondantes
+    $count = $query->fetchColumn();
+
+    // Si $count est supérieur à 0, cela signifie que l'e-mail existe déjà
+    return $count > 0;
 }
 
 
