@@ -19,7 +19,9 @@ $car = [
     'kilometer' => '',
     'full' => '',
     'color' => '',
-    'image1' => ''
+    'image1' => '',
+    'image2' => '',
+    'image3'=> '',
 ];
 
 
@@ -83,7 +85,9 @@ fichier et qu'on ne souhaite pas perdre les données qu'on avait saisit.
         'kilometer' => $_POST['kilometer'],
         'full' => $_POST['full'],
         'color' => $_POST['color'],
-        'image' => $fileName
+        'image1' => $_POST['image1'],
+        'image2' => $_POST['image2'],
+        'image3' => $_POST['image3']
     ];
 
     var_dump($_POST['year']);
@@ -98,8 +102,9 @@ fichier et qu'on ne souhaite pas perdre les données qu'on avait saisit.
         }
         var_dump($_POST['color']);
         // On passe toutes les données à la fonction saveArticle
-        $res = saveCar($pdo, $_POST["model"], $_POST["year"], $_POST["price"],$_POST["full"], $_POST["color"], $fileName, $id);
-
+        $res = saveCar($pdo, $_POST["model"], $_POST["year"], $_POST["price"], $_POST["kilometer"],$_POST["full"], $_POST["color"], $_POST["image1"],
+        $_POST["image2"],$_POST["image3"], $id);
+       
         if ($res) {
             $messages[] = "L'article a bien été sauvegardé";
             //On vide le tableau article pour avoir les champs de formulaire vides
@@ -111,7 +116,9 @@ fichier et qu'on ne souhaite pas perdre les données qu'on avait saisit.
                     'kilometer' => '',
                     'full' => '',
                     'color' => '',
-                    'image1' => ''
+                    'image1' => '',
+                    'image2' => '',
+                    'image3' => '',
                 ];
             }
         } else {
@@ -161,16 +168,20 @@ fichier et qu'on ne souhaite pas perdre les données qu'on avait saisit.
             <input type="text" class="form-control" id="color" name="color" value="<?= $car['color']; ?>">
         </div>
         
+        <?php for ($i = 1; $i <= 3; $i++){?>
+            <?php if (isset($_GET['id']) && isset($car['image' . $i])) { ?>
+                <p>
+                    <img src="<?= _CARS_IMAGES_FOLDER_ . $car['image' . $i] ?>" alt="<?= $car['model'] ?>" width="100">
+                    <label for="delete_image<?= $i?>">Supprimer l'image</label>
+                    <input type="checkbox" name="delete_image<?= $i?>" id="delete_image<?= $i?>">
+                    <input type="hidden" name="image<?= $i ?>" value="<?= $car['image' . $i]; ?>">
 
-        <?php if (isset($_GET['id']) && isset($car['image1'])) { ?>
-            <p>
-                <img src="<?= _CARS_IMAGES_FOLDER_ . $car['image1'] ?>" alt="<?= $car['model'] ?>" width="100">
-                <label for="delete_image">Supprimer l'image</label>
-                <input type="checkbox" name="delete_image" id="delete_image">
-                <input type="hidden" name="image" value="<?= $car['image1']; ?>">
 
-            </p>
+                </p>
+            <?php } ?>
         <?php } ?>
+
+
         <p>
             <input type="file" name="file" id="file">
         </p>

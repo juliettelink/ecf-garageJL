@@ -74,7 +74,7 @@ $cars = getCars($pdo, _HOME_CARS_LIMIT_);
 
     <div class="row text-center ">
       <?php foreach ($cars as $key => $car) {
- require __DIR__ . "/templates/part_car.php";
+      require __DIR__ . "/templates/part_car.php";
 }?>
     </div>
     <a href="occasions.php" class="btn btn-primary">Nos occasions</a>

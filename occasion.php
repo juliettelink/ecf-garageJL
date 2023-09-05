@@ -14,7 +14,7 @@ if(isset($_GET["id"])) {
     $id = $_GET["id"];
     $car = getCarById($pdo, $id);
 
-    if ($car){ // revoir ce passage avec les images en plus pour que quand il n'y en a pas mettre une image par defautl
+    if ($car){ 
         $imagePath = getCarImage($car["image1"]);
         $mainMenu["occasion.php"] = ["head_title" => $car["model"], "meta_description" => htmlentities(substr($car["model"],0,250)), "exclude" => true];
     } else {

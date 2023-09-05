@@ -5,22 +5,18 @@ function isStrongPassword($password) {
     if (!preg_match('/[a-z]/', $password)) {
         return false;
     }
-
     // Vérifie si le mot de passe contient au moins une majuscule
     if (!preg_match('/[A-Z]/', $password)) {
         return false;
     }
-
     // Vérifie si le mot de passe contient au moins un caractère spécial
     if (!preg_match('/[!@#$%^&*(),.?":{}|<>]/', $password)) {
         return false;
     }
-
     // Vérifie si le mot de passe a une longueur minimale (par exemple, 8 caractères)
     if (strlen($password) < 8) {
         return false;
     }
-
     return true;
 }
 
