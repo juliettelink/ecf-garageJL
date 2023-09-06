@@ -22,3 +22,18 @@ function getServiceImage(string|null $image):string
     return _SERVICES_IMAGES_FOLDER_.htmlentities($image);
 }
 }
+
+//fonction delet car
+function deleteService(PDO $pdo, int $id):bool
+{
+    
+    $query = $pdo->prepare("DELETE FROM services WHERE service_id = :id");
+    $query->bindValue(':id', $id, $pdo::PARAM_INT);
+
+    $query->execute();
+    if ($query->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}

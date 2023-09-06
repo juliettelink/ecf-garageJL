@@ -10,6 +10,8 @@ require_once __DIR__ . "/../lib/tools.php";
 require_once __DIR__ . "/../lib/car.php";
 require_once __DIR__ . "/templates/header.php";
 
+
+
 $errors = [];
 $messages = [];
 $car = [
@@ -18,44 +20,42 @@ $car = [
     'price' => '',
     'kilometer' => '',
     'full' => '',
-    'color' => '',
-    'image1' => '',
-    'image2' => '',
-    'image3'=> '',
+    'color'=> ''
 ];
 
 
 if (isset($_GET['id'])) {
-    // pour récupérer les données de la voiture si modif
+    //requête pour récupérer les données de l'article en cas de modification
     $car = getCarById($pdo, $_GET['id']);
     if ($car === false) {
-        $errors[] = "l'article n'exite pas";
+        $errors[] = "La voiture n\'existe pas";
     }
-    $pageTitle = "Formulaire modification de voiture";
+    $pageTitle = "Formulaire de modification de la voiture";
 } else {
-    $pageTitle = "Formulaire ajout de voiture";
+    $pageTitle = "Formulaire ajout de la voiture";
 }
 
-// A VERIFIER A PARTIR DE LA C DU COPIER COLLER
-
 if (isset($_POST['saveCar'])) {
-//@todo gérer la gestion des erreurs sur les champs (champ vide etc.)
 
+    //@todo gérer la gestion des erreurs sur les champs (champ vide etc.)
+    
     $fileName = null;
-// Si un fichier est envoyé
+    // Si un fichier est envoyé
     if (isset($_FILES["file"]["tmp_name"]) && $_FILES["file"]["tmp_name"] != '') {
         $checkImage = getimagesize($_FILES["file"]["tmp_name"]);
         if ($checkImage !== false) {
             $fileName = slugify(basename($_FILES["file"]["name"]));
             $fileName = uniqid() . '-' . $fileName;
 
-            /* On déplace le fichier uploadé dans notre dossier upload, dirname(__DIR__)
-            permet de cibler le dossier parent car on se trouve dans admin
-             */
-            if (move_uploaded_file($_FILES["file"]["tmp_name"], dirname(__DIR__) . _CARS_IMAGES_FOLDER_ . $fileName)) {
+
+
+            /* On déplace le fichier uploadé dans notre dossier upload, dirname(__DIR__) 
+                permet de cibler le dossier parent car on se trouve dans admin
+            */
+            if (move_uploaded_file($_FILES["file"]["tmp_name"], dirname(__DIR__)._CARS_IMAGES_FOLDER_ . $fileName)) {
                 if (isset($_POST['image1'])) {
                     // On supprime l'ancienne image si on a posté une nouvelle
-                    unlink(dirname(__DIR__) . _CARS_IMAGES_FOLDER_ . $_POST['image1']);
+                    unlink(dirname(__DIR__)._CARS_IMAGES_FOLDER_ . $_POST['image1']);
                 }
             } else {
                 $errors[] = 'Le fichier n\'a pas été uploadé';
@@ -68,16 +68,16 @@ if (isset($_POST['saveCar'])) {
         if (isset($_GET['id'])) {
             if (isset($_POST['delete_image'])) {
                 // Si on a coché la case de suppression d'image, on supprime l'image
-                unlink(dirname(__DIR__) . _CARS_IMAGES_FOLDER_ . $_POST['image1']);
+                unlink(dirname(__DIR__)._CARS_IMAGES_FOLDER_ . $_POST['image1']);
             } else {
                 $fileName = $_POST['image1'];
             }
         }
     }
-/* On stocke toutes les données envoyés dans un tableau pour pouvoir afficher
-les informations dans les champs. C'est utile pas exemple si on upload un mauvais
-fichier et qu'on ne souhaite pas perdre les données qu'on avait saisit.
- */
+    /* On stocke toutes les données envoyés dans un tableau pour pouvoir afficher
+       les informations dans les champs. C'est utile pas exemple si on upload un mauvais
+       fichier et qu'on ne souhaite pas perdre les données qu'on avait saisit.
+    */
     $car = [
         'model' => $_POST['model'],
         'year' => $_POST['year'],
@@ -85,29 +85,22 @@ fichier et qu'on ne souhaite pas perdre les données qu'on avait saisit.
         'kilometer' => $_POST['kilometer'],
         'full' => $_POST['full'],
         'color' => $_POST['color'],
-        'image1' => $_POST['image1'],
-        'image2' => $_POST['image2'],
-        'image3' => $_POST['image3']
+        'image1' => $fileName
     ];
-
-    var_dump($_POST['year']);
-    
-// Si il n'y a pas d'erreur on peut faire la sauvegarde
+    // Si il n'y a pas d'erreur on peut faire la sauvegarde
     if (!$errors) {
         if (isset($_GET["id"])) {
             // Avec (int) on s'assure que la valeur stockée sera de type int
-            $id = (int) $_GET["id"];
+            $id = (int)$_GET["id"];
         } else {
             $id = null;
         }
-        var_dump($_POST['color']);
-        // On passe toutes les données à la fonction saveArticle
-        $res = saveCar($pdo, $_POST["model"], $_POST["year"], $_POST["price"], $_POST["kilometer"],$_POST["full"], $_POST["color"], $_POST["image1"],
-        $_POST["image2"],$_POST["image3"], $id);
-       
+        // On passe toutes les données à la fonction 
+        $res = saveCar($pdo, $_POST["model"], $_POST["year"], $_POST["price"], $_POST["kilometer"], $_POST["full"], $_POST["color"], $fileName, $id);
+
         if ($res) {
-            $messages[] = "L'article a bien été sauvegardé";
-            //On vide le tableau article pour avoir les champs de formulaire vides
+            $messages[] = "La voiture a bien été sauvegardé";
+            //On vide le tableau pour avoir les champs de formulaire vides
             if (!isset($_GET["id"])) {
                 $car = [
                     'model' => '',
@@ -115,20 +108,16 @@ fichier et qu'on ne souhaite pas perdre les données qu'on avait saisit.
                     'price' => '',
                     'kilometer' => '',
                     'full' => '',
-                    'color' => '',
-                    'image1' => '',
-                    'image2' => '',
-                    'image3' => '',
+                    'color'=> ''
                 ];
             }
         } else {
-            $errors[] = "L'article n'a pas été sauvegardé";
+            $errors[] = "La voiture n'a pas été sauvegardé";
         }
     }
 }
 
 ?>
-
 <h1><?= $pageTitle; ?></h1>
 
 <?php foreach ($messages as $message) { ?>
@@ -143,7 +132,7 @@ fichier et qu'on ne souhaite pas perdre les données qu'on avait saisit.
 <?php } ?>
 <?php if ($car !== false) { ?>
     <form method="POST" enctype="multipart/form-data">
-        <div class="mb-3">
+    <div class="mb-3">
             <label for="model" class="form-label">Modéle</label>
             <input type="text" class="form-control" id="model" name="model" value="<?= $car['model']; ?>">
         </div>
@@ -167,21 +156,16 @@ fichier et qu'on ne souhaite pas perdre les données qu'on avait saisit.
             <label for="color" class="form-label">Couleur</label>
             <input type="text" class="form-control" id="color" name="color" value="<?= $car['color']; ?>">
         </div>
-        
-        <?php for ($i = 1; $i <= 3; $i++){?>
-            <?php if (isset($_GET['id']) && isset($car['image' . $i])) { ?>
-                <p>
-                    <img src="<?= _CARS_IMAGES_FOLDER_ . $car['image' . $i] ?>" alt="<?= $car['model'] ?>" width="100">
-                    <label for="delete_image<?= $i?>">Supprimer l'image</label>
-                    <input type="checkbox" name="delete_image<?= $i?>" id="delete_image<?= $i?>">
-                    <input type="hidden" name="image<?= $i ?>" value="<?= $car['image' . $i]; ?>">
 
+        <?php if (isset($_GET['id']) && isset($car['image1'])) { ?>
+            <p>
+                <img src="<?= _CARS_IMAGES_FOLDER_ . $car['image1'] ?>" alt="<?= $car['model'] ?>" width="100">
+                <label for="delete_image">Supprimer l'image</label>
+                <input type="checkbox" name="delete_image" id="delete_image">
+                <input type="hidden" name="image1" value="<?= $car['image1']; ?>">
 
-                </p>
-            <?php } ?>
+            </p>
         <?php } ?>
-
-
         <p>
             <input type="file" name="file" id="file">
         </p>
@@ -195,3 +179,7 @@ fichier et qu'on ne souhaite pas perdre les données qu'on avait saisit.
 
 
 <?php require_once __DIR__ . "/templates/footer.php"; ?>
+
+
+
+

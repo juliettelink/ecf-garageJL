@@ -82,7 +82,7 @@ function getCarImage(string|null $image):string
 
 //fonction saveCar
 function saveCar(PDO $pdo, string $model, int $year, string $price, string $kilometer, string $full, string $color, 
-                  string|null $image1, string|null $image2, string|null $image3, int $id = null)
+                  string|null $image1, int $id = null):bool
 {
     // cohérence entre les deux tables
     $pdo->beginTransaction();
@@ -100,17 +100,19 @@ function saveCar(PDO $pdo, string $model, int $year, string $price, string $kilo
             $carQuery->bindValue(':color', $color, PDO::PARAM_STR);
             $carQuery->execute();
 
-            // récupere l'id 
+            // récupérer l'id 
             $carId = $pdo->lastInsertId();
 
-            // insertion des images dans la table picture
-            $pictureQuery = $pdo->prepare("INSERT INTO pictures(is_principal, image1, image2, image3, car_id) 
-                                            VALUES (1, :image1, :image2, :image3, :carId)");
-            $pictureQuery->bindValue(':image1', $image1, PDO::PARAM_STR);
-            $pictureQuery->bindValue(':image2', $image2, PDO::PARAM_STR);
-            $pictureQuery->bindValue(':image3', $image3, PDO::PARAM_STR);
-            $pictureQuery->bindValue(':carId', $carId, PDO::PARAM_INT);
-            $pictureQuery->execute();
+            // Insertion des images dans la table pictures
+            if ($image1) {
+              var_dump($image1);
+                $pictureQuery = $pdo->prepare("INSERT INTO pictures(car_id, image1) 
+                                                VALUES (:carId, :image1)");
+                $pictureQuery->bindValue(':carId', $carId, PDO::PARAM_INT);
+                $pictureQuery->bindValue(':image1', $image1, PDO::PARAM_STR);
+                $pictureQuery->execute();
+            }
+
         } else {
             // mise à jour de la table cars
             $carQuery = $pdo->prepare("UPDATE cars SET model = :model, year = :year, price = :price, kilometer = :kilometer,
@@ -124,26 +126,39 @@ function saveCar(PDO $pdo, string $model, int $year, string $price, string $kilo
             $carQuery->bindValue(':color', $color, PDO::PARAM_STR);
             $carQuery->execute();
 
-            // mise à jour de la table pictures
-            $pictureQuery = $pdo->prepare("UPDATE pictures SET image1 = :image1, image2 = :image2, image3 = :image3
-                                            WHERE car_id = :id");
-            $pictureQuery->bindValue(':id', $id, PDO::PARAM_INT);
-            $pictureQuery->bindValue(':image1', $image1, PDO::PARAM_STR);
-            $pictureQuery->bindValue(':image2', $image2, PDO::PARAM_STR);
-            $pictureQuery->bindValue(':image3', $image3, PDO::PARAM_STR);
-            $pictureQuery->execute();
+            // Mise à jour des images associées à la voiture dans la table pictures
+            if ($image1) {
+                $pictureQuery = $pdo->prepare("UPDATE pictures SET image1 = :image1 
+                                                WHERE car_id = :id ");
+                $pictureQuery->bindValue(':id', $id, PDO::PARAM_INT);
+                $pictureQuery->bindValue(':image1', $image1, PDO::PARAM_STR);
+                $pictureQuery->execute();
+            }
+
 
             $carId = $id; 
         }
-        // commit 
+
+        // Commit 
         $pdo->commit();
         return true;
     } catch (PDOException $e) {
-        // exeption / annulation
+        // Exception / annulation
         $pdo->rollBack();
         return false;
     }
 }
+
+
+function getPicturesByCarId(PDO $pdo, $carId)
+{     
+  $sql = "SELECT * FROM pictures WHERE car_id = :carId";
+  $query = $pdo->prepare($sql);
+  $query->bindValue(":carId", $carId, PDO::PARAM_INT);
+  $query->execute();
+  return $query->fetch(PDO::FETCH_ASSOC);
+}
+
 
 
 //fonction delet car
