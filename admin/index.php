@@ -5,6 +5,8 @@
     require_once __DIR__ ."/templates/header.php";
 
 ?>
+<a href="../index.php" type="button" class="btn btn-outline-primary me-2" alt="retour au site">Retour sur le site</a>
+
 <h1>Bienvenue sur la plateforme</h1>
 <p>Chaque employé connecté peut faire des changements sur le site</p>
 <ul>
