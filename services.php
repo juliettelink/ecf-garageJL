@@ -6,30 +6,30 @@ require_once __DIR__ . "/templates/header.php";
 require_once __DIR__ . "/lib/service.php";
 
 // Appeler la fonction pour obtenir la liste de services
-$services = getAllServices($pdo); 
+$services = getAllServices($pdo);
 
 if ($services) {
     foreach ($services as $service) {
         // Pour chaque service, affichez ses détails
         $imagePath = getServiceImage($service["image"]);
-?>
+        ?>
     <div class="container">
         <div class="row text-center justify-content-center ">
             <div class=" col col-md-6 my-2 ">
                 <div class="card">
-                    <img src="<?= $imagePath ?>" class="card-img-top" alt="<?= htmlentities($service["image"]) ?>">
+                    <img src="<?=$imagePath?>" class="card-img-top" alt="<?=htmlentities($service["image"])?>">
                     <div class="card-body">
-                        <h5 class="card-title"><?= htmlentities($service["service"]) ?></h5>
-                        <p class="card-text"><?= htmlentities($service["description"]) ?></p>
+                        <h5 class="card-title"><?=htmlentities($service["service"])?></h5>
+                        <p class="card-text"><?=htmlentities($service["description"])?></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 <?php
-    }
-} else { ?>
-   
+}
+} else {?>
+
    <p> Aucun services trouvé </p>
 <?php }
 

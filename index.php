@@ -10,8 +10,6 @@ require_once __DIR__ . "/templates/header.php";
 
 $cars = getCars($pdo, _HOME_CARS_LIMIT_);
 
-
-
 ?>
       <!-- presentation-->
     <section classe="presentation">
@@ -74,7 +72,7 @@ $cars = getCars($pdo, _HOME_CARS_LIMIT_);
 
     <div class="row text-center ">
       <?php foreach ($cars as $key => $car) {
-      require __DIR__ . "/templates/part_car.php";
+  require __DIR__ . "/templates/part_car.php";
 }?>
     </div>
     <a href="occasions.php" class="btn btn-primary">Nos occasions</a>
@@ -110,9 +108,9 @@ $cars = getCars($pdo, _HOME_CARS_LIMIT_);
         </div>
       </div>
     <?php foreach ($opinions as $key => $opinion) {
-      require __DIR__."/templates/part_opinion.php";
-      } ?>
-      
+  require __DIR__ . "/templates/part_opinion.php";
+}?>
+
       </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -122,7 +120,7 @@ $cars = getCars($pdo, _HOME_CARS_LIMIT_);
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
-  </div> 
+  </div>
   <div>
   <a href="opinions.php" type="button" class="btn btn-primary">Donner votre avis</a>
   </div>

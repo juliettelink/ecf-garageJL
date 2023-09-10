@@ -1,44 +1,39 @@
-<?php 
-require_once __DIR__ ."/lib/config.php";
-require_once __DIR__. "/lib/pdo.php";
-require_once __DIR__. "/lib/user.php";
+<?php
+require_once __DIR__ . "/lib/config.php";
+require_once __DIR__ . "/lib/pdo.php";
+require_once __DIR__ . "/lib/user.php";
 require_once __DIR__ . "/lib/menu.php";
-require_once __DIR__ ."/templates/header.php";
+require_once __DIR__ . "/templates/header.php";
 
 $errors = [];
 
-if (isset($_POST["loginUser"])){
-    $email = $_POST["email"];
-var_dump($email);
-    $password = $_POST["password"];
-var_dump($password);
+if (isset($_POST["loginUser"])) {
+ $email = $_POST["email"];
+ $password = $_POST["password"];
 
-    $user = verifyUserLoginPassword($pdo, $email, $password);
-    if ($user){
-        // cree un id de session renouvelé securité en plus
-        session_regenerate_id(true); 
-        $_SESSION["user"] = $user;
-        if ($user["role_name"] === "employe"){
-            header("location: admin/index.php");
-        }elseif($user["role_name"] === "administrator"){
-            header("location: admin/index.php");
-        }
-    }else{
-        $errors[] = "Email ou mot de passe incorrect";
-    }
+ $user = verifyUserLoginPassword($pdo, $email, $password);
+ if ($user) {
+  // cree un id de session renouvelé securité en plus
+  session_regenerate_id(true);
+  $_SESSION["user"] = $user;
+  if ($user["role_name"] === "employe") {
+   header("location: admin/index.php");
+  } elseif ($user["role_name"] === "administrator") {
+   header("location: admin/index.php");
+  }
+ } else {
+  $errors[] = "Email ou mot de passe incorrect";
+ }
 }
-
-
-
 
 ?>
 <h1>Login</h1>
 
-<?php foreach ($errors as $error) { ?>
+<?php foreach ($errors as $error) {?>
     <div class="alert alert-danger">
-        <?=$error; ?>
+        <?=$error;?>
     </div>
-<?php } ?>
+<?php }?>
 
 <form method="POST">
     <div class="m-3">
@@ -54,6 +49,6 @@ var_dump($password);
 </form>
 
 
-<?php 
-require_once __DIR__ ."/templates/footer.php";
+<?php
+require_once __DIR__ . "/templates/footer.php";
 ?>
