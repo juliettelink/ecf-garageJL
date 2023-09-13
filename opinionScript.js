@@ -1,5 +1,5 @@
 // Les étoiles pour avis
-
+//alert("testopininon")
 window.onload = () => {
   //on cherche les étoiles
   const stars = document.querySelectorAll(".la-star");
@@ -8,7 +8,7 @@ window.onload = () => {
   const note = document.querySelector("#note");
 
   // on boulce sur les étoiles pour ajouter des écouteurs d'évenments
-  for (star of stars) {
+  for (const star of stars) {
     // on écoute le survol
     star.addEventListener("mouseover", function () {
       resetStars();
@@ -40,7 +40,7 @@ window.onload = () => {
 
   function resetStars(note = 0) {
     //boucle sur chaques étoiles
-    for (star of stars) {
+    for (const star of stars) {
       if (star.dataset.value > note) {
         star.style.color = "black";
         star.classList.add("lar");

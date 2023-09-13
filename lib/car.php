@@ -179,7 +179,7 @@ function deleteCar(PDO $pdo, int $id):bool
 // fonction filtres voiture
 function getFilteredCars($pdo, $year, $price, $kilometer) {
   // Construisez la requête SQL en utilisant les critères de filtrage
-  $sql = "SELECT * FROM cars WHERE";
+  $sql = "SELECT year, price, kilometer FROM cars WHERE";
 
   // Ajoutez des conditions pour chaque critère de filtrage non vide
   $conditions = [];
@@ -187,21 +187,17 @@ function getFilteredCars($pdo, $year, $price, $kilometer) {
   if (!empty($year)) {
       $conditions[] = "annee = :year";
   }
-
   if (!empty($price)) {
       $conditions[] = "prix <= :price";
   }
-
   if (!empty($kilometer)) {
       $conditions[] = "kilometrage <= :kilometer";
   }
 
   // Joignez les conditions avec "AND" dans la requête SQL
   $sql .= implode(" AND ", $conditions);
-
   // Préparez la requête SQL
   $stmt = $pdo->prepare($sql);
-
   // Associez les valeurs des paramètres
   if (!empty($year)) {
       $stmt->bindValue(':year', $year, PDO::PARAM_INT);
@@ -221,6 +217,7 @@ function getFilteredCars($pdo, $year, $price, $kilometer) {
   // Récupérez les résultats sous forme de tableau associatif
   $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+  var_dump($results);
   return $results;
 }
 

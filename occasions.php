@@ -9,30 +9,27 @@ require_once __DIR__ . "/lib/car.php";
 $cars = getCars($pdo);
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['year'])) {
- // Récupérez les paramètres de recherche depuis l'URL
- $year = $_GET['year'];
- $price = $_GET['price'];
- $kilometer = $_GET['kilometer'];
-var_dump($kilometer);
- // Effectuez la recherche filtrée en fonction des paramètres
- $filteredCars = getFilteredCars($pdo, $year, $price, $kilometer);
- 
- // Convertissez les résultats en JSON
- $jsonResult = json_encode($filteredCars);
+    // Récupérez les paramètres de recherche depuis l'URL
+    $year = isset($_GET['year']) ? intval($_GET['year']) : null;
+    $price = isset($_GET['price']) ? intval($_GET['price']) : null;
+    $kilometer = isset($_GET['kilometer']) ? intval($_GET['kilometer']) : null;
+    var_dump($kilometer);
+    // Effectuez la recherche filtrée en fonction des paramètres
+    $filteredCars = getFilteredCars($pdo, $year, $price, $kilometer);
 
- // Envoyez la réponse JSON
- header('Content-Type: application/json');
+    // Convertissez les résultats en JSON
+    $jsonResult = json_encode($filteredCars);
 
- var_dump($jsonResult);
- echo $jsonResult;
+    // Envoyez la réponse JSON
+    header('Content-Type: application/json');
 
- // Vous pouvez arrêter l'exécution du script ici si nécessaire
- exit();
+    echo $jsonResult;
 
- // Utilisez $filteredCars pour afficher les résultats filtrés dans votre boucle foreach
+    // Vous pouvez arrêter l'exécution du script ici si nécessaire
+    exit();
 } else {
- // Si aucune requête de filtrage n'a été effectuée, obtenez toutes les voitures
- $filteredCars = $cars;
+    // Si aucune requête de filtrage n'a été effectuée, obtenez toutes les voitures
+    $filteredCars = $cars;
 }
 ?>
 
@@ -44,20 +41,19 @@ var_dump($kilometer);
     <input type="range" id="year" name="year">
     <label for="price">Prix</label>
     <input type="range" id="price" name="price">
-    <label for="kilometer">kilométres</label>
+    <label for="kilometer">kilomètres</label>
     <input type="range" id="kilometer" name="kilometer">
 
     <input type="submit" value="Filter">
-  <div id="error-message" style="display: none; color: red;"></div>
+    <div id="error-message" style="display: none; color: red;"></div>
 </form>
 
-
 <!-- card cars -->
-  <div class="row text-center car-list">
-    <?php foreach ($cars as $key => $car) {
- require __DIR__ . "/templates/part_car.php";
-}?>
-  </div>
+<div class="row text-center car-list">
+    <?php foreach ($filteredCars as $key => $car) {
+        require __DIR__ . "/templates/part_car.php";
+    } ?>
+</div>
 
 <?php
 require_once __DIR__ . "/templates/footer.php";
