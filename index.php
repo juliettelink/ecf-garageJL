@@ -107,7 +107,10 @@ $cars = getCars($pdo, _HOME_CARS_LIMIT_);
           </div>
         </div>
       </div>
-    <?php foreach ($opinions as $key => $opinion) {
+    <?php 
+    $recentOpinion = getRecentOpinions($pdo);
+    
+    foreach ($recentOpinion as $key => $opinion) {
   require __DIR__ . "/templates/part_opinion.php";
 }?>
 
