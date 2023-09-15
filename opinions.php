@@ -1,17 +1,37 @@
 <?php
 require_once __DIR__ . "/lib/config.php";
+require_once __DIR__ . "/lib/pdo.php";
 require_once __DIR__ . '/lib/menu.php';
 require_once __DIR__ . "/lib/opinion.php";
 
 $mainMenu["opinions.php"] = ["head_title" => "title", "meta_description" => "a mettre", "exclude" => true];
 require_once __DIR__ . "/templates/header.php";
 
+$opinions = getOpinions($pdo);
+
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $nameClient = $_POST["nameClient"];
+    $comment = $_POST["comment"];
+    $note = $_POST["note"];
+       // Validation des données (assurez-vous de faire cela)
+
+    // Requête SQL pour insérer l'avis dans la base de données
+    $sql = "INSERT INTO opinions (nameClient, comment, note) VALUES (?, ?, ?)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$nameClient, $comment, $note]);
+
+    // Redirection vers la page d'avis après l'ajout
+    header("Location: opinions.php");
+    exit();
+}
+
 ?>
 <h1>Vos Avis</h1>
 <form action= "" method="post">
     <div class="form-group">
-        <label for="name">Votre nom</label>
-        <input type="name" class="form-control" id="name" placeholder="votre nom">
+        <label for="nameClient">Votre nom</label>
+        <input type="nameClient" class="form-control" id="nameClient" placeholder="votre nom">
     </div>
     <div class="form-group">
         <label for="comment">Votre commentaire</label>
@@ -31,9 +51,6 @@ require_once __DIR__ . "/templates/header.php";
         <button class="btn btn-primary" type="submit">Valider</button>
     </div>
 </form>
-<h2>votre commentaire</h2>
-<!-- contre le file xss-->
-<?=htmlentities($_POST["comment"]);?>
 
 <?php
 require_once __DIR__ . "/templates/footer.php";
