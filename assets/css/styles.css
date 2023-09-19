@@ -109,7 +109,7 @@ h1, h2{
 }
 /* fin slogan*/
 
-/* FIN PAGE D ACCEUIL*/
+
 
 /* nos services*/
 .two_columns{
@@ -125,7 +125,9 @@ h1, h2{
 
 
 /* PAGE D AVIS */
-
+article .opinion{
+    margin-top: 30px;
+}
 
 /* notation par les étoiles*/
 

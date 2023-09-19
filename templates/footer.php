@@ -5,12 +5,16 @@
 
     <div class="d-flex flex-wrap justify-content-around  align-items-center">
         <div>
-            <h4>Adresse</h4>
-            <p> Garage V.Parrot <br>
-            54 RUE DE GRANVILLE <br>
+            <h4> Garage V.Parrot</h4>
+            <p> 
+            14 rue de la Laque <br>
             31000 TOULOUSE<br>
-            tel : 05 26 25 25 14
-            </p>
+            tel : 05 26 25 25 14<br>
+            </p> 
+            <a href="contact.php" type="button" class="btn btn-primary">Nous contacter</a> 
+        </div>
+        <div>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2889.3392406334306!2d1.432110718476082!3d43.599477720117605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12aebb7aefd7b523%3A0xc9a63f739559ae58!2s14%20Rue%20de%20la%20Laque%2C%2031300%20Toulouse!5e0!3m2!1sfr!2sfr!4v1695035508196!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <div>
             <h4> Nos horaires</h4>

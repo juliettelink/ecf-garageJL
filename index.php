@@ -88,7 +88,7 @@ $cars = getCars($pdo, _HOME_CARS_LIMIT_);
  <article classe="opinion">
   <!-- premier caroussel-->
 
-  <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel" data-bs-theme="light">
+  <div id="myCarousel" class="carousel slide mt-5" data-bs-ride="carousel" data-bs-theme="light">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class=""></button>
@@ -108,13 +108,11 @@ $cars = getCars($pdo, _HOME_CARS_LIMIT_);
         </div>
       </div>
     <?php 
-    $recentOpinion = getRecentOpinions($pdo);
-    
-    foreach ($recentOpinion as $key => $opinion) {
-  require __DIR__ . "/templates/part_opinion.php";
-}?>
-
-      </div>
+      $recentOpinion = getRecentOpinions($pdo);
+      foreach ($recentOpinion as $key => $opinion) {
+      require __DIR__ . "/templates/part_opinion.php";
+    }?>
+    </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
@@ -125,7 +123,7 @@ $cars = getCars($pdo, _HOME_CARS_LIMIT_);
     </button>
   </div>
   <div>
-  <a href="opinions.php" type="button" class="btn btn-primary">Donner votre avis</a>
+    <a href="opinions.php" type="button" class="btn btn-primary">Donner votre avis</a>
   </div>
 </article>
 
