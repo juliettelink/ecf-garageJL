@@ -12,11 +12,12 @@ $service = false;
 $errors = [];
 $messages = [];
 if (isset($_GET["id"])) {
-    $service =  getAllServices($pdo, (int)$_GET["id"]);
+    $service =  getServiceById($pdo, (int)$_GET["id"]);
 }
 if ($service) {
     if (deleteService($pdo, $_GET["id"])) {
         $messages[] = "Le service a bien été supprimé";
+        header("Location: services.php");
     } else {
         $errors[] = "Une erreur s'est produite lors de la suppression";
     }
@@ -26,7 +27,7 @@ if ($service) {
 
 ?>
 <div class="row text-center my-5">
-    <h1>Supression du modéle</h1>
+    <h1>Supression du service</h1>
     <?php foreach ($messages as $message) { ?>
         <div class="alert alert-success" role="alert">
             <?= $message; ?>
