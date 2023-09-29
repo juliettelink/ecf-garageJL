@@ -30,51 +30,37 @@
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
-            <li class="inscription.php">
-                <a href="inscription.php" class="nav-link active" aria-current="page">
-                    <i class="fa-solid fa-arrow-right-to-bracket fa-sm me-2" style="color: #ffffff;"></i> 
-                    Création de compte
-                </a>
-            </li>
-            <li>
-                <a href="cars.php" class="nav-link text-white">
-                    <i class="fa-solid fa-car fa-sm me-2" style="color: #ffffff;"></i>
-                    Voitures
-                </a>
-            </li>
-            <li>
-                <a href="services.php" class="nav-link text-white">
-                    <i class="fa-solid fa-gauge fa-sm me-2" style="color: #ffffff;"></i>
-                    Services
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link text-white">
-                    <i class="fa-solid fa-pen-to-square fa-sm me-2" style="color: #ffffff;"></i>
-                    Avis
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link text-white">
-                    <i class="fa-solid fa-calendar-days fa-sm me-2" style="color: #ffffff;"></i>
-                    Horaires
-                </a>
-            </li>
-            </ul>
-            <hr>
-            <div class="dropdown">
-            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                <strong>mdo</strong>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                <li><a class="dropdown-item" href="#">New project...</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                <li class="inscription.php">
+                    <a href="inscription.php" class="nav-link active" aria-current="page">
+                        <i class="fa-solid fa-arrow-right-to-bracket fa-sm me-2" style="color: #ffffff;"></i> 
+                        Création de compte
+                    </a>
+                </li>
+                <li>
+                    <a href="cars.php" class="nav-link text-white" >
+                        <i class="fa-solid fa-car fa-sm me-2" style="color: #ffffff;"></i>
+                        Voitures
+                    </a>
+                </li>
+                <li>
+                    <a href="services.php" class="nav-link text-white">
+                        <i class="fa-solid fa-gauge fa-sm me-2" style="color: #ffffff;"></i>
+                        Services
+                    </a>
+                </li>
+                <li>
+                    <a href="opinions.php" class="nav-link text-white">
+                        <i class="fa-solid fa-pen-to-square fa-sm me-2" style="color: #ffffff;"></i>
+                        Avis
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link text-white">
+                        <i class="fa-solid fa-calendar-days fa-sm me-2" style="color: #ffffff;"></i>
+                        Horaires
+                    </a>
+                </li>
             </ul>
         </div>
-    </div>
     <div>
         <main class="d-flex flex-column px-4">

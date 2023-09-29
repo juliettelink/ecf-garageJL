@@ -13,7 +13,7 @@
             </p> 
             <a href="contact.php" type="button" class="btn btn-primary">Nous contacter</a> 
         </div>
-        <div>
+        <div class="">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2889.3392406334306!2d1.432110718476082!3d43.599477720117605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12aebb7aefd7b523%3A0xc9a63f739559ae58!2s14%20Rue%20de%20la%20Laque%2C%2031300%20Toulouse!5e0!3m2!1sfr!2sfr!4v1695035508196!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <div>
@@ -82,12 +82,17 @@
     </div>
 </footer>
 
-
-
+<!-- cdn jquery -->
+<!-- <script src="jquery-3.7.1.slim.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.3.2/jquery.min.js" integrity="sha512-q7KtixEScagqBDYpQKermTCIPsszSXocU+3NxJ8GNK9b9bG8cJW9GNsm0hKwWa7ORXf4UEC19JxJgrRo/pc8Eg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- cdn bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-<script src="filter.js"></script>
+
+<!-- script JS -->
+<script type = "text/javascript" src="filter.js"></script>
 <script src="opinionScript.js"></script>
 
 
 </body>
 </html>
+
