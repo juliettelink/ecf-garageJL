@@ -7,7 +7,9 @@ require_once __DIR__ . "/lib/service.php";
 
 // Appeler la fonction pour obtenir la liste de services
 $services = getAllServices($pdo);
-
+?>
+<h1>Présentation de nos services</h1>
+<?php
 if ($services) {
     foreach ($services as $service) {
         // Pour chaque service, affichez ses détails

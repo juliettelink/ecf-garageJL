@@ -27,6 +27,7 @@ $car = [
 if (isset($_GET['id'])) {
     //requête pour récupérer les données de l'article en cas de modification
     $car = getCarById($pdo, $_GET['id']);
+  
     if ($car === false) {
         $errors[] = "La voiture n\'existe pas";
     }

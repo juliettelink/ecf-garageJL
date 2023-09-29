@@ -1,68 +1,78 @@
 
-// alert("testfiltre")
 
-document.addEventListener('DOMContentLoaded', function() {
-    const filterForm = document.getElementById('filter-form');
-    const errorElement = document.getElementById('error-message');
+(function ($) {
+  $("#price-range-submit").hide();
 
-    filterForm.addEventListener('submit', function(event) {
-        event.preventDefault();
+  $("#min_price,#max_price").on("change", function () {
+    $("#price-range-submit").show();
 
-        const year = document.getElementById('year').value;
-        const price = document.getElementById('price').value;
-        const kilometer = document.getElementById('kilometer').value;
+    var min_price_range = parseInt($("#min_price").val());
 
-        sendAjaxRequest(year, price, kilometer);
+    var max_price_range = parseInt($("#max_price").val());
+
+    if (min_price_range > max_price_range) {
+      $("#max_price").val(min_price_range);
+    }
+
+    $("#slider-range").slider({
+      values: [min_price_range, max_price_range],
+    });
+  });
+
+  $("#min_price,#max_price").on("paste keyup", function () {
+    $("#price-range-submit").show();
+
+    var min_price_range = parseInt($("#min_price").val());
+
+    var max_price_range = parseInt($("#max_price").val());
+
+    if (min_price_range == max_price_range) {
+      max_price_range = min_price_range + 100;
+
+      $("#min_price").val(min_price_range);
+      $("#max_price").val(max_price_range);
+    }
+
+    $("#slider-range").slider({
+      values: [min_price_range, max_price_range],
+    });
+  });
+
+  $(function () {
+    $("#slider-range").slider({
+      range: true,
+      orientation: "horizontal",
+      min: 0,
+      max: 10000,
+      values: [0, 10000],
+      step: 100,
+
+      slide: function (event, ui) {
+        if (ui.values[0] == ui.values[1]) {
+          return false;
+        }
+
+        $("#min_price").val(ui.values[0]);
+        $("#max_price").val(ui.values[1]);
+      },
     });
 
-    function sendAjaxRequest(year, price, kilometer) {
-        const xhr = new XMLHttpRequest();
-        const url = `occasions.php?year=${encodeURIComponent(year)}&price=${encodeURIComponent(price)}&kilometer=${encodeURIComponent(kilometer)}`;
-        
-        xhr.open('GET', url, true);
+    $("#min_price").val($("#slider-range").slider("values", 0));
+    $("#max_price").val($("#slider-range").slider("values", 1));
+  });
 
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    handleAjaxSuccess(xhr.responseText);
-                } else {
-                    handleAjaxError(xhr.status, xhr.statusText);
-                }
-            }
-        };
+  $("#slider-range,#price-range-submit").click(function () {
+    var min_price = $("#min_price").val();
+    var max_price = $("#max_price").val();
 
-        xhr.send();
-    }
-
-    function handleAjaxSuccess(data) {
-        try {
-            const results = JSON.parse(data);
-            updateCarList(results);
-        } catch (error) {
-            console.error("Erreur de parsing JSON : " + error);
-            errorElement.textContent = "Erreur de parsing JSON";
-            errorElement.style.display = 'block';
-        }
-    }
-
-    function handleAjaxError(status, statusText) {
-        console.error("Erreur AJAX : " + status + " - " + statusText);
-        errorElement.textContent = 'Erreur de requête AJAX: ' + status + ' - ' + statusText;
-        errorElement.style.display = 'block';
-    }
-
-    function updateCarList(cars) {
-        const carList = document.querySelector('.car-list');
-        let html = '';
-
-        for (const car of cars) {
-            html += '<div class="car">';
-            html += '<p>year : ' + car.year + '</p>';
-            html += '<p>kilometer : ' + car.kilometer + '</p>';
-            html += '<p>price : ' + car.price + '</p>';
-            html += '</div>';
-        }
-
-        carList.innerHTML = html;
-    }
-});
+    $("#searchResults").text(
+      "Here List of products will be shown which are cost between " +
+        min_price +
+        " " +
+        "and" +
+        " " +
+        max_price +
+        "."
+    );
+  });
+})(jQuery);

@@ -2,41 +2,31 @@
 require_once __DIR__ . "/lib/config.php";
 require_once __DIR__ . "/lib/pdo.php";
 require_once __DIR__ . "/lib/menu.php";
+//require_once __DIR__ . "fetch.php";
 require_once __DIR__ . "/templates/header.php";
 
 require_once __DIR__ . "/lib/car.php";
 
 $cars = getCars($pdo);
-
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['year'])) {
-    // Récupérez les paramètres de recherche depuis l'URL
-    $year = isset($_GET['year']) ? intval($_GET['year']) : null;
-    $price = isset($_GET['price']) ? intval($_GET['price']) : null;
-    $kilometer = isset($_GET['kilometer']) ? intval($_GET['kilometer']) : null;
-    var_dump($kilometer);
-    // Effectuez la recherche filtrée en fonction des paramètres
-    $filteredCars = getFilteredCars($pdo, $year, $price, $kilometer);
-
-    // Convertissez les résultats en JSON
-    $jsonResult = json_encode($filteredCars);
-
-    // Envoyez la réponse JSON
-    header('Content-Type: application/json');
-
-    echo $jsonResult;
-
-    // Vous pouvez arrêter l'exécution du script ici si nécessaire
-    exit();
-} else {
-    // Si aucune requête de filtrage n'a été effectuée, obtenez toutes les voitures
-    $filteredCars = $cars;
-}
+var_dump($cars);
 ?>
-
 <h1> Présentation des occasions</h1>
 
+<div class="price-range-block">
+
+
+  <div id="slider-range" class="price-filter-range" name="rangeInput"></div>
+
+  <div style="margin:30px auto">
+    <input type="number" min=0 max="9900" oninput="validity.valid||(value='0');" id="min_price" class="price-range-field" />
+    <input type="number" min=0 max="10000" oninput="validity.valid||(value='10000');" id="max_price" class="price-range-field" />
+  </div>
+  <div id="searchResults" class="search-results-block"></div>
+
+</div>
+
 <!-- formulaire pour les filtre -->
-<form id="filter-form">
+<!-- <form id="filter-form">
     <label for="year">Année</label>
     <input type="range" id="year" name="year">
     <label for="price">Prix</label>
@@ -46,15 +36,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['year'])) {
 
     <input type="submit" value="Filter">
     <div id="error-message" style="display: none; color: red;"></div>
-</form>
+</form> -->
 
-<!-- card cars -->
-<div class="row text-center car-list">
-    <?php foreach ($filteredCars as $key => $car) {
-        require __DIR__ . "/templates/part_car.php";
-    } ?>
-</div>
+<!-- presentation des cards voitures -->
+  <div class="row text-center ">
+    <?php foreach ($cars as $key => $car) {
+    require __DIR__ . "/templates/part_car.php";
+}?>
+  </div>
+
 
 <?php
 require_once __DIR__ . "/templates/footer.php";
 ?>
+

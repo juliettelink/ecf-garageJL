@@ -6,6 +6,9 @@ require_once __DIR__. "/../lib/pdo.php";
 require_once __DIR__. "/../lib/car.php";
 require_once __DIR__. "/templates/header.php";
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 if (isset($_GET["page"])) {
     $currentPage = (int)$_GET["page"];
 } else {
@@ -13,6 +16,8 @@ if (isset($_GET["page"])) {
 }
 
 $cars = getCars($pdo, _ADMIN_ITEM_PER_PAGE_, $currentPage);
+
+var_dump($cars);
 
 $totalCars = getTotalCar($pdo);
 $totalPages = ceil($totalCars / _ADMIN_ITEM_PER_PAGE_ );
@@ -43,7 +48,10 @@ $totalPages = ceil($totalCars / _ADMIN_ITEM_PER_PAGE_ );
         </tr>
     </thead>
     <tbody>
-        <?php foreach($cars as $car) {?>
+        <?php foreach($cars as $car) {
+            var_dump($car["car_id"]);
+            ?>
+            
         <tr>
         <th scope="row"><?= $car["car_id"] ?></th>
         <td><?= $car["model"] ?></td>

@@ -23,7 +23,7 @@ function getServiceImage(string|null $image):string
 }
 }
 
-//fonction delet car
+//fonction delet service
 function deleteService(PDO $pdo, int $id):bool
 {
     
