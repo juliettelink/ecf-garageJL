@@ -37,6 +37,24 @@ if (isset($_GET['id'])) {
 
 if (isset($_POST['saveOpinion'])) {
 
+    // Validation pour s'assurer que le champ 'nameClient' n'est pas vide
+    if (empty($_POST['nameClient'])) {
+        $errors[] = "Le champ 'nom du client' ne peut pas être vide.";
+    }
+
+    // Validation pour s'assurer que le champ 'comment' n'est pas vide
+    if (empty($_POST['comment'])) {
+        $errors[] = "Le champ 'Commentaire' ne peut pas être vide.";
+    }
+    // Validation pour s'assurer que le champ 'note' n'est pas vide
+    if (empty($_POST['note'])) {
+        $errors[] = "Le champ 'note' ne peut pas être vide.";
+    }
+
+    // Validation pour s'assurer que le champ 'date' n'est pas vide
+    if (empty($_POST['date'])) {
+        $errors[] = "Le champ 'date' ne peut pas être vide.";
+    }
     $opinion = [
         'nameClient' => $_POST['nameClient'],
         'comment' => $_POST['comment'],
@@ -88,19 +106,19 @@ if (isset($_POST['saveOpinion'])) {
     <form method="POST" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="nameClient" class="form-label">Nom du client</label>
-            <input type="text" class="form-control" id="nameClient" name="nameClient" value="<?= $opinion['nameClient']; ?>">
+            <input type="text" class="form-control" id="nameClient" name="nameClient" value="<?= $opinion['nameClient']; ?>" required>
         </div>
         <div class="mb-3">
             <label for="comment" class="form-label">Commentaire</label>
-            <textarea class="form-control" id="comment" name="comment"><?= $opinion['comment']; ?></textarea>
+            <textarea class="form-control" id="comment" name="comment" required><?= $opinion['comment']; ?></textarea>
         </div>
         <div class="mb-3">
             <label for="note" class="form-label">Note</label>
-            <input type="number" class="form-control" id="note" name="note" value="<?= $opinion['note']; ?>">
+            <input type="number" class="form-control" id="note" name="note" value="<?= $opinion['note']; ?>" required>
         </div>
         <div class="mb-3">
             <label for="date" class="form-label">Date</label>
-            <input type="date" class="form-control" id="date" name="date" value="<?= $opinion['date']; ?>">
+            <input type="date" class="form-control" id="date" name="date" value="<?= $opinion['date']; ?>" required>
         </div>
 
         <input type="submit" name="saveOpinion" class="btn btn-primary" value="Enregistrer">

@@ -75,9 +75,9 @@
 
 
         <ul class="nav col-md-4 list-unstyled d-flex">
-            <li class="ms-3"><a class="text-body-secondary" href="#">facebook</a></li>
-            <li class="ms-3"><a class="text-body-secondary" href="#">instagram</a></li>
-            <li class="ms-3"><a class="text-body-secondary" href="#">autre</a></li>
+            <li class="ms-3"><a class="text-body-secondary" href="index.php">accueil</a></li>
+            <li class="ms-3"><a class="text-body-secondary" href="services.php">services</a></li>
+            <li class="ms-3"><a class="text-body-secondary" href="occasions.php">occasions</a></li>
         </ul>
     </div>
 </footer>

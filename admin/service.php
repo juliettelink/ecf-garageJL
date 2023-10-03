@@ -43,39 +43,32 @@ if (isset($_POST['saveService'])) {
     if (empty($_POST['description'])) {
         $errors[] = "Le champ 'Description' ne peut pas être vide.";
     }
-    // Si un fichier est envoyé
+    // Gestion de l'image
     $fileName = null;
-    if (isset($_FILES["file"]["tmp_name"]) && $_FILES["file"]["tmp_name"] != '') {
+
+    // Si aucun fichier n'a été envoyé
+    if (empty($_FILES["file"]["tmp_name"]) && !isset($_GET['id'])) {
+        // Si c'est une création et aucun fichier image
+        $fileName = 'default_image.jpg';
+    } elseif (isset($_FILES["file"]["tmp_name"]) && $_FILES["file"]["tmp_name"] != '') {
         $checkImage = getimagesize($_FILES["file"]["tmp_name"]);
+
         if ($checkImage !== false) {
             $fileName = slugify(basename($_FILES["file"]["name"]));
             $fileName = uniqid() . '-' . $fileName;
 
-
-
-            /* On déplace le fichier uploadé dans notre dossier upload, dirname(__DIR__) 
-                permet de cibler le dossier parent car on se trouve dans admin
-            */
-            if (move_uploaded_file($_FILES["file"]["tmp_name"], dirname(__DIR__)._SERVICES_IMAGES_FOLDER_ . $fileName)) {
-                if (isset($_POST['image'])) {
-                    // On supprime l'ancienne image si on a posté une nouvelle
-                    unlink(dirname(__DIR__)._SERVICES_IMAGES_FOLDER_ . $_POST['image']);
+            // On déplace le fichier uploadé dans notre dossier
+            if (move_uploaded_file($_FILES["file"]["tmp_name"], dirname(__DIR__) . _SERVICES_IMAGES_FOLDER_ . $fileName)) {
+                // L'image a été téléchargée avec succès
+                // Suppression de l'ancienne image si on modifie le service
+                if (isset($_POST['image']) && isset($_GET['id'])) {
+                    unlink(dirname(__DIR__) . _SERVICES_IMAGES_FOLDER_ . $_POST['image']);
                 }
             } else {
                 $errors[] = 'Le fichier n\'a pas été uploadé';
             }
         } else {
             $errors[] = 'Le fichier doit être une image';
-        }
-    } else {
-         // Si aucun fichier n'a été envoyé
-         if (isset($_GET['id'])) {
-            if (isset($_POST['delete_image'])) {
-                // Si on a coché la case de suppression d'image, on supprime l'image
-                unlink(dirname(__DIR__)._SERVICES_IMAGES_FOLDER_ . $_POST['image']);
-            } else {
-                $fileName = $_POST['image'];
-            }
         }
     }
     /* On stocke toutes les données envoyés dans un tableau pour pouvoir afficher
@@ -87,7 +80,7 @@ if (isset($_POST['saveService'])) {
     $service = [
         'service' => $_POST['service'],
         'description' => $_POST['description'],
-        'image' => $fileName,
+        'image' => $fileName  
     ];
 
     // Si il n'y a pas d'erreur on peut faire la sauvegarde
@@ -133,11 +126,11 @@ if (isset($_POST['saveService'])) {
     <form method="POST" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="service" class="form-label">Nom du service</label>
-            <input type="text" class="form-control" id="service" name="service" value="<?= $service['service']; ?>">
+            <input type="text" class="form-control" id="service" name="service" value="<?= $service['service']; ?>" required>
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" id="description" name="description"><?= $service['description']; ?></textarea>
+            <textarea class="form-control" id="description" name="description" required><?= $service['description']; ?></textarea>
         </div>
         <?php if (isset($_GET['id']) && isset($service['image'])) { ?>
             <p>
@@ -161,7 +154,3 @@ if (isset($_POST['saveService'])) {
 
 
 <?php require_once __DIR__ . "/templates/footer.php"; ?>
-
-
-
-
