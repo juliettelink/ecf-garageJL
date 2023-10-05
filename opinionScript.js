@@ -1,3 +1,4 @@
+alert("opinionScript");
 // Les étoiles pour avis
 // alert("testopininon")
 //fonction pour congurer les étoiles pour les avis récents

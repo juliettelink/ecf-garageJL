@@ -1,4 +1,10 @@
+<?php
+require_once __DIR__ . "/../lib/pdo.php";
+require_once __DIR__ . '/../lib/openingTimes.php';
 
+$openingTimes = getOpeningTimes($pdo);
+
+?>
 </main>
 
 <footer id="footer" class=" footer py-3 my-4 border-top">
@@ -22,48 +28,23 @@
                 <thead>
                     <tr class="table-dark">
                         <th scope="col">Jours</th>
-                        <th scope="col">8h45-12h</th>
-                        <th scope="col">14h30-18h30</th>
+                        <th scope="col">debut matin</th>
+                        <th scope="col">fin matin</th>
+                        <th scope="col">debut ap</th>
+                        <th scope="col">fin ap</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody> 
+                    <?php foreach ($openingTimes as $openingTime){ ?>
                     <tr>
-                        <th scope="row">Lundi</th>
-                        <td>X</td>
-                        <td>X</td>
-
+                        <th scope="row"><?php echo htmlentities($openingTime['day']); ?></th>
+                        <td><?php echo htmlentities($openingTime['morningOpen']); ?></td>
+                        <td><?php echo htmlentities($openingTime['morningClose']); ?></td>
+                        <td><?php echo htmlentities($openingTime['afternoonOpen']); ?></td>
+                        <td><?php echo htmlentities($openingTime['afternoonClose']); ?></td>
                     </tr>
-                    <tr>
-                        <th scope="row">Mardi</th>
-                        <td>X</td>
-                        <td>X</td>
-
-                    </tr>
-                    <tr>
-                        <th scope="row">Mercredi</th>
-                        <td>X</td>
-                        <td>X</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Jeudi</th>
-                        <td>X</td>
-                        <td>X</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Vendredi</th>
-                        <td>X</td>
-                        <td>X</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Samedi</th>
-                        <td>X</td>
-                        <td>X</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Dimanche</th>
-                        <td>X</td>
-                        <td>X</td>
-                    </tr>
+                    <?php } ?>
+                    
                 </tbody>
             </table>
         </div>

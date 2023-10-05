@@ -1,4 +1,4 @@
-
+alert("filtre")
 
 (function ($) {
   $("#price-range-submit").hide();
