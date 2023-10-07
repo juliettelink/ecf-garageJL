@@ -1,7 +1,15 @@
 <?php 
 
+//fonction pour le formulaire de contact avec les modèles de voitures
+function getCarsModels(PDO $pdo): array
+{
+    $sql = "SELECT DISTINCT model FROM cars";
+    $query = $pdo->query($sql);
+    $models = $query->fetchAll(PDO::FETCH_COLUMN);
+    return $models;
+}
 
-// fonction card cars
+//fonction card cars
 function getCars(PDO $pdo, int $limit = null, int $page = null):array
 {
   $sql = "SELECT c.*, p.* 
@@ -31,7 +39,7 @@ function getCars(PDO $pdo, int $limit = null, int $page = null):array
   }
   $query->execute();
   $cars = $query->fetchAll(PDO::FETCH_ASSOC);
-var_dump($cars);
+// var_dump($cars);
   return $cars;
 }
 

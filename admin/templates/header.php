@@ -59,6 +59,12 @@
                         Horaires
                     </a>
                 </li>
+                <li>
+                    <a href="forms.php" class="nav-link text-white">
+                        <i class="fa-solid fa-calendar-days fa-sm me-2" style="color: #ffffff;"></i>
+                        Messages Clients
+                    </a>
+                </li>
             </ul>
         </div>
     <div>

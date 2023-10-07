@@ -8,7 +8,7 @@ require_once __DIR__ . "/templates/header.php";
 require_once __DIR__ . "/lib/car.php";
 
 $cars = getCars($pdo);
-var_dump($cars);
+//var_dump($cars);
 ?>
 <h1> Présentation des occasions</h1>
 

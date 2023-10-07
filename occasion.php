@@ -68,7 +68,7 @@ require_once __DIR__ . "/templates/header.php";
                 <p class="lead">Année : <?=htmlentities($car["year"])?></p>
                 <p class="lead">Carburant : <?=htmlentities($car["full"])?></p>
                 <div class="d-grid gap-2 d-md-flex justify-content-center">
-                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Formulaire</button>
+                    <a href="forms.php" class="btn btn-primary btn-lg px-4 me-md-2">Formulaire</a>
                     <a href="occasions.php" class="btn btn-secondary btn-lg px-4 me-md-2">Retour</a>
                 </div>
             </div>
