@@ -11,6 +11,7 @@ require_once __DIR__ . "/templates/header.php";
 $cars = getCars($pdo, _HOME_CARS_LIMIT_);
 
 ?>
+<div class="container">
       <!-- presentation-->
     <section classe="presentation">
       <div class="row flex-lg-row align-items-center g-5 py-5">
@@ -85,48 +86,49 @@ $cars = getCars($pdo, _HOME_CARS_LIMIT_);
 
  <!-- les avis-->
 
- <article classe="opinion">
-  <!-- premier caroussel-->
+  <article classe="opinion">
+    <!-- premier caroussel-->
 
-  <div id="myCarousel" class="carousel slide mt-5" data-bs-ride="carousel" data-bs-theme="light">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class=""></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class=""></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4" class=""></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="4" aria-label="Slide 5" class="active" aria-current="true"></button>
-    </div>
+    <div id="myCarousel" class="carousel slide mt-5" data-bs-ride="carousel" data-bs-theme="light">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class=""></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class=""></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4" class=""></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="4" aria-label="Slide 5" class="active" aria-current="true"></button>
+      </div>
 
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <svg class="bd-placeholder-img" width="100%" height="25%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
-        <div class="container">
-          <div class="carousel-caption">
-            <h3>Les Avis</h3>
-            <p>Lisez les avis clients et mettez votre ressentis</p>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <svg class="bd-placeholder-img" width="100%" height="25%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
+          <div class="container">
+            <div class="carousel-caption">
+              <h3>Les Avis</h3>
+              <p>Lisez les avis clients et mettez votre ressentis</p>
+            </div>
           </div>
         </div>
+      <?php 
+        $recentOpinion = getRecentOpinions($pdo);
+        foreach ($recentOpinion as $key => $opinion) {
+        require __DIR__ . "/templates/part_opinion.php";
+      }?>
       </div>
-    <?php 
-      $recentOpinion = getRecentOpinions($pdo);
-      foreach ($recentOpinion as $key => $opinion) {
-      require __DIR__ . "/templates/part_opinion.php";
-    }?>
+      <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-  <div>
-    <a href="opinions.php" type="button" class="btn btn-primary">Donner votre avis</a>
-  </div>
-</article>
+    <div>
+      <a href="opinions.php" type="button" class="btn btn-primary">Donner votre avis</a>
+    </div>
+  </article>
 
+</div>
 
 
 <?php

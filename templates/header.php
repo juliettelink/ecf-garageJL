@@ -22,6 +22,7 @@ $currentPage = basename($_SERVER["SCRIPT_NAME"]);
 
 </head>
 <body>
+
     <div class="container">
         <!--navbar-->
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
@@ -54,6 +55,7 @@ $currentPage = basename($_SERVER["SCRIPT_NAME"]);
                 <a href="opinions.php" type="button" class="btn btn-primary">Avis</a>
             </div>
         </header>
+    </div>
         <!--fin navbar-->
 
 
