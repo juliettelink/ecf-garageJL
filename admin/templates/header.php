@@ -21,51 +21,40 @@
 </head>
 <body>
 
-    <div class="container d-flex">
-        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
-            <a href="index.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-                <span class="fs-4">Garage V.Parrot</span>
-            </a>
-            <hr>
-            <ul class="nav nav-pills flex-column mb-auto">
-                <li class="inscription.php">
-                    <a href="inscription.php" class="nav-link active" aria-current="page">
-                        <i class="fa-solid fa-arrow-right-to-bracket fa-sm me-2" style="color: #ffffff;"></i> 
-                        Création de compte
-                    </a>
-                </li>
-                <li>
-                    <a href="cars.php" class="nav-link text-white" >
-                        <i class="fa-solid fa-car fa-sm me-2" style="color: #ffffff;"></i>
-                        Voitures
-                    </a>
-                </li>
-                <li>
-                    <a href="services.php" class="nav-link text-white">
-                        <i class="fa-solid fa-gauge fa-sm me-2" style="color: #ffffff;"></i>
-                        Services
-                    </a>
-                </li>
-                <li>
-                    <a href="opinions.php" class="nav-link text-white">
-                        <i class="fa-solid fa-pen-to-square fa-sm me-2" style="color: #ffffff;"></i>
-                        Avis
-                    </a>
-                </li>
-                <li>
-                    <a href="openingTimes.php" class="nav-link text-white">
-                        <i class="fa-solid fa-calendar-days fa-sm me-2" style="color: #ffffff;"></i>
-                        Horaires
-                    </a>
-                </li>
-                <li>
-                    <a href="forms.php" class="nav-link text-white">
-                        <i class="fa-solid fa-calendar-days fa-sm me-2" style="color: #ffffff;"></i>
-                        Messages Clients
-                    </a>
-                </li>
-            </ul>
-        </div>
-    <div>
-        <main class="d-flex flex-column px-4">
+<?php 
+$mainmenu =[
+    'inscription.php'=>['label'=> 'Création de compte', 'icon'=>'fa-arrow-right-to-bracket'],
+    'cars.php' => ['label' => 'Voitures', 'icon' => 'fa-car'],
+    'services.php' => ['label' => 'Services', 'icon' => 'fa-gauge'],
+    'opinions.php' => ['label' => 'Avis', 'icon' => 'fa-pen-to-square'],
+    'openingTimes.php' => ['label' => 'Horaires', 'icon' => 'fa-calendar-days'],
+    'forms.php' => ['label' => 'Messages Clients', 'icon' => 'fa-message'],
+];
+
+$page_active = basename($_SERVER["SCRIPT_NAME"]);
+ 
+?>
+
+<div class="container">
+    <div class="row">
+        <nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar">
+            <div class="sidebar-sticky">
+                <a href="index.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+                    <span class="fs-4">Garage V.Parrot</span>
+                </a>
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <?php foreach ($mainmenu as $page => $data) { ?>
+                    <li class="nav-item <?php echo ($page_active == $page) ? 'active' : ''; ?>">
+                        <a href="<?php echo $page; ?>" class="nav-link <?php echo ($page_active == $page) ? 'text-danger' : 'text-white'; ?>">
+                            <i class="fa-solid <?php echo $data['icon']; ?> fa-sm me-2" style="color: #ffffff;"></i>
+                            <?php echo $data['label']; ?>
+                        </a>
+                    </li>
+                    <?php }; ?>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">

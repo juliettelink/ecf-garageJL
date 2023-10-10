@@ -22,7 +22,6 @@ if (isset($_POST["addUser"])) {
         if (emailAlreadyExists($pdo, $_POST['mail_id'])) {
             $errors[] = 'L\'adresse e-mail est déjà utilisée par un autre utilisateur.';
         }
-
         // complexité du mot de passe
         if (!isStrongPassword($_POST['password'])) {
             $errors[] = 'Le mot de passe doit contenir au moins une minuscule, une majuscule, un caractère spécial et
@@ -90,7 +89,7 @@ if (isset($_POST["addUser"])) {
         <th scope="col">Email</th>
         <th scope="col">Nom</th>
         <th scope="col">Prénom</th>
-        <th scope="col">Email</th>
+        <th scope="col">Action</th>
     </thead>
     <tbody>
         <?php 
