@@ -11,19 +11,19 @@ $currentPage = basename($_SERVER["SCRIPT_NAME"]);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="<?=$mainMenu[$currentPage]["meta_description"]?>">
     <title><?=$mainMenu[$currentPage]["head_title"]?></title>
+    <!-- Lien vers les polices -->
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;400&family=Barlow:wght@100&family=Rajdhani:wght@300&display=swap" rel="stylesheet">
-    <link href= "https://cdnjs.cloudflare.com/ajax/libs/jquery/1.3.2/jquery.min.js">
+    <!-- Lien vers les feuilles de style -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 
 </head>
 <body>
 
-    <div class="container">
+<div class="container">
         <!--navbar-->
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
             <div class="col-md-3 mb-2 mb-md-0">

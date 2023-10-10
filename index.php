@@ -84,20 +84,10 @@ $cars = getCars($pdo, _HOME_CARS_LIMIT_);
 
  <!--fin de la présentation des occasions-->
 
- <!-- les avis-->
+ <!-- carrousel des avis-->
 
-  <article classe="opinion">
-    <!-- premier caroussel-->
-
+ <article classe="opinion">
     <div id="myCarousel" class="carousel slide mt-5" data-bs-ride="carousel" data-bs-theme="light">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class=""></button>
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class=""></button>
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4" class=""></button>
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="4" aria-label="Slide 5" class="active" aria-current="true"></button>
-      </div>
-
       <div class="carousel-inner">
         <div class="carousel-item active">
           <svg class="bd-placeholder-img" width="100%" height="25%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
@@ -115,12 +105,10 @@ $cars = getCars($pdo, _HOME_CARS_LIMIT_);
       }?>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>  
       </button>
       <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>  
       </button>
     </div>
     <div>
@@ -129,6 +117,9 @@ $cars = getCars($pdo, _HOME_CARS_LIMIT_);
   </article>
 
 </div>
+
+
+
 
 
 <?php

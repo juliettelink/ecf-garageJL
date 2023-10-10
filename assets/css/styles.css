@@ -129,6 +129,41 @@ article .opinion{
     margin-top: 30px;
 }
 
+/* Styles pour le carrousel */
+#myCarousel {
+    background-color: #fff !important; /* Fond blanc */
+    color: #000; /* Écriture noire */
+}
+
+.carousel-inner {
+    border: 2px solid #D92332; /* Bordure rouge */
+}
+
+/* Styles pour les indicateurs du carrousel */
+.carousel-indicators button {
+    background-color: #D92332; /* Fond rouge pour les indicateurs actifs */
+}
+
+.carousel-indicators button.active {
+    background-color: #000; /* Fond noir pour l'indicateur actif */
+}
+
+/* Styles pour les flèches de contrôle du carrousel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: #D92332; /* Couleur rouge pour les flèches de contrôle */
+}
+
+/* Styles pour le texte dans le carrousel */
+.carousel-caption h3 {
+    color: #000; /* Couleur du texte (noir) */
+}
+
+.carousel-caption p {
+    color: #000; /* Couleur du texte (noir) */
+}
+
+
 /* notation par les étoiles*/
 
 

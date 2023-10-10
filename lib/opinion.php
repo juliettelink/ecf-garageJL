@@ -12,7 +12,7 @@ function getOpinions(PDO $pdo){
 }
 
 function getRecentOpinions($pdo){
-    $sql = "SELECT * FROM opinions ORDER BY opinion_id DESC LIMIT 5";
+    $sql = "SELECT * FROM opinions ORDER BY opinion_id DESC LIMIT 10";
     $stmt = $pdo->query($sql);
     $recentOpinions = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $recentOpinions; 

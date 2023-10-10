@@ -1,4 +1,34 @@
 <?php
+// pour afficher les employés
+function getUsers($pdo){
+    $sql = "SELECT * FROM users";
+    $stmt = $pdo->query($sql);
+
+    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $users;
+}
+
+//fonction suppression employé
+function deleteUser(PDO $pdo, string $email):bool
+{
+    // Supprimer l'utilisateur de la table users_role
+    $queryUserRole = $pdo->prepare("DELETE FROM users_role WHERE mail_id = :email");
+    $queryUserRole->bindValue(':email', $email, PDO::PARAM_STR);
+    $queryUserRole->execute();
+    
+    //supprime l'utilisateur de la table users
+    $query = $pdo->prepare("DELETE FROM users WHERE mail_id = :email");
+    $query->bindValue(':email', $email, $pdo::PARAM_STR);
+
+    $query->execute();
+    if ($query->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
  // mot de passe
 function isStrongPassword($password) {
     // Vérifie si le mot de passe contient au moins une minuscule

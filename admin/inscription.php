@@ -80,6 +80,38 @@ if (isset($_POST["addUser"])) {
 
     <input type="submit" name="addUser" class="btn btn-primary" value="Enregistrer" required>
 </form>
+<br>
+
+<h2>Listes des employés</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+        <th scope="col">Email</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Prénom</th>
+        <th scope="col">Email</th>
+    </thead>
+    <tbody>
+        <?php 
+        $users = getUsers($pdo);
+        foreach($users as $user) {
+            //excepter le compte de VParrot.
+            if ($user["mail_id"] == "vparrot@gmail.com") {
+                continue; 
+            }
+            ?>
+        <tr>
+            <th scope="row"><?= $user["mail_id"] ?></th>
+            <td><?= $user["name"] ?></td>
+            <td><?= $user["firstname"] ?></td>
+            <td>
+                <a href="user_delete.php?id=<?=urlencode($user['mail_id'])?>" onclick="return confirm('Etes-vous sur de vouloir supprimer de l\'employé')">Supprimer</a>
+            </td>
+        </tr>
+        <?php } ?>
+    </tbody>
+    </table>
 
 <?php
 
