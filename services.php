@@ -20,7 +20,7 @@ $services = getAllServices($pdo);
             <div class="row text-center justify-content-center ">
                 <div class=" col col-md-6 my-2 ">
                     <div class="card">
-                        <img src="<?=$imagePath?>" class="card-img-top" alt="<?=htmlentities($service["image"])?>">
+                        <img src="<?=$imagePath?>" class="card-img" alt="<?=htmlentities($service["image"])?>">
                         <div class="card-body">
                             <h5 class="card-title"><?=htmlentities($service["service"])?></h5>
                             <p class="card-text"><?=htmlentities($service["description"])?></p>

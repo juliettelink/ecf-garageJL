@@ -38,6 +38,6 @@ $openingTimes = getOpeningTimes($pdo);
         <?php endforeach; ?>
     </tbody>
 </table>
-<button id="submitChanges">Enregistrer les changements</button>
+<button class="btn btn-primary" id="submitChanges">Enregistrer les changements</button>
 
 <?php require_once __DIR__ . "/templates/footer.php"; ?>

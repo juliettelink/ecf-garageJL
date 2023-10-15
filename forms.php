@@ -13,6 +13,8 @@ require_once __DIR__ . "/templates/header.php";
 
 $cars =  getCarsModels($pdo);
 $forms = getForms($pdo);
+$selectedModel = isset($_GET['model']) ? urldecode($_GET['model']) : '';
+
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $name = $_POST["name"];
@@ -71,17 +73,21 @@ if (isset($_SESSION['error_message'])) {
             <label for="mail">Votre email</label>
             <input class="form-control" type="mail"  name="mail" id="mail" placeholder="votre email" required>
         </div>
+        
+                    
         <div class="form-group">
-            
+            <label for="model">Modèle de voiture</label>
             <select class="form-control" name="model" id="model" required>
-            <?php foreach ($cars as $carModel) { ?>
-                    <option value="<?= htmlentities($carModel); ?>" <?= (isset($_POST['model']) && $_POST['model'] == $carModel) ? 'selected' : ''; ?>>
-                        <?= $carModel; ?>
-                    </option>
+                <?php foreach ($cars as $carModel) { ?>
+                <option value="<?= htmlentities($carModel); ?>" <?= ($selectedModel == $carModel) ? 'selected' : ''; ?>>
+                    <?= $carModel; ?>
+                </option>
                 <?php }; ?>
-                <option value="Autres" <?= (isset($_POST['model']) && $_POST['model'] == 'Autres') ? 'selected' : ''; ?>>Autres</option>
+                <option value="Autres" <?= ($selectedModel == 'Autres') ? 'selected' : ''; ?>>Autres</option>
             </select>
         </div>
+
+        
         <div class="form-group">
             <label for="subject">Sujet</label>
             <input class="form-control" type="text"  name="subject" id="subject" required>
