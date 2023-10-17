@@ -38,7 +38,24 @@ if (isset($_GET['id'])) {
 
 if (isset($_POST['saveCar'])) {
 
-    //@todo gérer la gestion des erreurs sur les champs (champ vide etc.)
+    if (empty($_POST['model'])) {
+        $errors[] = "Le champ 'Modèle' ne peut pas être vide.";
+    }
+    if (empty($_POST['year'])) {
+        $errors[] = "Le champ 'Année' ne peut pas être vide.";
+    }
+    if (empty($_POST['price'])) {
+        $errors[] = "Le champ 'Prix' ne peut pas être vide.";
+    }
+    if (empty($_POST['kilometer'])) {
+        $errors[] = "Le champ 'Kilométre' ne peut pas être vide.";
+    }
+    if (empty($_POST['full'])) {
+        $errors[] = "Le champ 'Carburant' ne peut pas être vide.";
+    }
+    if (empty($_POST['color'])) {
+        $errors[] = "Le champ 'Couleur' ne peut pas être vide.";
+    }
     
     $fileName = null;
     // Si un fichier est envoyé
@@ -76,8 +93,7 @@ if (isset($_POST['saveCar'])) {
         }
     }
     /* On stocke toutes les données envoyés dans un tableau pour pouvoir afficher
-       les informations dans les champs. C'est utile pas exemple si on upload un mauvais
-       fichier et qu'on ne souhaite pas perdre les données qu'on avait saisit.
+       les informations dans les champs.
     */
     $car = [
         'model' => $_POST['model'],
@@ -112,6 +128,9 @@ if (isset($_POST['saveCar'])) {
                     'color'=> ''
                 ];
             }
+            //reinitialise les messages
+            $messages = [];
+            $errors = [];
         } else {
             $errors[] = "La voiture n'a pas été sauvegardé";
         }
@@ -180,7 +199,3 @@ if (isset($_POST['saveCar'])) {
 
 
 <?php require_once __DIR__ . "/templates/footer.php"; ?>
-
-
-
-

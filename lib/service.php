@@ -24,7 +24,7 @@ function getServiceById(PDO $pdo, int $id): array|bool
 function getServiceImage(string|null $image):string
 {
     if ($image === null){
-    return _ASSETS_IMAGES_FOLDER_."null.jpg";
+    return _DEFAULT_IMAGE_FOLDER_."null.jpg";
 } else {
     return _SERVICES_IMAGES_FOLDER_.htmlentities($image);
 }

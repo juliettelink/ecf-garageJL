@@ -17,8 +17,6 @@ if (isset($_GET["page"])) {
 
 $cars = getCars($pdo, _ADMIN_ITEM_PER_PAGE_, $currentPage);
 
-var_dump($cars);
-
 $totalCars = getTotalCar($pdo);
 $totalPages = ceil($totalCars / _ADMIN_ITEM_PER_PAGE_ );
 
@@ -48,9 +46,7 @@ $totalPages = ceil($totalCars / _ADMIN_ITEM_PER_PAGE_ );
         </tr>
     </thead>
     <tbody>
-        <?php foreach($cars as $car) {
-            var_dump($car["car_id"]);
-            ?>
+        <?php foreach($cars as $car) { ?>
             
         <tr>
         <th scope="row"><?= $car["car_id"] ?></th>
@@ -86,11 +82,3 @@ $totalPages = ceil($totalCars / _ADMIN_ITEM_PER_PAGE_ );
         </ul>
     </nav>
     <?php } ?>
-
-
-
-
-<?php 
-require_once __DIR__. "/templates/footer.php";
-
-?>

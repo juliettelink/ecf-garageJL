@@ -8,10 +8,14 @@ $mainMenu["occasion.php"] = ["head_title" => "modéle de voiture introuvable", "
 
 $error = false;
 
+
 //gestion d'erreur quand on ne passe pas d'id et quand on en passe 1. on peut aussi le faire avec un switch
+var_dump($_GET["id"]);
 if (isset($_GET["id"])) {
  $id = $_GET["id"];
  $car = getCarById($pdo, $id);
+
+ var_dump($car);
 
  if ($car) {
   $imagePath = getCarImage($car["image1"]);
@@ -46,7 +50,7 @@ require_once __DIR__ . "/templates/header.php";
                 $image2Path = getCarImage($image2);
                 $image3Path = getCarImage($image3);
             } else {
-                $image2Path = $image3Path = _ASSETS_IMAGES_FOLDER_ . 'null.jpg';
+                $image2Path = $image3Path = _DEFAULT_IMAGE_FOLDER_ . 'null.jpg';
             }
             ?>
             <div class="mr-2">

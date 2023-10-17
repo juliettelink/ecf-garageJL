@@ -1,5 +1,6 @@
 <?php 
 
+
 //fonction pour le formulaire de contact avec les modèles de voitures
 function getCarsModels(PDO $pdo): array
 {
@@ -81,80 +82,13 @@ function getCarById(PDO $pdo, $id):array|bool
 function getCarImage(string|null $image):string
 {
   if ($image === null){
-   return _ASSETS_IMAGES_FOLDER_ . "null.jpg";
+   return _DEFAULT_IMAGE_FOLDER_."null.jpg"; 
 } else {
     return _CARS_IMAGES_FOLDER_ . htmlentities($image);
 }
 }
 
-//fonction saveCar
-function saveCar(PDO $pdo, string $model, int $year, int $price, int $kilometer, string $full, string $color, 
-                  string|null $image1, int $id = null): bool
-{
-    // cohérence entre les deux tables
-    $pdo->beginTransaction();
-
-    try {
-        if ($id === null) {
-            // insertion de voiture dans la table cars
-            $carQuery = $pdo->prepare("INSERT INTO cars(model, year, price, kilometer, full, color) 
-                                        VALUES (:model, :year, :price, :kilometer, :full, :color)");
-            $carQuery->bindValue(':model', $model, PDO::PARAM_STR);
-            $carQuery->bindValue(':year', $year, PDO::PARAM_INT);
-            $carQuery->bindValue(':price', $price, PDO::PARAM_INT);
-            $carQuery->bindValue(':kilometer', $kilometer, PDO::PARAM_INT);
-            $carQuery->bindValue(':full', $full, PDO::PARAM_STR);
-            $carQuery->bindValue(':color', $color, PDO::PARAM_STR);
-            $carQuery->execute();
-
-            // récupérer l'id 
-            $id = $pdo->lastInsertId();
-
-            var_dump($id);
-            // Insertion des images dans la table pictures
-            if ($image1) {
-                $pictureQuery = $pdo->prepare("INSERT INTO pictures(car_id, image1) 
-                                                VALUES (:id, :image1)");
-                $pictureQuery->bindValue(':id', $id, PDO::PARAM_INT);
-                $pictureQuery->bindValue(':image1', $image1, PDO::PARAM_STR);
-                $pictureQuery->execute();
-            }
-        } else {
-            // mise à jour de la table cars
-            $carQuery = $pdo->prepare("UPDATE cars SET model = :model, year = :year, price = :price, kilometer = :kilometer,
-                                      full = :full, color = :color WHERE car_id = :id");
-            $carQuery->bindValue(':id', $id, PDO::PARAM_INT);
-            $carQuery->bindValue(':model', $model, PDO::PARAM_STR);
-            $carQuery->bindValue(':year', $year, PDO::PARAM_INT);
-            $carQuery->bindValue(':price', $price, PDO::PARAM_INT);
-            $carQuery->bindValue(':kilometer', $kilometer, PDO::PARAM_INT);
-            $carQuery->bindValue(':full', $full, PDO::PARAM_STR);
-            $carQuery->bindValue(':color', $color, PDO::PARAM_STR);
-            $carQuery->execute();
-
-            // Mise à jour des images associées à la voiture dans la table pictures
-            if ($image1) {
-                $pictureQuery = $pdo->prepare("UPDATE pictures SET image1 = :image1 
-                                                WHERE car_id = :id ");
-                $pictureQuery->bindValue(':id', $id, PDO::PARAM_INT);
-                $pictureQuery->bindValue(':image1', $image1, PDO::PARAM_STR);
-                $pictureQuery->execute();
-            }
-        }
-
-        // Commit 
-        $pdo->commit();
-        return true;
-    } catch (PDOException $e) {
-        // Exception / annulation
-        $pdo->rollBack();
-        return false;
-    }
-}
-
-
-
-
+// fonction de la table pictures
 function getPicturesByCarId(PDO $pdo, int $Id)
 {     
   $sql = "SELECT * FROM pictures WHERE car_id = :id";
@@ -166,24 +100,115 @@ function getPicturesByCarId(PDO $pdo, int $Id)
 
 
 
-//fonction delet car
-function deleteCar(PDO $pdo, int $id):bool
+//fonction saveCar
+function saveCar(PDO $pdo, string $model, int $year, int $price, int $kilometer, string $full, string $color, 
+                  string|null $image1, int $id = null)
 {
-    
-    $query = $pdo->prepare("DELETE FROM cars WHERE car_id = :id");
-    $query->bindValue(':id', $id, $pdo::PARAM_INT);
+    // Cohérence entre les deux tables
+    $pdo->beginTransaction();
 
-    $query->execute();
-    if ($query->rowCount() > 0) {
-        return true;
-    } else {
+    try {
+        $query = null;
+
+        if ($id === null) {
+            // Insertion de voiture dans la table cars
+            $query = $pdo->prepare("INSERT INTO cars(model, year, price, kilometer, full, color) 
+                                    VALUES (:model, :year, :price, :kilometer, :full, :color)");
+
+            // Exécution de la requête d'insertion
+            $query->bindValue(':model', $model, PDO::PARAM_STR);
+            $query->bindValue(':year', $year, PDO::PARAM_INT);
+            $query->bindValue(':price', $price, PDO::PARAM_INT);
+            $query->bindValue(':kilometer', $kilometer, PDO::PARAM_INT);
+            $query->bindValue(':full', $full, PDO::PARAM_STR);
+            $query->bindValue(':color', $color, PDO::PARAM_STR);
+            $query->execute();
+
+            // Récupération de l'ID généré
+            $id = $pdo->lastInsertId();
+        } else {
+            // Mise à jour de la table cars
+            $query = $pdo->prepare("UPDATE cars SET model = :model, year = :year, price = :price, kilometer = :kilometer,
+                                    full = :full, color = :color WHERE car_id = :id");
+            $query->bindValue(':id', $id, PDO::PARAM_INT);
+            $query->bindValue(':model', $model, PDO::PARAM_STR);
+            $query->bindValue(':year', $year, PDO::PARAM_INT);
+            $query->bindValue(':price', $price, PDO::PARAM_INT);
+            $query->bindValue(':kilometer', $kilometer, PDO::PARAM_INT);
+            $query->bindValue(':full', $full, PDO::PARAM_STR);
+            $query->bindValue(':color', $color, PDO::PARAM_STR);
+            $query->execute();
+        }
+
+        // Vérifie si existe dans la table pictures
+          $existingPicture = getPicturesByCarId($pdo, $id);
+        // Insertion des images 
+        if ($image1) {
+          // mise à jour de l'image
+          if ($existingPicture) {
+              $pictureQuery = $pdo->prepare("UPDATE pictures SET image1 = :image1 WHERE car_id = :id");
+              $pictureQuery->bindValue(':id', $id, PDO::PARAM_INT);
+              $pictureQuery->bindValue(':image1', $image1, PDO::PARAM_STR);
+              $pictureQuery->execute();
+          } else {
+              // insere une nouvelle image
+              $pictureQuery = $pdo->prepare("INSERT INTO pictures(car_id, image1) 
+                                              VALUES (:id, :image1)");
+              $pictureQuery->bindValue(':id', $id, PDO::PARAM_INT);
+              $pictureQuery->bindValue(':image1', $image1, PDO::PARAM_STR);
+              $pictureQuery->execute();
+          }
+      } else {
+          // pas d'image fournie et qu'il y a une entrée existante, ne rien faire
+          if (!$existingPicture) {
+              // insersion d'une image par défault
+              $defaultImage = _DEFAULT_IMAGE_FOLDER_."null.jpg";  
+              $pictureQuery = $pdo->prepare("INSERT INTO pictures(car_id, image1) 
+                                              VALUES (:id, :image1)");
+              $pictureQuery->bindValue(':id', $id, PDO::PARAM_INT);
+              $pictureQuery->bindValue(':image1', $defaultImage, PDO::PARAM_STR);
+              $pictureQuery->execute();
+          }
+      }
+
+        // Commit 
+        $pdo->commit();
+
+        // Retourne l'ID si l'opération a réussi, sinon retourne false
+        return $id !== null ? $id : false;
+    } catch (PDOException $e) {
+        // Exception / annulation
+        $pdo->rollBack();
+
+        // Peut-être enregistrez l'erreur quelque part ou faites un echo pour le débogage
+        echo "Erreur lors de l'opération : " . $e->getMessage();
+
         return false;
     }
 }
 
+
+
+
+//fonction suppression d'un modele dans la bdd cars et pictures
+function deleteCar(PDO $pdo, int $id) :bool
+ {
+  // Supprimer table 'pictures'
+  $picturesQuery = "DELETE FROM pictures WHERE car_id = :car_id";
+  $picturesStmt = $pdo->prepare($picturesQuery);
+  $picturesStmt->bindParam(":car_id", $id, PDO::PARAM_INT);
+  $picturesStmt->execute();
+
+  // Supprimer  table 'cars'
+  $carQuery = "DELETE FROM cars WHERE car_id = :car_id";
+  $carStmt = $pdo->prepare($carQuery);
+  $carStmt->bindParam(":car_id", $id, PDO::PARAM_INT);
+  $carStmt->execute();
+
+  // vérifie le nombre de lignes affectées
+  $rowsAffectedPictures = $picturesStmt->rowCount();
+  $rowsAffectedCar = $carStmt->rowCount();
+
+  return ($rowsAffectedPictures > 0 && $rowsAffectedCar > 0);
+}
   ?>
-
-
-
-
-
