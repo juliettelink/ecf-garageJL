@@ -1,12 +1,22 @@
-<?
-    require __DIR__ . "lib.config.php";
-    require __DIR__ . "lib.pdo.php";
-//filtre voiture
+<?php
+require_once __DIR__ . "/lib/config.php";
+require_once __DIR__ . "/lib/pdo.php";
+require_once __DIR__ . "/lib/car.php";
 
+$year = isset($_GET['year']) ? $_GET['year'] : null;
+$kilometer = isset($_GET['kilometer']) ? $_GET['kilometer'] : null;
+$price = isset($_GET['price']) ? $_GET['price'] : null;
 
-    $query = "SELECT * FROM cars WHERE id >= 0 ";
-    $r = mysqli_query($con,$query);
+//  la fonction de filtrage
+require_once __DIR__ . "/lib/filter.php";
 
+header('Content-Type: application/json');
 
-    //kilométre
+try {
+    $filteredCars = filterCars($pdo, getCars($pdo), $year, $kilometer, $price);
+    echo json_encode($filteredCars);
+} catch (Exception $e) {
+    echo json_encode(['error' => $e->getMessage()]);
+}
 
+?>

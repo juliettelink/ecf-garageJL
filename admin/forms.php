@@ -36,6 +36,7 @@ $forms = getForms($pdo);
             <th scope="row"><?= $form["form_id"] ?></th>
             <td><?= $form["name"] ?></td>
             <td><?= $form["surname"] ?></td>
+            <td><?= $form["mail"] ?></td>
             <td><?= $form["model"] ?></td>
             <td><?= $form["subject"] ?></td>
             <td><?= $form["message"] ?></td>

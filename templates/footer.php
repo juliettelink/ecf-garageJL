@@ -56,22 +56,21 @@ $openingTimes = getOpeningTimes($pdo);
             <span class="mb-3 mb-md-0 text-body-secondary ">© 2021 Garage V.Parrot, Inc</span>
 
             <ul class="nav col-md-4 list-unstyled d-flex">
-                <li class="ms-3"><a class="text-body-secondary" href="index.php">accueil</a></li>
-                <li class="ms-3"><a class="text-body-secondary" href="services.php">services</a></li>
-                <li class="ms-3"><a class="text-body-secondary" href="occasions.php">occasions</a></li>
+                <li class="ms-3"><a class="text-body-secondary" href="index.php">Accueil</a></li>
+                <li class="ms-3"><a class="text-body-secondary" href="services.php">Services</a></li>
+                <li class="ms-3"><a class="text-body-secondary" href="occasions.php">Occasions</a></li>
             </ul>
         </div>
     </footer>
 </div>
 
 <!-- cdn jquery -->
-<!-- <script src="jquery-3.7.1.slim.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.3.2/jquery.min.js" integrity="sha512-q7KtixEScagqBDYpQKermTCIPsszSXocU+3NxJ8GNK9b9bG8cJW9GNsm0hKwWa7ORXf4UEC19JxJgrRo/pc8Eg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <!-- cdn bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
 <!-- script JS -->
-<script type = "text/javascript" src="filter.js"></script>
 <script src="opinionScript.js"></script>
 
 
