@@ -4,7 +4,7 @@ define("_DOMAIN_", "localhost");
 define("_DB_SERVER_", "localhost");
 define("_DB_NAME_", "garagevp");
 define("_DB_USER_", "root");
-define("_DB_PASSSWORD_", "");
+define("_DB_PASSWORD_", "");
 define("_DEFAULT_IMAGE_FOLDER_", "./uploads/occasion/");
 define("_CARS_IMAGES_FOLDER_", "./uploads/occasion/");
 
