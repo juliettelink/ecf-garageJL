@@ -23,6 +23,7 @@ CREATE TABLE openingTimes(
         afternoonClose VARCHAR (50) NOT NULL
 );
 
+
 # table Cars
 drop table if exists cars;
 CREATE TABLE cars(
@@ -30,7 +31,7 @@ CREATE TABLE cars(
         model VARCHAR (50) NOT NULL,
         year INT NOT NULL,
         price DECIMAL(10, 2) NOT NULL,
-   	    kilometer INT NOT NULL,
+   	kilometer INT NOT NULL,
         full VARCHAR(50) NOT NULL,
         color VARCHAR (50) NOT NULL
 );
@@ -220,11 +221,109 @@ insert into users_role(role_id, mail_id) values
 (2, 'GBoutin@gmail.com');
 
 
+
+# REQUETE INTEGRER A MON PHP
+
+# DEBUT DE REQUETE POUR LES VOITURES
 # requete SQL  relier cars et pictures avec ordre id inversé
 SELECT c.*, p.* 
 FROM cars c 
 INNER JOIN pictures p 
 ON c.car_id = p.car_id 
 ORDER BY c.car_id DESC;
+
+
+# requete pour obtenir la liste des modéle de voitures unique
+SELECT DISTINCT model FROM cars;
+
+# requete pour obtenir le nombre total de lignes dans la tables cars (nombre de voitures)
+SELECT COUNT(*) as total
+          FROM cars;
+         
+#requête pour obtenir les données d'un voiture (car_id) et de ses images associées
+SELECT c.*, p.* 
+          FROM cars c 
+          INNER JOIN pictures p ON c.car_id = p.car_id 
+          WHERE c.car_id = :id;
+
+
+# requête qui permet d'obtenir toutes les images associées en fonction de id (car_id)
+SELECT * FROM pictures WHERE car_id = :id;
+
+# requête pour effectuer des modifications d'une voiture dans la bdd
+UPDATE cars SET model = :model, year = :year, price = :price, kilometer = :kilometer,
+       full = :full, color = :color WHERE car_id = :id
+       
+# requête qui met à jour une image accocié à une voiture dans la bdd
+UPDATE pictures SET image1 = :image1 WHERE car_id = :id;
+
+
+# requête pour supprimer les images associée à une voiture (car-id)
+DELETE FROM pictures WHERE car_id = :car_id;
+
+# requête pour supprimer une voiture de la BDD
+DELETE FROM cars WHERE car_id = :car_id;
+
+
+# DEBUT REQUETE POUR LE FORMULAIRE (forms)
+# requête pour prend tous les informations de la table forms 
+SELECT * FROM forms
+
+# requête pour supprimer un formulaire spécifique (form_id) de bdd
+DELETE FROM forms WHERE form_id = :id;
+
+
+
+# DEBUT REQUETE POUR LES HORAIRES (openingTimes)
+# requête qui permet de récupere les infomations specifique (openingTime_id)
+SELECT * FROM openingTimes WHERE openingTime_id=:id;
+
+# DEBUT REQUETE AVIS (opinions)
+# Requete qui pemert d'afficher les derniers avis dans l'appli du site limité à 10
+SELECT * FROM opinions ORDER BY opinion_id DESC LIMIT 10;
+
+# Requete pour récuper un avis spécifique en fonciton de id (opinion_id)
+SELECT * FROM opinions WHERE opinion_id = :id;
+
+# Requete pour supprimer un avis spécifique en fonction de l'id
+DELETE FROM opinions WHERE opinion_id = :id;
+
+
+#POUR LES SERVICES 
+SELECT * FROM services WHERE service_id=:id;
+
+DELETE FROM services WHERE service_id = :id;
+
+#Requête pour effectuer des modification spécifique sur un id dans la bdd
+UPDATE `services` SET `service` = :service, "
+        ."`description` = :description, "
+        ."image = :image WHERE `service_id` = :id;
+
+
+
+# REQUETE POUR LES UTILISATUERS (users) et role (users-role)
+SELECT * FROM users;
+
+# Requête pour récuperer des informations sur un utilisateur et son role
+# jointure role_id et mail_id
+SELECT u.*, r.name AS role_name
+                            FROM users u
+                            INNER JOIN users_role ur ON u.mail_id = ur.mail_id
+                            INNER JOIN role r ON ur.role_id = r.role_id
+                            WHERE u.mail_id = :email;
+
+
+DELETE FROM users_role WHERE mail_id = :email;
+
+
+
+DELETE FROM users WHERE mail_id = :email;
+
+SELECT role_id FROM role WHERE name = :role
+
+SELECT COUNT(*) FROM users WHERE mail_id = :email
+
+
+
 
 

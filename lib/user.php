@@ -12,7 +12,7 @@ function getUsers($pdo){
 //fonction suppression employé
 function deleteUser(PDO $pdo, string $email):bool
 {
-    // Supprimer l'utilisateur de la table users_role
+    // Supprime l'utilisateur de la table users_role
     $queryUserRole = $pdo->prepare("DELETE FROM users_role WHERE mail_id = :email");
     $queryUserRole->bindValue(':email', $email, PDO::PARAM_STR);
     $queryUserRole->execute();

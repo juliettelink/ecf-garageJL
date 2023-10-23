@@ -8,22 +8,22 @@ require_once __DIR__ . "/templates/header.php";
 $errors = [];
 
 if (isset($_POST["loginUser"])) {
- $email = $_POST["email"];
- $password = $_POST["password"];
+    $email = $_POST["email"];
+    $password = $_POST["password"];
 
- $user = verifyUserLoginPassword($pdo, $email, $password);
- if ($user) {
-  // cree un id de session renouvelé securité en plus
-  session_regenerate_id(true);
-  $_SESSION["user"] = $user;
-  if ($user["role_name"] === "employe") {
-   header("location: admin/index.php");
-  } elseif ($user["role_name"] === "administrator") {
-   header("location: admin/index.php");
-  }
- } else {
-  $errors[] = "Email ou mot de passe incorrect";
- }
+    $user = verifyUserLoginPassword($pdo, $email, $password);
+    if ($user) {
+        // cree un id de session renouvelé, securité en plus
+        session_regenerate_id(true);
+        $_SESSION["user"] = $user;
+        if ($user["role_name"] === "employe") {
+        header("location: admin/index.php");
+        } elseif ($user["role_name"] === "administrator") {
+        header("location: admin/index.php");
+        }
+    } else {
+    $errors[] = "Email ou mot de passe incorrect";
+    }
 }
 
 ?>
