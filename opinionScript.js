@@ -1,4 +1,4 @@
-// alert("opinionScript");
+
 // Les étoiles pour avis
 
 //fonction pour congurer les étoiles pour les avis récents
