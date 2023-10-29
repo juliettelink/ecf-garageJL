@@ -183,15 +183,12 @@ if (isset($_POST['saveCar'])) {
                 <label for="delete_image">Supprimer l'image</label>
                 <input type="checkbox" name="delete_image" id="delete_image">
                 <input type="hidden" name="image1" value="<?= $car['image1']; ?>">
-
             </p>
         <?php } ?>
         <p>
             <input type="file" name="file" id="file">
         </p>
-
         <input type="submit" name="saveCar" class="btn btn-primary" value="Enregistrer">
-
     </form>
 
 <?php } ?>

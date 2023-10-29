@@ -29,7 +29,6 @@ if (isset($_POST["loginUser"])) {
 ?>
 <div class="container">
     <h1>Login</h1>
-
     <?php foreach ($errors as $error) {?>
         <div class="alert alert-danger">
             <?=$error;?>
@@ -45,7 +44,6 @@ if (isset($_POST["loginUser"])) {
             <label class="form-label" for="password">Mot de passe</label>
             <input type="password" name="password" id="password" class="form-control" required>
         </div>
-
         <input type="submit" value="Connexion" name="loginUser" class="btn btn-primary" >
     </form>
 </div>

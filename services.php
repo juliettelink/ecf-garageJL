@@ -5,9 +5,11 @@ require_once __DIR__ . "/lib/menu.php";
 require_once __DIR__ . "/templates/header.php";
 require_once __DIR__ . "/lib/service.php";
 
-// Appeler la fonction pour obtenir la liste de services
+// appelle la fonction pour obtenir la liste de services
 $services = getAllServices($pdo);
 ?>
+
+
 <div class="container">
     <h1>Présentation de nos services</h1>
     <?php
@@ -38,6 +40,5 @@ $services = getAllServices($pdo);
 </div>
 
 <?php
-
 require_once __DIR__ . "/templates/footer.php";
 ?>

@@ -40,8 +40,8 @@ $opinions = getOpinions($pdo);
             <td><?= $opinion["note"] ?></td>
             <td><?= $opinion["date"] ?></td>
             <td>
-                <a href="opinion.php?id=<?=$opinion['opinion_id']?>">Modifier</a>
-                <a href="opinion_delete.php?id=<?=$opinion['opinion_id']?>" onclick="return confirm('Etes-vous sur de vouloir supprimer cet avis')">Supprimer</a>
+                <a href="opinion.php?id=<?=$opinion['opinion_id']?>" class="btn btn-success">Modifier</a>
+                <a href="opinion_delete.php?id=<?=$opinion['opinion_id']?>" class="btn btn-danger" onclick="return confirm('Etes-vous sur de vouloir supprimer cet avis')">Supprimer</a>
             </td>
         </tr>
         <?php } ?>

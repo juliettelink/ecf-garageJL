@@ -27,7 +27,7 @@ $currentPage = basename($_SERVER["SCRIPT_NAME"]);
         <!--navbar-->
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
             <div class="col-md-3 mb-2 mb-md-0">
-                <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+                <a href="index.php" class="d-inline-flex link-body-emphasis text-decoration-none">
                     <img width="300px" src="assets/images/logo.jpg" alt="logo garage">
                 </a>
             </div>
@@ -52,7 +52,7 @@ $currentPage = basename($_SERVER["SCRIPT_NAME"]);
                     <a href="login.php" type="button" class="btn btn-outline-primary me-2">Espace Pro</a>
                 <?php }?>
 
-                <a href="opinions.php" type="button" class="btn btn-primary">Avis</a>
+                <a href="opinions.php" type="button" class="btn btn-secondary">Avis</a>
             </div>
         </header>
     </div>

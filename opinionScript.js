@@ -1,7 +1,7 @@
 
 // Les étoiles pour avis
 
-//fonction pour congurer les étoiles pour les avis récents
+//fonction pour configurer les étoiles pour les avis récents
 function setupRecentStarRating() {
   // On cherche les étoiles pour les avis récents
   const recentStarRatingElements = document.querySelectorAll(".recent-star-rating");

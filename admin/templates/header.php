@@ -2,8 +2,6 @@
     require_once __DIR__ ."/../../lib/config.php";
     require_once __DIR__ ."/../../lib/session.php";
 
-   // adminOnly();
-   
 ?>
 
 <!DOCTYPE html>
@@ -37,11 +35,11 @@ $page_active = basename($_SERVER["SCRIPT_NAME"]);
 
 <div class="container">
     <div class="row">
-        <nav class="col-md-3 col-lg-2 d-md-block bg-dark sidebar">
+        <nav class="col-md-3 col-lg-3 d-md-block bg-dark sidebar">
             <div class="sidebar-sticky">
                 <a href="index.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-                    <span class="fs-4">Garage V.Parrot</span>
+                    <span class="title-nav">Garage V.Parrot</span>
                 </a>
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto">
@@ -57,4 +55,4 @@ $page_active = basename($_SERVER["SCRIPT_NAME"]);
             </div>
         </nav>
 
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">

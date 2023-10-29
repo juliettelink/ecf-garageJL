@@ -43,7 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // Stockez un message de remerciement dans la session
         $_SESSION['thank_you_message'] = "Merci de votre message. Il sera pris en compte dans les meilleurs délais.";
-
     }
 }
 
@@ -60,7 +59,7 @@ if (isset($_SESSION['error_message'])) {
     <h1> Formulaire du contact </h1>
     <p> Nous prenons le temps de vous lire et de vous répondre dans les meilleurs delais. </p>
 
-    <form action= "" method="post">
+    <form method="post">
         <div class="form-group">
             <label for="name">Votre nom</label>
             <input class="form-control" type="text"  name="name" id="name" placeholder="votre nom" required>
@@ -72,9 +71,7 @@ if (isset($_SESSION['error_message'])) {
         <div class="form-group">
             <label for="mail">Votre email</label>
             <input class="form-control" type="mail"  name="mail" id="mail" placeholder="votre email" required>
-        </div>
-        
-                    
+        </div>               
         <div class="form-group">
             <label for="model">Modèle de voiture</label>
             <select class="form-control" name="model" id="model" required>
@@ -86,8 +83,6 @@ if (isset($_SESSION['error_message'])) {
                 <option value="Autres" <?= ($selectedModel == 'Autres') ? 'selected' : ''; ?>>Autres</option>
             </select>
         </div>
-
-        
         <div class="form-group">
             <label for="subject">Sujet</label>
             <input class="form-control" type="text"  name="subject" id="subject" required>
@@ -100,8 +95,6 @@ if (isset($_SESSION['error_message'])) {
             <label for="date">Date</label>
             <input class="form-control" type="date" name="date" id="date"/>
         </div>
-
-
         <div class= "form-group">
             <button class="btn btn-primary" type="submit">Valider</button>
         </div>
@@ -120,6 +113,5 @@ if (isset($_SESSION['error_message'])) {
 </script>
 
 <?php
-
 require_once __DIR__ . "/templates/footer.php";
 ?>

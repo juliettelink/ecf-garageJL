@@ -44,17 +44,13 @@ $openingTimes = getOpeningTimes($pdo);
                             <td><?php echo htmlentities($openingTime['afternoonClose']); ?></td>
                         </tr>
                         <?php } ?>
-                        
                     </tbody>
                 </table>
-
             </div>
         </div>
 
-
         <div class= "d-flex flex-wrap justify-content-between">
             <span class="mb-3 mb-md-0 text-body-secondary ">© 2021 Garage V.Parrot, Inc</span>
-
             <ul class="nav col-md-4 list-unstyled d-flex">
                 <li class="ms-3"><a class="text-body-secondary" href="index.php">Accueil</a></li>
                 <li class="ms-3"><a class="text-body-secondary" href="services.php">Services</a></li>
@@ -65,7 +61,6 @@ $openingTimes = getOpeningTimes($pdo);
 </div>
 
 <!-- cdn jquery -->
-
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <!-- cdn bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>

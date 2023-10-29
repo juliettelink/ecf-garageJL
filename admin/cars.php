@@ -29,6 +29,7 @@ $totalPages = ceil($totalCars / _ADMIN_ITEM_PER_PAGE_ );
         Ajouter un modéle
     </a>
 </div>
+
 <table class="table">
     <thead>
         <tr>
@@ -62,16 +63,16 @@ $totalPages = ceil($totalCars / _ADMIN_ITEM_PER_PAGE_ );
         <td>
             <a href="car.php?id=<?=$car['car_id']?>" type="button" class="btn btn-success" >Modifier</a>
             <a href="car_delete.php?id=<?=$car['car_id']?>" type="button" class="btn btn-danger"
-             onclick="return confirm('Etes-vous sur de vouloir supprimer ce modéle')">
-                <i class="fa-solid fa-trash" style="color: #ffffff;">
-                </i>    
+                onclick="return confirm('Etes-vous sur de vouloir supprimer ce modéle')">
+                <i class="fa-solid fa-trash" style="color: #ffffff;"></i> 
                 Supprimer
             </a>
         </td>
         <?php } ?>
         </tr>
     </tbody>
-    </table>
+</table>
+
 
     <?php if($totalPages > 1){?>
     <nav aria-label="Page navigation">
