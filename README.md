@@ -66,3 +66,7 @@ C'est une évalutation en cours de formation (ECF) afin de valider des compéten
 # Chartre et wireframes
 * dans le github dans le dossier PDF : chartre graphique.pdf
 * et lien figma : (https://www.figma.com/file/sf4vamlO6WYXUSGQGJnfsK/Garage?type=design&node-id=7:19&mode=design&t=bmxWljtAVKhDOKgu-1)
+
+# Se connecter à l'espace pro
+Seul l'administrateur: Vincent Parrot et ses employés y ont accés.
+* Les mails et mots de passe sont fournis dans le document officiel du projet Sudi.
