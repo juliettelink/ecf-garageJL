@@ -24,10 +24,8 @@ C'est une évalutation en cours de formation (ECF) afin de valider des compéten
 
 # Les outils du projet:
 1. SERVEUR :
-    • RAJOUTER L HEBERGEUR
+    • Holstinger
     • PHP 8.2.4
-    • Extension PHP:PDO
-    • MariaDB
 
 2. FRONT :
     • HTML 5
@@ -42,7 +40,7 @@ C'est une évalutation en cours de formation (ECF) afin de valider des compéten
 
 
 ## LE SITE EN LIGNE **
-    mettre le site
+   (https://garagevparrotjl.net/)
 
 # En local
 1. Cloner le projet
