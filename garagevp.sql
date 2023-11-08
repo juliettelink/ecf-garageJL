@@ -6,10 +6,10 @@ create database garagevpjl;
 drop table if exists opinions;
 CREATE TABLE opinions(
 	opinion_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    nameClient VARCHAR (50) NOT NULL,
-    comment VARCHAR (250) NOT NULL,
+        nameClient VARCHAR (50) NOT NULL,
+        comment VARCHAR (250) NOT NULL,
 	note INT NOT NULL,
-    date DATE NOT NULL
+        date DATE NOT NULL
 );
 
 #table openingTimes
@@ -58,23 +58,22 @@ CREATE TABLE users(
         mail_id VARCHAR(50) PRIMARY KEY NOT NULL,
         name VARCHAR (50) NOT NULL,
         firstname VARCHAR (50) NOT NULL,
-        password VARCHAR (50) NOT NULL,
+        password VARCHAR (250) NOT NULL,
         openingTime_id INT NOT NULL,
         service_id INT NOT NULL,
-	    CONSTRAINT user_OpeningTime_FK FOREIGN KEY (openingTime_id) REFERENCES openingTimes(openingTime_id),
-	    CONSTRAINT user_Service0_FK FOREIGN KEY (service_id) REFERENCES services(service_id)
+	CONSTRAINT user_OpeningTime_FK FOREIGN KEY (openingTime_id) REFERENCES openingTimes(openingTime_id),
+	CONSTRAINT user_Service0_FK FOREIGN KEY (service_id) REFERENCES services(service_id)
 );
 
 #table pictures
 drop table if exists pictures;
 CREATE TABLE pictures(
         picture_id INT PRIMARY KEY AUTO_INCREMENT  NOT NULL ,
-        is_principal BOOL NOT NULL ,
         image1 VARCHAR (250) NOT NULL ,
         image2 VARCHAR (250) NOT NULL ,
         image3 VARCHAR (250) NOT NULL ,
         car_id INT NOT NULL,
-    	CONSTRAINT picture_car_FK FOREIGN KEY (car_id) REFERENCES cars(car_id)
+CONSTRAINT picture_car_FK FOREIGN KEY (car_id) REFERENCES cars(car_id)
 );
 
 	
@@ -223,6 +222,9 @@ insert into users_role(role_id, mail_id) values
 
 
 # REQUETE INTEGRER A MON PHP
+# model de forms correspond au model dans cars
+alter table forms 	
+	add foreign key (model) references cars(model);
 
 # DEBUT DE REQUETE POUR LES VOITURES
 # requete SQL  relier cars et pictures avec ordre id inversé
