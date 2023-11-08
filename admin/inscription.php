@@ -13,7 +13,13 @@ adminOnly();
 $errors = [];
 $messages = [];
 
-if (isset($_POST["addUser"])) {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Validez et échappez les données d'entrée
+    $mail_id = filter_var($_POST['mail_id'], FILTER_VALIDATE_EMAIL);
+    $name = htmlspecialchars($_POST['name']);
+    $firstname = htmlspecialchars($_POST['firstname']);
+    $password = $_POST['password'];
+
     // Vérifie si tous les champs du formulaire sont remplis
     if (empty($_POST['mail_id']) || empty($_POST['name']) || empty($_POST['firstname']) || empty($_POST['password'])) {
         $errors[] = 'Tous les champs du formulaire doivent être remplis.';
@@ -28,12 +34,15 @@ if (isset($_POST["addUser"])) {
                         avoir une longueur minimale de 8 caractères.';
         }
 
+        // Hachez le mot de passe avant de l'ajouter à la base de données
+        $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+
         // ajout de l'utilisateur
         if (empty($errors)) {
             $roleName = 'employe'; 
             $roleId = getRoleIdByName($pdo, $roleName);
 
-            $res = addUser($pdo, $_POST['mail_id'], $_POST['name'], $_POST['firstname'], $_POST['password'], $roleId);
+            $res = addUser($pdo, $mail_id, $name, $firstname, $passwordHash, $roleId);
             if ($res) {
                 $messages[] = 'Inscription réussie';
             } else {
