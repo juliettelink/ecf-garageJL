@@ -84,6 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <div class="mb-3">
         <label for="password" class="form-label">Mot de passe</label>
         <input type="password" class="form-control" id="password" name="password" required>
+        <span id="eye-icon" class="eye-icon" onclick="passwordVisibility()">👁️</span>
     </div>
 
     <input type="submit" name="addUser" class="btn btn-primary" value="Enregistrer" required>

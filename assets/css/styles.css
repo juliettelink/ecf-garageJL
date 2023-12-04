@@ -224,3 +224,8 @@ h1, h2{
     font-size: 24px;
 }
 
+/* icone vue dans inscription */
+#eye-icon{
+    cursor: pointer;
+}
+
