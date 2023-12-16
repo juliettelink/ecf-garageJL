@@ -11,41 +11,46 @@ require_once __DIR__ . "/lib/session.php";
 $mainMenu["forms.php"] = ["head_title" => "contact", "meta_description" => "nous contacter via le formulaire", "exclude" => true];
 require_once __DIR__ . "/templates/header.php";
 
+
 $cars =  getCarsModels($pdo);
 $forms = getForms($pdo);
 $selectedModel = isset($_GET['model']) ? urldecode($_GET['model']) : '';
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $name = $_POST["name"];
-    $surname = $_POST["surname"];
-    $mail = $_POST["mail"];
-    $model = $_POST["model"];
-    $subject = $_POST["subject"];
-    $message = $_POST["message"];
-    $date = $_POST["date"];
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        $errors[] = 'Erreur CSRF : tentative de requête non autorisée.';
+    }else{
+        $name = $_POST["name"];
+        $surname = $_POST["surname"];
+        $mail = $_POST["mail"];
+        $model = $_POST["model"];
+        $subject = $_POST["subject"];
+        $message = $_POST["message"];
+        $date = $_POST["date"];
+        
+        // Validation des données
+        if (empty($name) || empty($surname) || empty($mail) || empty($model) || empty($subject) || empty($message) || empty($date)) {
+            // Au moins un champ obligatoire est vide
+            $_SESSION['error_message'] = "Veuillez remplir tous les champs obligatoires.";
+        } elseif (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+            // L'adresse email n'est pas valide
+            $_SESSION['error_message'] = "L'adresse email n'est pas valide.";
+        } elseif (!strtotime($date)) {
+            // La date n'est pas dans un format attendu
+            $_SESSION['error_message'] = "La date n'est pas valide.";
+        } else {
+            // Requête SQL pour insérer l'avis dans la base de données
+            $sql = "INSERT INTO forms (name, surname, mail, model, subject, message, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$name, $surname, $mail, $model, $subject, $message, $date]);
     
-    // Validation des données
-    if (empty($name) || empty($surname) || empty($mail) || empty($model) || empty($subject) || empty($message) || empty($date)) {
-        // Au moins un champ obligatoire est vide
-        $_SESSION['error_message'] = "Veuillez remplir tous les champs obligatoires.";
-    } elseif (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-        // L'adresse email n'est pas valide
-        $_SESSION['error_message'] = "L'adresse email n'est pas valide.";
-    } elseif (!strtotime($date)) {
-        // La date n'est pas dans un format attendu
-        $_SESSION['error_message'] = "La date n'est pas valide.";
-    } else {
-        // Requête SQL pour insérer l'avis dans la base de données
-        $sql = "INSERT INTO forms (name, surname, mail, model, subject, message, date) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$name, $surname, $mail, $model, $subject, $message, $date]);
-
-        // Stockez un message de remerciement dans la session
-        $_SESSION['thank_you_message'] = "Merci de votre message. Il sera pris en compte dans les meilleurs délais.";
+            // Stockez un message de remerciement dans la session
+            $_SESSION['thank_you_message'] = "Merci de votre message. Il sera pris en compte dans les meilleurs délais.";
+        }
     }
-}
 
+}
 // Affichez le message d'erreur s'il est présent dans la session
 if (isset($_SESSION['error_message'])) {
     echo '<p style="color: red;">' . $_SESSION['error_message'] . '</p>';
@@ -53,6 +58,8 @@ if (isset($_SESSION['error_message'])) {
     unset($_SESSION['error_message']);
 }
 
+$csrfToken = bin2hex(random_bytes(32));
+$_SESSION['csrf_token'] = $csrfToken;
 ?>
 
 <div class="container">
@@ -60,6 +67,7 @@ if (isset($_SESSION['error_message'])) {
     <p> Nous prenons le temps de vous lire et de vous répondre dans les meilleurs delais. </p>
 
     <form method="post">
+        <input type="hidden" name="csrf_token" value="<?= $csrfToken ?>">
         <div class="form-group">
             <label for="name">Votre nom</label>
             <input class="form-control" type="text"  name="name" id="name" placeholder="votre nom" required>
@@ -104,9 +112,9 @@ if (isset($_SESSION['error_message'])) {
 <script>
     <?php
     if (isset($_SESSION['thank_you_message'])) {
-        // Utilisez JavaScript pour afficher une popup
+        // Utilise JavaScript pour afficher une popup
         echo 'alert("' . $_SESSION['thank_you_message'] . '");';
-        // Effacez le message de remerciement pour éviter de l'afficher à nouveau
+        // Efface le message de remerciement pour éviter de l'afficher à nouveau
         unset($_SESSION['thank_you_message']);
     }
     ?>

@@ -1,7 +1,4 @@
 <?php
-//function getService(PDO $pdo, int $limit = null, int $page = null):array
-
-
 
 function getAllServices(PDO $pdo):array
 {

@@ -15,7 +15,6 @@ $messages = [];
 $service = [
     'service' => '',
     'description' => '',
-
 ];
 
 
@@ -71,11 +70,6 @@ if (isset($_POST['saveService'])) {
             $errors[] = 'Le fichier doit être une image';
         }
     }
-    /* On stocke toutes les données envoyés dans un tableau pour pouvoir afficher
-       les informations dans les champs. C'est utile pas exemple si on upload un mauvais
-       fichier et qu'on ne souhaite pas perdre les données qu'on avait saisit.
-    */       
-
 
     $service = [
         'service' => $_POST['service'],
@@ -95,7 +89,7 @@ if (isset($_POST['saveService'])) {
         $res = saveService($pdo, $_POST["service"], $_POST["description"], $fileName, $id);
 
         if ($res) {
-            $messages[] = "L'avis a bien été sauvegardé";
+            $messages[] = "Le service a bien été sauvegardé";
             //On vide le tableau pour avoir les champs de formulaire vides
             if (!isset($_GET["id"])) {
                 $service = [
@@ -104,7 +98,7 @@ if (isset($_POST['saveService'])) {
                 ];
             }
         } else {
-            $errors[] = "L'avis n'a pas été sauvegardé";
+            $errors[] = "Le service n'a pas été sauvegardé";
         }
     }
 }

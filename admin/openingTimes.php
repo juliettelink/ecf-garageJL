@@ -12,6 +12,10 @@ adminOnly();
 
 $openingTimes = getOpeningTimes($pdo);
 
+function escapeHtml($value) {
+    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+}
+
 ?>
 
 <h1 class="py-3">Changement des Horaires</h1>
@@ -29,7 +33,7 @@ $openingTimes = getOpeningTimes($pdo);
     <tbody>
         <?php foreach ($openingTimes as $openingTime): ?>
             <tr>
-                <th scope="row"><?= $openingTime['day']; ?></th>
+                <th scope="row"><?= escapeHtml($openingTime['day']); ?></th>
                 <td class="editable" data-column="morningOpen" data-id="<?= $openingTime['openingTime_id']; ?>" contenteditable="true"><?= $openingTime['morningOpen']; ?></td>
                 <td class="editable" data-column="morningClose" data-id="<?= $openingTime['openingTime_id']; ?>" contenteditable="true"><?= $openingTime['morningClose']; ?></td>
                 <td class="editable" data-column="afternoonOpen" data-id="<?= $openingTime['openingTime_id']; ?>" contenteditable="true"><?= $openingTime['afternoonOpen']; ?></td>

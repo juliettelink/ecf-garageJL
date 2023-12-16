@@ -14,43 +14,56 @@ $errors = [];
 $messages = [];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Validez et échappez les données d'entrée
-    $mail_id = filter_var($_POST['mail_id'], FILTER_VALIDATE_EMAIL);
-    $name = htmlspecialchars($_POST['name']);
-    $firstname = htmlspecialchars($_POST['firstname']);
-    $password = $_POST['password'];
-
-    // Vérifie si tous les champs du formulaire sont remplis
-    if (empty($_POST['mail_id']) || empty($_POST['name']) || empty($_POST['firstname']) || empty($_POST['password'])) {
-        $errors[] = 'Tous les champs du formulaire doivent être remplis.';
+    // Verification CSRF
+    
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        var_dump($_SESSION['csrf_token']);
+        var_dump($_POST['csrf_token']);
+        $errors[] = 'Erreur CSRF : tentative de requête non autorisée.';
     } else {
-        // Vérifie si l'adresse e-mail est déjà utilisée 
-        if (emailAlreadyExists($pdo, $_POST['mail_id'])) {
-            $errors[] = 'L\'adresse e-mail est déjà utilisée par un autre utilisateur.';
-        }
-        // complexité du mot de passe
-        if (!isStrongPassword($_POST['password'])) {
-            $errors[] = 'Le mot de passe doit contenir au moins une minuscule, une majuscule, un caractère spécial et
-                        avoir une longueur minimale de 8 caractères.';
-        }
+        $mail_id = filter_var($_POST['mail_id'], FILTER_VALIDATE_EMAIL);
+        $name = htmlspecialchars($_POST['name']);
+        $firstname = htmlspecialchars($_POST['firstname']);
+        $password = $_POST['password'];
 
-        // Hachez le mot de passe avant de l'ajouter à la base de données
-        $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+        // Vérifie si tous les champs du formulaire sont remplis
+        if (empty($_POST['mail_id']) || empty($_POST['name']) || empty($_POST['firstname']) || empty($_POST['password'])) {
+            $errors[] = 'Tous les champs du formulaire doivent être remplis.';
+        } else {
+            // Vérifie si l'adresse e-mail est déjà utilisée 
+            if (emailAlreadyExists($pdo, $_POST['mail_id'])) {
+                $errors[] = 'L\'adresse e-mail est déjà utilisée par un autre utilisateur.';
+            }
+            // complexité du mot de passe
+            if (!isStrongPassword($_POST['password'])) {
+                $errors[] = 'Le mot de passe doit contenir au moins une minuscule, une majuscule, un caractère spécial et
+                            avoir une longueur minimale de 8 caractères.';
+            }
 
-        // ajout de l'utilisateur
-        if (empty($errors)) {
-            $roleName = 'employe'; 
-            $roleId = getRoleIdByName($pdo, $roleName);
+            // Hachez le mot de passe avant de l'ajouter à la base de données
+            $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
-            $res = addUser($pdo, $mail_id, $name, $firstname, $passwordHash, $roleId);
-            if ($res) {
-                $messages[] = 'Inscription réussie';
-            } else {
-                $errors[] = 'Une erreur s\'est produite lors de votre inscription.';
+            // ajout de l'utilisateur
+            if (empty($errors)) {
+                $roleName = 'employe'; 
+                $roleId = getRoleIdByName($pdo, $roleName);
+
+                $res = addUser($pdo, $mail_id, $name, $firstname, $passwordHash, $roleId);
+                if ($res) {
+                    $messages[] = 'Inscription réussie';
+                } else {
+                    $errors[] = 'Une erreur s\'est produite lors de votre inscription.';
+                }
             }
         }
     }
 }
+
+$csrfToken = bin2hex(random_bytes(32));
+$_SESSION['csrf_token'] = $csrfToken;
+
+
+
 ?>
 
 <h1 class="py-3">Inscription employé</h1>
@@ -69,6 +82,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
 <form method="POST">
+    <!-- Champ caché pour stocker le jeton CSRF -->
+    <div class="mb-3">
+        <input type="hidden" name="csrf_token" value="<?= $csrfToken ?>">
+    </div>
+    
     <div class="mb-3">
         <label for="mail_id" class="form-label">Email</label>
         <input type="email" class="form-control" id="mail_id" name="mail_id" required>

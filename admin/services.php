@@ -9,9 +9,6 @@ require_once __DIR__. "/templates/header.php";
 adminOnly();
 
 $services = getAllServices($pdo);
-
-
-
 ?>
 
 <h1 class="py-3">Listes des services</h1>
@@ -46,10 +43,6 @@ $services = getAllServices($pdo);
         </tr>
     </tbody>
     </table>
-
-
-
-
 
 <?php 
 require_once __DIR__. "/templates/footer.php";
