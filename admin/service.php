@@ -51,7 +51,7 @@ if (isset($_POST['saveService'])) {
         $fileName = 'default_image.jpg';
     } elseif (isset($_FILES["file"]["tmp_name"]) && $_FILES["file"]["tmp_name"] != '') {
         $checkImage = getimagesize($_FILES["file"]["tmp_name"]);
-
+    
         if ($checkImage !== false) {
             $fileName = slugify(basename($_FILES["file"]["name"]));
             $fileName = uniqid() . '-' . $fileName;
@@ -69,7 +69,7 @@ if (isset($_POST['saveService'])) {
         } else {
             $errors[] = 'Le fichier doit être une image';
         }
-    }
+    } 
 
     $service = [
         'service' => $_POST['service'],

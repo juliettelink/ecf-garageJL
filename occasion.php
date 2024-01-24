@@ -15,7 +15,12 @@ if (isset($_GET["id"])) {
 
     if ($car) {
     $imagePath = getCarImage($car["image1"]);
-    $mainMenu["occasion.php"] = ["head_title" => $car["model"], "meta_description" => htmlentities(substr($car["model"], 0, 250)), "exclude" => true];
+    var_dump($imagePath);
+    $mainMenu["occasion.php"] = [
+        "head_title" => $car["model"], 
+        "meta_description" => htmlentities(substr($car["model"], 0, 250)), 
+        "exclude" => true
+    ];
     } else {
     $error = true;
     }

@@ -17,8 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Verification CSRF
     
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        var_dump($_SESSION['csrf_token']);
-        var_dump($_POST['csrf_token']);
+
         $errors[] = 'Erreur CSRF : tentative de requête non autorisée.';
     } else {
         $mail_id = filter_var($_POST['mail_id'], FILTER_VALIDATE_EMAIL);

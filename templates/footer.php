@@ -37,11 +37,11 @@ $openingTimes = getOpeningTimes($pdo);
                     <tbody> 
                         <?php foreach ($openingTimes as $openingTime){ ?>
                         <tr>
-                            <th scope="row"><?php echo htmlentities($openingTime['day']); ?></th>
-                            <td><?php echo htmlentities($openingTime['morningOpen']); ?></td>
-                            <td><?php echo htmlentities($openingTime['morningClose']); ?></td>
-                            <td><?php echo htmlentities($openingTime['afternoonOpen']); ?></td>
-                            <td><?php echo htmlentities($openingTime['afternoonClose']); ?></td>
+                            <th scope="row"><?= htmlentities($openingTime['day']); ?></th>
+                            <td><?= htmlentities($openingTime['morningOpen']); ?></td>
+                            <td><?= htmlentities($openingTime['morningClose']); ?></td>
+                            <td><?= htmlentities($openingTime['afternoonOpen']); ?></td>
+                            <td><?= htmlentities($openingTime['afternoonClose']); ?></td>
                         </tr>
                         <?php } ?>
                     </tbody>

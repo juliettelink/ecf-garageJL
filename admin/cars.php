@@ -6,8 +6,6 @@ require_once __DIR__. "/../lib/pdo.php";
 require_once __DIR__. "/../lib/car.php";
 require_once __DIR__. "/templates/header.php";
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
 if (isset($_GET["page"])) {
     $currentPage = (int)$_GET["page"];

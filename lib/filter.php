@@ -4,7 +4,7 @@
 // Fonction pour filtrer les voitures en fonction des critères
 function filterCars(PDO $pdo, ?array $cars, $year, $kilometer, $price): array
 {
-       $cars = $cars ?? [];
+    $cars = $cars ?? [];
     // Filtrer les voitures en fonction de l'année, des kilométre et du prix
     $filteredCars = [];
 

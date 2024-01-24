@@ -86,10 +86,13 @@ if (isset($_POST['saveCar'])) {
         if (isset($_GET['id'])) {
             if (isset($_POST['delete_image'])) {
                 // Si on a coché la case de suppression d'image, on supprime l'image
-                unlink(dirname(__DIR__)._CARS_IMAGES_FOLDER_ . $_POST['image1']);
+                unlink(dirname(__DIR__) . _CARS_IMAGES_FOLDER_ . $_POST['image1']);
             } else {
                 $fileName = $_POST['image1'];
             }
+        } else {
+            // Si aucun fichier n'a été envoyé et il n'y a pas d'id, utilisez la valeur par défaut
+            $fileName = 'null.jpg';
         }
     }
     /* On stocke toutes les données envoyés dans un tableau pour pouvoir afficher

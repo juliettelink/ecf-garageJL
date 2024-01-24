@@ -81,8 +81,8 @@ function getCarById(PDO $pdo, $id):array|bool
 
 function getCarImage(string|null $image):string
 {
-  if ($image === null){
-   return _DEFAULT_IMAGE_FOLDER_."null.jpg"; 
+  if ($image === null || $image === "null.jpg"){
+   return _DEFAULT_IMAGE_FOLDER_ ."null.jpg"; 
 } else {
     return _CARS_IMAGES_FOLDER_ . htmlentities($image);
 }
