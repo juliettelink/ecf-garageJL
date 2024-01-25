@@ -10,11 +10,25 @@ session_set_cookie_params([
 session_start();
 
 
+define('ROLE_EMPLOYE', 'employe');
+define('ROLE_ADMINISTRATOR', 'administrator');
+
 function adminOnly()
 {
     if (!isset($_SESSION['user'])) {
         header('Location: ../login.php');
-    }else if($_SESSION['user']['role_name'] !=='administrator'){
+    }else if($_SESSION['user']['role_name'] !== ROLE_ADMINISTRATOR){
         header('Location: ../admin/index.php');
  }
+}
+
+function employeAndAdmin()
+{
+    if (!isset($_SESSION['user'])) {
+        header('Location: ../login.php');
+        exit();
+    } else if ($_SESSION['user']['role_name'] !== ROLE_EMPLOYE && $_SESSION['user']['role_name'] !== ROLE_ADMINISTRATOR) {
+        header('Location: ../admin/index.php');
+        exit();
+    }
 }

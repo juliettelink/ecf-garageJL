@@ -6,6 +6,7 @@ require_once __DIR__. "/../lib/pdo.php";
 require_once __DIR__. "/../lib/car.php";
 require_once __DIR__. "/templates/header.php";
 
+employeAndAdmin();
 
 if (isset($_GET["page"])) {
     $currentPage = (int)$_GET["page"];

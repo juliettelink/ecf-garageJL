@@ -8,7 +8,7 @@ require_once __DIR__ . "/../lib/tools.php";
 require_once __DIR__ . "/../lib/service.php";
 require_once __DIR__ . "/templates/header.php";
 
-
+adminOnly();
 
 $errors = [];
 $messages = [];
@@ -42,26 +42,23 @@ if (isset($_POST['saveService'])) {
     if (empty($_POST['description'])) {
         $errors[] = "Le champ 'Description' ne peut pas être vide.";
     }
+
     // Gestion de l'image
     $fileName = null;
-
     // Si aucun fichier n'a été envoyé
-    if (empty($_FILES["file"]["tmp_name"]) && !isset($_GET['id'])) {
-        // Si c'est une création et aucun fichier image
-        $fileName = 'default_image.jpg';
-    } elseif (isset($_FILES["file"]["tmp_name"]) && $_FILES["file"]["tmp_name"] != '') {
+    if (isset($_FILES["file"]["tmp_name"]) && $_FILES["file"]["tmp_name"] != '') {
         $checkImage = getimagesize($_FILES["file"]["tmp_name"]);
-    
         if ($checkImage !== false) {
             $fileName = slugify(basename($_FILES["file"]["name"]));
             $fileName = uniqid() . '-' . $fileName;
 
-            // On déplace le fichier uploadé dans notre dossier
-            if (move_uploaded_file($_FILES["file"]["tmp_name"], dirname(__DIR__) . _SERVICES_IMAGES_FOLDER_ . $fileName)) {
-                // L'image a été téléchargée avec succès
-                // Suppression de l'ancienne image si on modifie le service
-                if (isset($_POST['image']) && isset($_GET['id'])) {
-                    unlink(dirname(__DIR__) . _SERVICES_IMAGES_FOLDER_ . $_POST['image']);
+            /* On déplace le fichier uploadé dans notre dossier upload, dirname(__DIR__) 
+                permet de cibler le dossier parent car on se trouve dans admin
+            */
+            if (move_uploaded_file($_FILES["file"]["tmp_name"], dirname(__DIR__)._SERVICES_IMAGES_FOLDER_ . $fileName)) {
+                if (isset($_POST['image'])) {
+                    // On supprime l'ancienne image si on a posté une nouvelle
+                    unlink(dirname(__DIR__)._SERVICES_IMAGES_FOLDER_ . $_POST['image']);
                 }
             } else {
                 $errors[] = 'Le fichier n\'a pas été uploadé';
@@ -69,7 +66,26 @@ if (isset($_POST['saveService'])) {
         } else {
             $errors[] = 'Le fichier doit être une image';
         }
-    } 
+    } else {
+        // Si aucun fichier n'a été envoyé
+        if (isset($_GET['id'])) {
+            if (isset($_POST['delete_image'])) {
+                // Si on a coché la case de suppression d'image, on supprime l'image
+                $imageToDelete = dirname(__DIR__) ._SERVICES_IMAGES_FOLDER_ . $_POST['image'];
+                if (file_exists($imageToDelete)) {
+                    unlink($imageToDelete);
+                } else {
+                    // Si le fichier n'existe pas, utilisez la valeur par défaut
+                    $fileName = 'null.jpg';
+                }
+            } else {
+                $fileName = $_POST['image'];
+            }
+        } else {
+            // Si aucun fichier n'a été envoyé et il n'y a pas d'id, utilisez la valeur par défaut
+            $fileName = 'null.jpg';
+        }
+    }
 
     $service = [
         'service' => $_POST['service'],
@@ -128,7 +144,7 @@ if (isset($_POST['saveService'])) {
         </div>
         <?php if (isset($_GET['id']) && isset($service['image'])) { ?>
             <p>
-                <img src="<?= _SERVICES_IMAGES_FOLDER_ . $service['image'] ?>" alt="<?= $service['service'] ?>" width="100">
+                <img src="<?= "../assets/images/" . $service['image'] ?>" alt="<?= $service['service'] ?>" width="30">
                 <label for="delete_image">Supprimer l'image</label>
                 <input type="checkbox" name="delete_image" id="delete_image">
                 <input type="hidden" name="image" value="<?= $service['image']; ?>">

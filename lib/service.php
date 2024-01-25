@@ -20,7 +20,7 @@ function getServiceById(PDO $pdo, int $id): array|bool
 
 function getServiceImage(string|null $image):string
 {
-    if ($image === null){
+    if ($image === null || $image === "null.jpg"){
     return _DEFAULT_IMAGE_FOLDER_."null.jpg";
 } else {
     return _SERVICES_IMAGES_FOLDER_.htmlentities($image);

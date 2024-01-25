@@ -8,6 +8,8 @@ require_once __DIR__ . "/../lib/pdo.php";
 require_once __DIR__ . "/../lib/service.php";
 require_once __DIR__ . "/templates/header.php";
 
+adminOnly();
+
 $service = false;
 $errors = [];
 $messages = [];
