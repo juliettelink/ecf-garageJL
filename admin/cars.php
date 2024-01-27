@@ -56,7 +56,7 @@ $totalPages = ceil($totalCars / _ADMIN_ITEM_PER_PAGE_ );
         <td><?= $car["kilometer"] ?></td>
         <td><?= $car["full"] ?></td>
         <td><?= $car["color"] ?></td>
-        <td><?= $car["image1"] ?></td>
+        <td><img src="<?= "../uploads/occasion/". $car['image1'] ?>" alt="<?= $car['model'] ?>" width="100"></td>
         <td><?= $car["image2"] ?></td>
         <td><?= $car["image3"] ?></td>
         <td>

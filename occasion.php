@@ -8,14 +8,13 @@ $mainMenu["occasion.php"] = ["head_title" => "modéle de voiture introuvable", "
 
 $error = false;
 
-//gestion d'erreur quand on ne passe pas d'id et quand on en passe 1. on peut aussi le faire avec un switch
+//gestion d'erreur quand on ne passe pas d'id et quand on en passe 1.
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
     $car = getCarById($pdo, $id);
 
     if ($car) {
     $imagePath = getCarImage($car["image1"]);
-    var_dump($imagePath);
     $mainMenu["occasion.php"] = [
         "head_title" => $car["model"], 
         "meta_description" => htmlentities(substr($car["model"], 0, 250)), 
@@ -82,3 +81,5 @@ require_once __DIR__ . "/templates/header.php";
 <?php
 require_once __DIR__ . "/templates/footer.php";
 ?>
+
+
