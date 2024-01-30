@@ -21,11 +21,15 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    function roundValue(value){
+        return Math.round(value / 1000) *1000;
+    }
+
     // fonction qui récupére et affiche les voitures filtrées
     function fetchCars() {
         const year = yearInput.val();
-        const kilometer = kilometerInput.val();
-        const price = priceInput.val();
+        const kilometer = roundValue(kilometerInput.val());
+        const price = roundValue(priceInput.val());
 
     // donne la valeur réelle en fonction du filtre
         yearValue.text(year);
@@ -68,6 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //écoute les changements dans les filtres
     yearInput.add(kilometerInput).add(priceInput).on("input", function () {
-        fetchCars(); // appelle la fonction pour mettre à jour les voitures affichées
+        fetchCars(); // mise à jour les voitures affichées
     });
 });
