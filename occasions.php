@@ -27,7 +27,7 @@ $filteredCars = filterCars($pdo, $cars, $year, $kilometer, $price);
         <input type="range" min="1000" max="1000000" id="kilometer" class="filter-field" />
 
         <label for="price">Prix : <span id="priceValue">255000</span></label>
-        <input type="range" min="10000" max="500000" id="price" class="filter-field" />
+        <input type="range" min="10000" max="900000" id="price" class="filter-field" />
 
         <div id="searchResults" class="search-results-block"></div>
     </div>

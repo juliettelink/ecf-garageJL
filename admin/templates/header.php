@@ -27,7 +27,10 @@ $mainmenu =[
     'opinions.php' => ['label' => 'Avis', 'icon' => 'fa-pen-to-square'],
     'openingTimes.php' => ['label' => 'Horaires', 'icon' => 'fa-calendar-days'],
     'forms.php' => ['label' => 'Messages Clients', 'icon' => 'fa-message'],
+    '../logout.php'=>  ['label' => 'Déconnexion', 'icon' => 'fa-sign-out']
 ];
+
+
 
 $page_active = basename($_SERVER["SCRIPT_NAME"]);
  

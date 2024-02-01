@@ -53,7 +53,7 @@ function isStrongPassword($password) {
 // nouvel employé
 function addUser(PDO $pdo, string $mail_id, string $name, string $firstname, string $password) {
     // Hachage du mot de passe
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    $password = password_hash($password, PASSWORD_DEFAULT);
 
     // Insérer l'employé dans la table users
     $sqlInsertUser = "INSERT INTO users (mail_id, name, firstname, password) 
@@ -63,7 +63,7 @@ function addUser(PDO $pdo, string $mail_id, string $name, string $firstname, str
     $queryInsertUser->bindValue(":mail_id", $mail_id, PDO::PARAM_STR);
     $queryInsertUser->bindValue(":name", $name, PDO::PARAM_STR);
     $queryInsertUser->bindValue(":firstname", $firstname, PDO::PARAM_STR);
-    $queryInsertUser->bindValue(":password", $hashedPassword, PDO::PARAM_STR);
+    $queryInsertUser->bindValue(":password", $password, PDO::PARAM_STR);
 
     // Exécute la requête pour insérer l'utilisateur dans la table users
     if ($queryInsertUser->execute()) {
@@ -104,11 +104,8 @@ function emailAlreadyExists(PDO $pdo, string $email) {
     
     $sql = "SELECT COUNT(*) FROM users WHERE mail_id = :email";
 
-    // lie le paramètre :email
     $query = $pdo->prepare($sql);
     $query->bindParam(":email", $email, PDO::PARAM_STR);
-
-
     $query->execute();
 
     // Récupérez le résultat sous forme de nombre de lignes correspondantes
@@ -129,12 +126,16 @@ function verifyUserLoginPassword(PDO $pdo, string $email, string $password):arra
                             WHERE u.mail_id = :email");
     $query->bindValue(":email", $email, PDO::PARAM_STR);
     $query->execute();
+
     $user = $query->fetch(PDO::FETCH_ASSOC);
-    
+
  // verifie le mot de passe et le compare avec le hach
     if($user && password_verify($password, $user["password"])){
+        var_dump("Mot de passe correct !");
         return $user;
     } else {
+        var_dump("Mot de passe incorrect. Hachages :");
+        var_dump("Mot de passe entré : $password");
         return false;
     }
     

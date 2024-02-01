@@ -13,12 +13,16 @@ adminOnly();
 $errors = [];
 $messages = [];
 
+echo "Formulaire POST : ";
+print_r($_POST);
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Verification CSRF
     
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
 
         $errors[] = 'Erreur CSRF : tentative de requête non autorisée.';
+        echo "Erreur CSRF détectée.";
     } else {
         $mail_id = filter_var($_POST['mail_id'], FILTER_VALIDATE_EMAIL);
         $name = htmlspecialchars($_POST['name']);
@@ -33,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             if (emailAlreadyExists($pdo, $_POST['mail_id'])) {
                 $errors[] = 'L\'adresse e-mail est déjà utilisée par un autre utilisateur.';
             }
-            // complexité du mot de passe
+            //complexité du mot de passe
             if (!isStrongPassword($_POST['password'])) {
                 $errors[] = 'Le mot de passe doit contenir au moins une minuscule, une majuscule, un caractère spécial et
                             avoir une longueur minimale de 8 caractères.';
@@ -41,17 +45,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             // Hachez le mot de passe avant de l'ajouter à la base de données
             $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+            echo "Mot de passe haché : " . $passwordHash . "<br>";
 
-            // ajout de l'utilisateur
+            // ajout de l'employé
             if (empty($errors)) {
                 $roleName = 'employe'; 
                 $roleId = getRoleIdByName($pdo, $roleName);
 
-                $res = addUser($pdo, $mail_id, $name, $firstname, $passwordHash, $roleId);
+                $res = addUser($pdo, $mail_id, $name, $firstname, $password, $roleId);
                 if ($res) {
                     $messages[] = 'Inscription réussie';
                 } else {
                     $errors[] = 'Une erreur s\'est produite lors de votre inscription.';
+                    echo "Erreur lors de l'ajout de l'utilisateur : " . print_r($pdo->errorInfo(), true);
                 }
             }
         }
