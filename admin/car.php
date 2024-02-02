@@ -72,7 +72,7 @@ if (isset($_POST['saveCar'])) {
                 permet de cibler le dossier parent car on se trouve dans admin
             */
             if (move_uploaded_file($_FILES["file"]["tmp_name"], dirname(__DIR__)._CARS_IMAGES_FOLDER_ . $fileName)) {
-                if (isset($_POST['image1'])) {
+                if (isset($_POST['image1']) && $_POST['image1'] !== 'null.jpg') {
                     // On supprime l'ancienne image si on a posté une nouvelle
                     unlink(dirname(__DIR__)._CARS_IMAGES_FOLDER_ . $_POST['image1']);
                 }

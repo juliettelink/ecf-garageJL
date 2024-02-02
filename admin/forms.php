@@ -43,7 +43,7 @@ $forms = getForms($pdo);
             <td><?= $form["message"] ?></td>
             <td><?= $form["date"] ?></td>
             <td>
-                <a href="form_delete.php?id=<?=$form['form_id']?>" class="btn btn-danger" onclick="return confirm('Etes-vous sur de vouloir supprimer cet avis')">Supprimer</a>
+                <a href="form_delete.php?id=<?=$form['form_id']?>" class="btn btn-outline-danger" onclick="return confirm('Etes-vous sur de vouloir supprimer cet avis')">Supprimer</a>
             </td>
         </tr>
         <?php } ?>

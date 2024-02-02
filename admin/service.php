@@ -56,7 +56,7 @@ if (isset($_POST['saveService'])) {
                 permet de cibler le dossier parent car on se trouve dans admin
             */
             if (move_uploaded_file($_FILES["file"]["tmp_name"], dirname(__DIR__)._SERVICES_IMAGES_FOLDER_ . $fileName)) {
-                if (isset($_POST['image'])) {
+                if (isset($_POST['image']) && $_POST['image'] !== 'null.jpg') {
                     // On supprime l'ancienne image si on a posté une nouvelle
                     unlink(dirname(__DIR__)._SERVICES_IMAGES_FOLDER_ . $_POST['image']);
                 }

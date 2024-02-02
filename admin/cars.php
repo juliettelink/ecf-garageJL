@@ -60,9 +60,9 @@ $totalPages = ceil($totalCars / _ADMIN_ITEM_PER_PAGE_ );
         <td><?= $car["image2"] ?></td>
         <td><?= $car["image3"] ?></td>
         <td>
-            <a href="../occasion.php?id=<?=$car['car_id']?>" type="button" class="btn btn-info">Voir</a>
-            <a href="car.php?id=<?=$car['car_id']?>" type="button" class="btn btn-success" >Modifier</a>
-            <a href="car_delete.php?id=<?=$car['car_id']?>" type="button" class="btn btn-danger"
+            <a href="../occasion.php?id=<?=$car['car_id']?>" type="button" class="btn btn-outline-info">Voir</a>
+            <a href="car.php?id=<?=$car['car_id']?>" type="button" class="btn btn-outline-success" >Modifier</a>
+            <a href="car_delete.php?id=<?=$car['car_id']?>" type="button" class="btn btn-outline-danger"
                 onclick="return confirm('Etes-vous sur de vouloir supprimer ce modéle')">
                 <i class="fa-solid fa-trash" style="color: #ffffff;"></i> 
                 Supprimer

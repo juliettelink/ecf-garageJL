@@ -128,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <td><?= $user["name"] ?></td>
             <td><?= $user["firstname"] ?></td>
             <td>
-                <a href="user_delete.php?id=<?=urlencode($user['mail_id'])?>" class="btn btn-danger" onclick="return confirm('Etes-vous sur de vouloir supprimer de l\'employé')">Supprimer</a>
+                <a href="user_delete.php?id=<?=urlencode($user['mail_id'])?>" class="btn btn-outline-danger" onclick="return confirm('Etes-vous sur de vouloir supprimer de l\'employé')">Supprimer</a>
             </td>
         </tr>
         <?php } ?>

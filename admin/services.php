@@ -36,8 +36,8 @@ $services = getAllServices($pdo);
         <td><?= $service["description"] ?></td>
         <td><img src="<?= "../assets/images/". $service["image"] ?>" alt="image service" width="30" height="30"></td>
         <td>
-            <a href="service.php?id=<?=$service['service_id']?>" class="btn btn-success">Modifier</a>
-            <a href="service_delete.php?id=<?=$service['service_id']?>" class="btn btn-danger" onclick="return confirm('Etes-vous sur de vouloir supprimer ce service')">Supprimer</a>
+            <a href="service.php?id=<?=$service['service_id']?>" class="btn btn-outline-success">Modifier</a>
+            <a href="service_delete.php?id=<?=$service['service_id']?>" class="btn btn-outline-danger" onclick="return confirm('Etes-vous sur de vouloir supprimer ce service')">Supprimer</a>
         </td>
         <?php } ?>
         </tr>
