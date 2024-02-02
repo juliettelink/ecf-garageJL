@@ -39,23 +39,23 @@ if (isset($_GET['id'])) {
 
 if (isset($_POST['saveCar'])) {
 
-    if (empty($_POST['model'])) {
-        $errors[] = "Le champ 'Modèle' ne peut pas être vide.";
+    if (empty($_POST['model']) || !is_string($_POST['model'])) {
+        $errors[] = "Le champ 'Modèle' ne peut pas être vide et doit être une chaine de caractères";
     }
-    if (empty($_POST['year'])) {
-        $errors[] = "Le champ 'Année' ne peut pas être vide.";
+    if (empty($_POST['year']) || !is_numeric($_POST['year'])) {
+        $errors[] = "Le champ 'Année' ne peut pas être vide  et doit être un nombre.";
     }
-    if (empty($_POST['price'])) {
-        $errors[] = "Le champ 'Prix' ne peut pas être vide.";
+    if (empty($_POST['price']) || !is_numeric($_POST['price'])) {
+        $errors[] = "Le champ 'Prix' ne peut pas être vide et doit être un nombre.";
     }
-    if (empty($_POST['kilometer'])) {
-        $errors[] = "Le champ 'Kilométre' ne peut pas être vide.";
+    if (empty($_POST['kilometer']) || !is_numeric($_POST['kilometer'])) {
+        $errors[] = "Le champ 'Kilométre' ne peut pas être vide et doit être un nombre";
     }
-    if (empty($_POST['full'])) {
-        $errors[] = "Le champ 'Carburant' ne peut pas être vide.";
+    if (empty($_POST['full']) || !is_string($_POST['full'])) {
+        $errors[] = "Le champ 'Carburant' ne peut pas être vide et doit être une chaine de caractères.";
     }
-    if (empty($_POST['color'])) {
-        $errors[] = "Le champ 'Couleur' ne peut pas être vide.";
+    if (empty($_POST['color']) || !is_string($_POST['color'])) {
+        $errors[] = "Le champ 'Couleur' ne peut pas être vide et doit être une chaine de caractères.";
     }
     
     $fileName = null;
@@ -164,27 +164,27 @@ if (isset($_POST['saveCar'])) {
     <form method="POST" enctype="multipart/form-data">
     <div class="mb-3">
             <label for="model" class="form-label">Modéle</label>
-            <input type="text" class="form-control" id="model" name="model" value="<?= $car['model']; ?>">
+            <input type="text" class="form-control" id="model" name="model" value="<?= $car['model']; ?>" required>
         </div>
         <div class="mb-3">
             <label for="year" class="form-label">Année</label>
-            <input type="number" class="form-control" id="year" name="year" value="<?= $car['year']; ?>">
+            <input type="number" class="form-control" id="year" name="year" value="<?= $car['year']; ?>" required>
         </div>
         <div class="mb-3">
             <label for="price" class="form-label">Prix</label>
-            <input type="text" class="form-control" id="price" name="price" value="<?= $car['price']; ?>">
+            <input type="number" class="form-control" id="price" name="price" value="<?= $car['price']; ?>" required>
         </div>
         <div class="mb-3">
             <label for="kilometer" class="form-label">Kilométre</label>
-            <input type="text" class="form-control" id="kilometer" name="kilometer" value="<?= $car['kilometer']; ?>">
+            <input type="text" class="form-control" id="kilometer" name="kilometer" value="<?= $car['kilometer']; ?>" required>
         </div>
         <div class="mb-3">
             <label for="full" class="form-label">Carburant</label>
-            <input type="text" class="form-control" id="full" name="full" value="<?= $car['full']; ?>">
+            <input type="text" class="form-control" id="full" name="full" value="<?= $car['full']; ?>" required>
         </div>
         <div class="mb-3">
             <label for="color" class="form-label">Couleur</label>
-            <input type="text" class="form-control" id="color" name="color" value="<?= $car['color']; ?>">
+            <input type="text" class="form-control" id="color" name="color" value="<?= $car['color']; ?>" required>
         </div>
 
         <?php if (isset($_GET['id']) && isset($car['image1'])) { ?>

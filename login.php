@@ -10,8 +10,6 @@ require_once __DIR__ . "/templates/header.php";
 
 $errors = [];
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
 $csrfToken = $_SESSION['csrf_token'];
 
@@ -29,7 +27,6 @@ if (isset($_POST["loginUser"])) {
             $user = verifyUserLoginPassword($pdo,$_POST['email'], $_POST['password']);
 
             if ($user) {
-                var_dump("connexion ok");
                 // cree un id de session renouvelé, securité en plus
                 session_regenerate_id(true);
                 $_SESSION["user"] = $user;

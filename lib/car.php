@@ -101,7 +101,7 @@ function getPicturesByCarId(PDO $pdo, int $Id)
 
 
 //fonction saveCar
-function saveCar(PDO $pdo, string $model, int $year, int $price, int $kilometer, string $full, string $color, 
+function saveCar(PDO $pdo, string $model, int $year, float $price, int $kilometer, string $full, string $color, 
                   string|null $image1, int $id = null)
 {
     // Cohérence entre les deux tables
@@ -118,7 +118,7 @@ function saveCar(PDO $pdo, string $model, int $year, int $price, int $kilometer,
             // Exécution de la requête d'insertion
             $query->bindValue(':model', $model, PDO::PARAM_STR);
             $query->bindValue(':year', $year, PDO::PARAM_INT);
-            $query->bindValue(':price', $price, PDO::PARAM_INT);
+            $query->bindValue(':price', $price, PDO::PARAM_STR);
             $query->bindValue(':kilometer', $kilometer, PDO::PARAM_INT);
             $query->bindValue(':full', $full, PDO::PARAM_STR);
             $query->bindValue(':color', $color, PDO::PARAM_STR);
@@ -133,7 +133,7 @@ function saveCar(PDO $pdo, string $model, int $year, int $price, int $kilometer,
             $query->bindValue(':id', $id, PDO::PARAM_INT);
             $query->bindValue(':model', $model, PDO::PARAM_STR);
             $query->bindValue(':year', $year, PDO::PARAM_INT);
-            $query->bindValue(':price', $price, PDO::PARAM_INT);
+            $query->bindValue(':price', $price, PDO::PARAM_STR);
             $query->bindValue(':kilometer', $kilometer, PDO::PARAM_INT);
             $query->bindValue(':full', $full, PDO::PARAM_STR);
             $query->bindValue(':color', $color, PDO::PARAM_STR);

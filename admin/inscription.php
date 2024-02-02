@@ -10,6 +10,8 @@ require_once __DIR__. "/templates/header.php";
 
 adminOnly();
 
+$csrfToken = $_SESSION['csrf_token'];
+
 $errors = [];
 $messages = [];
 
@@ -57,12 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 }
-
-$csrfToken = bin2hex(random_bytes(32));
-$_SESSION['csrf_token'] = $csrfToken;
-
-
-
 ?>
 
 <h1 class="py-3">Inscription employé</h1>
