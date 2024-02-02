@@ -13,16 +13,14 @@ adminOnly();
 $errors = [];
 $messages = [];
 
-echo "Formulaire POST : ";
-print_r($_POST);
+
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Verification CSRF
     
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-
         $errors[] = 'Erreur CSRF : tentative de requête non autorisée.';
-        echo "Erreur CSRF détectée.";
+    
     } else {
         $mail_id = filter_var($_POST['mail_id'], FILTER_VALIDATE_EMAIL);
         $name = htmlspecialchars($_POST['name']);
@@ -42,10 +40,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $errors[] = 'Le mot de passe doit contenir au moins une minuscule, une majuscule, un caractère spécial et
                             avoir une longueur minimale de 8 caractères.';
             }
-
-            // Hachez le mot de passe avant de l'ajouter à la base de données
-            $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-            echo "Mot de passe haché : " . $passwordHash . "<br>";
 
             // ajout de l'employé
             if (empty($errors)) {

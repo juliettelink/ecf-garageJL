@@ -17,39 +17,34 @@ $csrfToken = $_SESSION['csrf_token'];
 
 if (isset($_POST["loginUser"])) {
 
-
-    //rajouter si l'email n'est pas vide ou le mot de passe
-
-
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
         $errors[] = 'Erreur CSRF : tentative de requête non autorisée.';
-    }
+    } else{
+        if (empty($_POST['email']) || empty($_POST['password'])) {
+            $errors[] = 'Veuillez saisir votre email et votre mot de passe.';
+        }else{
+            $email = $_POST["email"];
+            $password = $_POST["password"];
 
-    $email = $_POST["email"];
-    $password = $_POST["password"];
+            $user = verifyUserLoginPassword($pdo,$_POST['email'], $_POST['password']);
 
-
-    $user = verifyUserLoginPassword($pdo,$_POST['email'], $_POST['password']);
-
-    if ($user) {
-        var_dump("connexion ok");
-        // cree un id de session renouvelé, securité en plus
-        session_regenerate_id(true);
-        $_SESSION["user"] = $user;
-        if ($user["role_name"] === "employe" ) {
-            header("location: admin/index.php");
-        } elseif ($user["role_name"] === "administrator"){
-            header("location: admin/index.php"); 
-        } else {
-            header('location: index.php');
+            if ($user) {
+                var_dump("connexion ok");
+                // cree un id de session renouvelé, securité en plus
+                session_regenerate_id(true);
+                $_SESSION["user"] = $user;
+                if ($user["role_name"] === "employe" ) {
+                    header("location: admin/index.php");
+                } elseif ($user["role_name"] === "administrator"){
+                    header("location: admin/index.php"); 
+                } else {
+                    header('location: index.php');
+                }
+            } else {
+            $errors[] = "Email ou mot de passe incorrect";
+            }
         }
-    } else {
-    $errors[] = "Email ou mot de passe incorrect";
     }
-
-    var_dump($_POST);
-var_dump($csrfToken);
-var_dump($user);
 }
 
 ?>

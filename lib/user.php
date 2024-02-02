@@ -68,7 +68,7 @@ function addUser(PDO $pdo, string $mail_id, string $name, string $firstname, str
     // Exécute la requête pour insérer l'utilisateur dans la table users
     if ($queryInsertUser->execute()) {
         // Insérer le rôle "employé" dans la table users_role
-        $roleId = 2; 
+        $roleId = getRoleIdByName($pdo, 'employe');; 
         $sqlInsertUserRole = "INSERT INTO users_role (mail_id, role_id) 
                                 VALUES (:mail_id, :role_id)";
         $queryInsertUserRole = $pdo->prepare($sqlInsertUserRole);
@@ -131,11 +131,8 @@ function verifyUserLoginPassword(PDO $pdo, string $email, string $password):arra
 
  // verifie le mot de passe et le compare avec le hach
     if($user && password_verify($password, $user["password"])){
-        var_dump("Mot de passe correct !");
         return $user;
     } else {
-        var_dump("Mot de passe incorrect. Hachages :");
-        var_dump("Mot de passe entré : $password");
         return false;
     }
     
