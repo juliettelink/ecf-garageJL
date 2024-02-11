@@ -7,8 +7,10 @@ adminOnly();
 
 header('Content-Type: application/json');
 
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Récupérer les données envoyées par AJAX
+    
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
 

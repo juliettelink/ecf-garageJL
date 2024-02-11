@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . "/../lib/session.php";
 require_once __DIR__ . '/../lib/menu.php';
+
 $currentPage = basename($_SERVER["SCRIPT_NAME"]);
 ?>
 

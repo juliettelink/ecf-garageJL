@@ -104,7 +104,6 @@ function getPicturesByCarId(PDO $pdo, int $Id)
 function saveCar(PDO $pdo, string $model, int $year, float $price, int $kilometer, string $full, string $color, 
                   string|null $image1, int $id = null)
 {
-    // Cohérence entre les deux tables
     $pdo->beginTransaction();
 
     try {
@@ -114,8 +113,6 @@ function saveCar(PDO $pdo, string $model, int $year, float $price, int $kilomete
             // Insertion de voiture dans la table cars
             $query = $pdo->prepare("INSERT INTO cars(model, year, price, kilometer, full, color) 
                                     VALUES (:model, :year, :price, :kilometer, :full, :color)");
-
-            // Exécution de la requête d'insertion
             $query->bindValue(':model', $model, PDO::PARAM_STR);
             $query->bindValue(':year', $year, PDO::PARAM_INT);
             $query->bindValue(':price', $price, PDO::PARAM_STR);
