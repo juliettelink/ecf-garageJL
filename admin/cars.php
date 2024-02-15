@@ -28,51 +28,50 @@ $totalPages = ceil($totalCars / _ADMIN_ITEM_PER_PAGE_ );
         Ajouter un modéle
     </a>
 </div>
-
-<table class="table">
-    <thead>
-        <tr>
-        <th scope="col">#</th>
-        <th scope="col">Modele</th>
-        <th scope="col">Année</th>
-        <th scope="col">Prix</th>
-        <th scope="col">Kilométre</th>
-        <th scope="col">Carburant</th>
-        <th scope="col">Couleur</th>
-        <th scope="col">Image 1</th>
-        <th scope="col">Image 2</th>
-        <th scope="col">Image 3</th>
-        <th scope="col">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach($cars as $car) { ?>
-            
-        <tr>
-        <th scope="row"><?= $car["car_id"] ?></th>
-        <td><?= $car["model"] ?></td>
-        <td><?= $car["year"] ?></td>
-        <td><?= $car["price"] ?></td>
-        <td><?= $car["kilometer"] ?></td>
-        <td><?= $car["full"] ?></td>
-        <td><?= $car["color"] ?></td>
-        <td><img src="<?= "../uploads/occasion/". $car['image1'] ?>" alt="<?= $car['model'] ?>" width="100"></td>
-        <td><?= $car["image2"] ?></td>
-        <td><?= $car["image3"] ?></td>
-        <td>
-            <a href="../occasion.php?id=<?=$car['car_id']?>" type="button" class="btn btn-outline-info">Voir</a>
-            <a href="car.php?id=<?=$car['car_id']?>" type="button" class="btn btn-outline-success" >Modifier</a>
-            <a href="car_delete.php?id=<?=$car['car_id']?>" type="button" class="btn btn-outline-danger"
-                onclick="return confirm('Etes-vous sur de vouloir supprimer ce modéle')">
-                <i class="fa-solid fa-trash" style="color: #ffffff;"></i> 
-                Supprimer
-            </a>
-        </td>
-        <?php } ?>
-        </tr>
-    </tbody>
-</table>
-
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Modele</th>
+            <th scope="col">Année</th>
+            <th scope="col">Prix</th>
+            <th scope="col">Kilométre</th>
+            <th scope="col">Carburant</th>
+            <th scope="col">Couleur</th>
+            <th scope="col">Image 1</th>
+            <th scope="col">Image 2</th>
+            <th scope="col">Image 3</th>
+            <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($cars as $car) { ?>
+                
+            <tr>
+            <th scope="row"><?= $car["car_id"] ?></th>
+            <td><?= $car["model"] ?></td>
+            <td><?= $car["year"] ?></td>
+            <td><?= $car["price"] ?></td>
+            <td><?= $car["kilometer"] ?></td>
+            <td><?= $car["full"] ?></td>
+            <td><?= $car["color"] ?></td>
+            <td><img src="<?= "../uploads/occasion/". $car['image1'] ?>" alt="<?= $car['model'] ?>" width="100"></td>
+            <td><?= $car["image2"] ?></td>
+            <td><?= $car["image3"] ?></td>
+            <td>
+                <a href="../occasion.php?id=<?=$car['car_id']?>" type="button" class="btn btn-outline-info">Voir</a>
+                <a href="car.php?id=<?=$car['car_id']?>" type="button" class="btn btn-outline-success" >Modifier</a>
+                <a href="car_delete.php?id=<?=$car['car_id']?>" type="button" class="btn btn-outline-danger"
+                    onclick="return confirm('Etes-vous sur de vouloir supprimer ce modéle')">
+                    Supprimer 
+                </a>
+            </td>
+            <?php } ?>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
     <?php if($totalPages > 1){?>
     <nav aria-label="Page navigation">
@@ -82,4 +81,6 @@ $totalPages = ceil($totalCars / _ADMIN_ITEM_PER_PAGE_ );
             <?php } ?>
         </ul>
     </nav>
-    <?php } ?>
+    <?php }
+    
+    require_once __DIR__. "/templates/footer.php";?>

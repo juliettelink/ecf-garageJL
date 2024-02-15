@@ -47,8 +47,22 @@ if (isset($_POST['saveService'])) {
     $fileName = null;
     // Si aucun fichier n'a été envoyé
     if (isset($_FILES["file"]["tmp_name"]) && $_FILES["file"]["tmp_name"] != '') {
-        $checkImage = getimagesize($_FILES["file"]["tmp_name"]);
-        if ($checkImage !== false) {
+        // Vérification du type de fichier
+        $allowedTypes = [IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_GIF];
+        $imageType = exif_imagetype($_FILES["file"]["tmp_name"]);
+
+        if (!in_array($imageType, $allowedTypes)) {
+            $errors[] = 'Le fichier doit être une image valide (JPEG, PNG, GIF)';
+        }
+
+        //  taille du fichier
+        $maxFileSize = 5 * 1024 * 1024; // 5 Mo
+        if ($_FILES["file"]["size"] > $maxFileSize) {
+            $errors[] = 'Le fichier est trop volumineux. La taille maximale autorisée est de 5 Mo.';
+        }
+
+        // enregistrement du fichier
+        if (empty($errors)) {
             $fileName = slugify(basename($_FILES["file"]["name"]));
             $fileName = uniqid() . '-' . $fileName;
 

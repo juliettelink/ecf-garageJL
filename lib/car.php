@@ -40,7 +40,6 @@ function getCars(PDO $pdo, int $limit = null, int $page = null):array
   }
   $query->execute();
   $cars = $query->fetchAll(PDO::FETCH_ASSOC);
-// var_dump($cars);
   return $cars;
 }
 
@@ -176,10 +175,6 @@ function saveCar(PDO $pdo, string $model, int $year, float $price, int $kilomete
     } catch (PDOException $e) {
         // Exception / annulation
         $pdo->rollBack();
-
-        // Peut-être enregistrez l'erreur quelque part ou faites un echo pour le débogage
-        echo "Erreur lors de l'opération : " . $e->getMessage();
-
         return false;
     }
 }
@@ -190,13 +185,11 @@ function saveCar(PDO $pdo, string $model, int $year, float $price, int $kilomete
 //fonction suppression d'un modele dans la bdd cars et pictures
 function deleteCar(PDO $pdo, int $id) :bool
  {
-  // Supprimer table 'pictures'
   $picturesQuery = "DELETE FROM pictures WHERE car_id = :car_id";
   $picturesStmt = $pdo->prepare($picturesQuery);
   $picturesStmt->bindParam(":car_id", $id, PDO::PARAM_INT);
   $picturesStmt->execute();
 
-  // Supprimer  table 'cars'
   $carQuery = "DELETE FROM cars WHERE car_id = :car_id";
   $carStmt = $pdo->prepare($carQuery);
   $carStmt->bindParam(":car_id", $id, PDO::PARAM_INT);

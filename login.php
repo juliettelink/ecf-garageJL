@@ -64,6 +64,7 @@ if (isset($_POST["loginUser"])) {
         <div class="m-3">
             <label class="form-label" for="password">Mot de passe</label>
             <input type="password" name="password" id="password" class="form-control" required>
+            <span id="eye-icon" class="eye-icon" onclick="passwordVisibility()">👁️</span>
         </div>
         <input type="submit" value="Connexion" name="loginUser" class="btn btn-primary" >
     </form>

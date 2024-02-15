@@ -1,9 +1,6 @@
 <?php
 
 $imagePath = getCarImage($car["image1"]);
-//var_dump($imagePath);
-
-
 ?>
 
 <div class="col-md-4 my-2">

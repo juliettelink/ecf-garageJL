@@ -15,8 +15,6 @@ $csrfToken = $_SESSION['csrf_token'];
 $errors = [];
 $messages = [];
 
-
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Verification CSRF
     
@@ -47,7 +45,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             if (empty($errors)) {
                 $roleName = 'employe'; 
                 $roleId = getRoleIdByName($pdo, $roleName);
-
                 $res = addUser($pdo, $mail_id, $name, $firstname, $password, $roleId);
                 if ($res) {
                     $messages[] = 'Inscription réussie';

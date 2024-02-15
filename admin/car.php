@@ -33,7 +33,7 @@ if (isset($_GET['id'])) {
     }
     $pageTitle = "Formulaire de modification de la voiture";
 } else {
-    $pageTitle = "Formulaire ajout de la voiture";
+    $pageTitle = "Formulaire d'ajout de la voiture";
 }
 
 if (isset($_POST['saveCar'])) {
@@ -60,12 +60,24 @@ if (isset($_POST['saveCar'])) {
     $fileName = null;
     // Si un fichier est envoyé
     if (isset($_FILES["file"]["tmp_name"]) && $_FILES["file"]["tmp_name"] != '') {
-        $checkImage = getimagesize($_FILES["file"]["tmp_name"]);
-        if ($checkImage !== false) {
+        // Vérification du type de fichier
+        $allowedTypes = [IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_GIF];
+        $imageType = exif_imagetype($_FILES["file"]["tmp_name"]);
+
+        if (!in_array($imageType, $allowedTypes)) {
+            $errors[] = 'Le fichier doit être une image valide (JPEG, PNG, GIF)';
+        }
+
+        //  taille du fichier
+        $maxFileSize = 5 * 1024 * 1024; // 5 Mo
+        if ($_FILES["file"]["size"] > $maxFileSize) {
+            $errors[] = 'Le fichier est trop volumineux. La taille maximale autorisée est de 5 Mo.';
+        }
+
+        // enregistrement du fichier
+        if (empty($errors)) {
             $fileName = slugify(basename($_FILES["file"]["name"]));
             $fileName = uniqid() . '-' . $fileName;
-
-
 
             /* On déplace le fichier uploadé dans notre dossier upload, dirname(__DIR__) 
                 permet de cibler le dossier parent car on se trouve dans admin
@@ -125,7 +137,7 @@ if (isset($_POST['saveCar'])) {
         $res = saveCar($pdo, $_POST["model"], $_POST["year"], $_POST["price"], $_POST["kilometer"], $_POST["full"], $_POST["color"], $fileName, $id);
 
         if ($res) {
-            $messages[] = "La voiture a bien été sauvegardé";
+            $messages[] = "La voiture a bien été sauvegardée";
             //On vide le tableau pour avoir les champs de formulaire vides
             if (!isset($_GET["id"])) {
                 $car = [
@@ -138,8 +150,8 @@ if (isset($_POST['saveCar'])) {
                 ];
             }
             //reinitialise les messages
-            $messages = [];
-            $errors = [];
+           //$messages = [];
+           // $errors = [];
         } else {
             $errors[] = "La voiture n'a pas été sauvegardé";
         }
@@ -159,6 +171,7 @@ if (isset($_POST['saveCar'])) {
         <?= $error; ?>
     </div>
 <?php } ?>
+
 <?php if ($car !== false) { ?>
     <form method="POST" enctype="multipart/form-data">
     <div class="mb-3">

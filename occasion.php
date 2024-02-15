@@ -60,19 +60,19 @@ require_once __DIR__ . "/templates/header.php";
                     </a>
                 </div>
             </div>
-        <div class="row flex-lg-row align-items-center g-5 py-5">
-            <div class="col-lg-12 text-center">
-                <p class="lead">Couleur : <?=htmlentities($car["color"])?></p>
-                <p class="lead"><?=htmlentities($car["price"])?> €</p>
-                <p class="lead"><?=htmlentities($car["kilometer"])?> km</p>
-                <p class="lead">Année : <?=htmlentities($car["year"])?></p>
-                <p class="lead">Carburant : <?=htmlentities($car["full"])?></p>
-                <div class="d-grid gap-2 d-md-flex justify-content-center">
-                    <a href="forms.php?model=<?= urldecode($car["model"])?>" class="btn btn-primary btn-lg px-4 me-md-2">Formulaire</a>
-                    <a href="occasions.php" class="btn btn-secondary btn-lg px-4 me-md-2">Retour</a>
+            <div class="row flex-lg-row align-items-center g-5 py-5">
+                <div class="col-lg-12 text-center">
+                    <p class="lead">Couleur : <?=htmlentities($car["color"])?></p>
+                    <p class="lead"><?=htmlentities($car["price"])?> €</p>
+                    <p class="lead"><?=htmlentities($car["kilometer"])?> km</p>
+                    <p class="lead">Année : <?=htmlentities($car["year"])?></p>
+                    <p class="lead">Carburant : <?=htmlentities($car["full"])?></p>
+                    <div class="d-grid gap-2 d-md-flex justify-content-center">
+                        <a href="forms.php?model=<?= urldecode($car["model"])?>" class="btn btn-primary btn-lg px-4 me-md-2">Formulaire</a>
+                        <a href="occasions.php" class="btn btn-secondary btn-lg px-4 me-md-2">Retour</a>
+                    </div>
                 </div>
             </div>
-        </div>
     </div>
 <?php } else {?>
     <h2>Modéle de voiture introuvable</h2>

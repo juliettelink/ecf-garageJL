@@ -52,13 +52,12 @@ function isStrongPassword($password) {
 
 // nouvel employé
 function addUser(PDO $pdo, string $mail_id, string $name, string $firstname, string $password) {
-    // Hachage du mot de passe
+    
     $password = password_hash($password, PASSWORD_DEFAULT);
 
-    // Insérer l'employé dans la table users
+    // Insére l'employé dans la table users
     $sqlInsertUser = "INSERT INTO users (mail_id, name, firstname, password) 
                         VALUES (:mail_id, :name, :firstname, :password)";
-
     $queryInsertUser = $pdo->prepare($sqlInsertUser);
     $queryInsertUser->bindValue(":mail_id", $mail_id, PDO::PARAM_STR);
     $queryInsertUser->bindValue(":name", $name, PDO::PARAM_STR);
@@ -67,7 +66,7 @@ function addUser(PDO $pdo, string $mail_id, string $name, string $firstname, str
 
     // Exécute la requête pour insérer l'utilisateur dans la table users
     if ($queryInsertUser->execute()) {
-        // Insérer le rôle "employé" dans la table users_role
+        // Insére le rôle "employé" dans la table users_role
         $roleId = getRoleIdByName($pdo, 'employe');; 
         $sqlInsertUserRole = "INSERT INTO users_role (mail_id, role_id) 
                                 VALUES (:mail_id, :role_id)";

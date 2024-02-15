@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // La date n'est pas dans un format attendu
             $_SESSION['error_message'] = "La date n'est pas valide.";
         } else {
-            // Requête SQL pour insérer l'avis dans la base de données
+            
             $sql = "INSERT INTO opinions (nameClient, comment, date, note) VALUES (?, ?, ?, ?)";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$nameClient, $comment, $date, $note]);
