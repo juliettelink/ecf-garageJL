@@ -45,12 +45,9 @@ function deleteService(PDO $pdo, int $id):bool
 function saveService(PDO $pdo,  string $service, string $description,  string|null $image, int $id = null): bool
 {
     if ($id === null) {
-        $query = $pdo->prepare("INSERT INTO services (service, description, image) "
-        ."VALUES(:service, :description, :image)");
+        $query = $pdo->prepare("INSERT INTO services (service, description, image) VALUES(:service, :description, :image)");
     } else {
-        $query = $pdo->prepare("UPDATE `services` SET `service` = :service, "
-        ."`description` = :description, "
-        ."image = :image WHERE `service_id` = :id;");
+        $query = $pdo->prepare("UPDATE `services` SET `service` = :service, `description` = :description, image = :image WHERE `service_id` = :id;");
         
         $query->bindValue(':id', $id, PDO::PARAM_INT);
     }

@@ -49,6 +49,8 @@ $filteredCars = filterCars($pdo, $cars, $year, $kilometer, $price);
 require_once __DIR__ . "/templates/footer.php";
 ?>
 
+<!-- le chemin des images pour le JS -->
+
 <script>
     const DEFAULT_IMAGE_FOLDER = <?= json_encode(_DEFAULT_IMAGE_FOLDER_) ?>;
     const CARS_IMAGES_FOLDER = <?= json_encode(_CARS_IMAGES_FOLDER_) ?>;

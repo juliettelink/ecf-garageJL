@@ -64,25 +64,27 @@ $openingTimes = getOpeningTimes($pdo);
 <!-- Contenu de la politique de confidentialité -->
 <div id="privacy-policy-popup">
     <h2>Votre politique de confidentialité </h2>
-    <p> Dernière mise à jour : 10/2023
-Bienvenue sur notre site exploitant le garage VParrot. Nous nous engageons à protéger la confidentialité de vos informations. Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos informations lorsque vous utilisez notre site et notamment lorsque vous faites des demandes d'informations sur des voitures d'occasion spécifiques via notre formulaire de contact.
-Informations que nous collectons :
-Lorsque vous utilisez notre formulaire de contact pour demander des informations sur une voiture d'occasion spécifique, nous collectons les informations que vous fournissez volontairement, telles que votre nom, votre adresse e-mail et votre numéro de téléphone.
-Finalité de la collecte :
-Les informations collectées sont utilisées exclusivement pour répondre à votre demande d'informations sur la voiture d'occasion spécifique que vous avez mentionnée dans le formulaire.
-Utilisation des informations :
-Nous utilisons les informations que vous fournissez pour vous fournir les détails demandés sur la voiture d'occasion spécifique et pour faciliter la communication relative à votre demande.
-Conservation des données :
-Les informations fournies dans le cadre de votre demande sont conservées pendant six mois à des fins de suivi et de communication ultérieure.
-Communication additionnelle :
-En fournissant vos informations, vous consentez à recevoir des communications additionnelles de notre part, notamment des mises à jour sur de nouvelles arrivées de voitures d'occasion et des offres promotionnelles.
-Sécurité des informations :
-Nous prenons des mesures de sécurité appropriées pour protéger vos informations, y compris des technologies de sécurité et des pratiques de gestion sécurisées.
-Partage d'informations :
-Nous ne partageons pas vos informations avec des tiers sans votre consentement, sauf si cela est nécessaire pour répondre à votre demande spécifique (par exemple, pour fournir un rapport d'historique de véhicule).
-En utilisant notre site et en fournissant vos informations, vous consentez à notre politique de confidentialité. Nous nous réservons le droit de mettre à jour cette politique de confidentialité à tout moment. Veuillez consulter cette page régulièrement pour être informé des éventuelles modifications.
-Si vous avez des questions ou des préoccupations concernant notre politique de confidentialité, veuillez nous contacter.
-    </p>
+    <div class="overflow-auto" style="max-height: 300px;">
+        <p> Dernière mise à jour : 10/2023
+            Bienvenue sur notre site exploitant le garage VParrot. Nous nous engageons à protéger la confidentialité de vos informations. Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos informations lorsque vous utilisez notre site et notamment lorsque vous faites des demandes d'informations sur des voitures d'occasion spécifiques via notre formulaire de contact.
+            Informations que nous collectons :
+            Lorsque vous utilisez notre formulaire de contact pour demander des informations sur une voiture d'occasion spécifique, nous collectons les informations que vous fournissez volontairement, telles que votre nom, votre adresse e-mail et votre numéro de téléphone.
+            Finalité de la collecte :
+            Les informations collectées sont utilisées exclusivement pour répondre à votre demande d'informations sur la voiture d'occasion spécifique que vous avez mentionnée dans le formulaire.
+            Utilisation des informations :
+            Nous utilisons les informations que vous fournissez pour vous fournir les détails demandés sur la voiture d'occasion spécifique et pour faciliter la communication relative à votre demande.
+            Conservation des données :
+            Les informations fournies dans le cadre de votre demande sont conservées pendant six mois à des fins de suivi et de communication ultérieure.
+            Communication additionnelle :
+            En fournissant vos informations, vous consentez à recevoir des communications additionnelles de notre part, notamment des mises à jour sur de nouvelles arrivées de voitures d'occasion et des offres promotionnelles.
+            Sécurité des informations :
+            Nous prenons des mesures de sécurité appropriées pour protéger vos informations, y compris des technologies de sécurité et des pratiques de gestion sécurisées.
+            Partage d'informations :
+            Nous ne partageons pas vos informations avec des tiers sans votre consentement, sauf si cela est nécessaire pour répondre à votre demande spécifique (par exemple, pour fournir un rapport d'historique de véhicule).
+            En utilisant notre site et en fournissant vos informations, vous consentez à notre politique de confidentialité. Nous nous réservons le droit de mettre à jour cette politique de confidentialité à tout moment. Veuillez consulter cette page régulièrement pour être informé des éventuelles modifications.
+            Si vous avez des questions ou des préoccupations concernant notre politique de confidentialité, veuillez nous contacter.
+        </p>
+    </div>
     <button id="close-popup">Fermer</button>
 </div>
 
