@@ -14,6 +14,10 @@ $price = $_GET['price'] ?? null;
 $cars = getCars($pdo);
 $filteredCars = filterCars($pdo, $cars, $year, $kilometer, $price);
 
+$maxYear = 2024;
+$maxKilometer = 1000000;
+$maxPrice = 900000;
+
 ?>
 
 <div class="container">
@@ -21,18 +25,18 @@ $filteredCars = filterCars($pdo, $cars, $year, $kilometer, $price);
 
     <div class="filter-block row">
         <div class="col-md-4 col-12">
-            <label for="year">Année : <span id="yearValue">2009</span></label>
-            <input type="range" min="2000" max="2023" id="year" class="filter-field" />
+            <label for="year">Année : <span id="yearValue"><?=$maxYear?></span></label>
+            <input type="range" min="2010" max="<?=$maxYear?>" id="year" class="filter-field" value="<?=$maxYear?>" />
         </div>
 
         <div class="col-md-4 col-12">   
-            <label for="kilometer">Kilométrage : <span id="kilometerValue">50050</span></label>
-            <input type="range" min="1000" max="1000000" id="kilometer" class="filter-field" />
+            <label for="kilometer">Kilométrage : <span id="kilometerValue"><?=$maxKilometer?></span></label>
+            <input type="range" min="1000" max="<?=$maxKilometer?>" id="kilometer" class="filter-field" value="<?=$maxKilometer?>" />
         </div>
 
         <div class="col-md-4 col-12">
-            <label for="price">Prix : <span id="priceValue">255000</span></label>
-            <input type="range" min="10000" max="900000" id="price" class="filter-field" />
+            <label for="price">Prix : <span id="priceValue"><?=$maxPrice?></span></label>
+            <input type="range" min="10000" max="<?=$maxPrice?>" id="price" class="filter-field" value="<?=$maxPrice?>" />
         </div>
 
         <div id="searchResults" class="search-results-block"></div>

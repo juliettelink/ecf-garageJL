@@ -38,7 +38,7 @@ $currentPage = basename($_SERVER["SCRIPT_NAME"]);
                     foreach ($mainMenu as $key => $menuItem) {
                     if (!array_key_exists("exclude", $menuItem)) {
                     ?>
-                <li class="nav-item"><a href="<?=$key?>" class="nav-link px-2 <?php
+                        <li class="nav-item"><a href="<?=$key?>" class="nav-link px-2 <?php
                     if ($key === $currentPage) {echo "active";}
                     ?>"><?=$menuItem["menu_title"];?></a></li>
                 <?php }

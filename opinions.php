@@ -12,8 +12,8 @@ require_once __DIR__ . "/templates/header.php";
 $opinions = getOpinions($pdo);
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $nameClient = $_POST["nameClient"];
-    $comment = $_POST["comment"];
+    $nameClient = htmlspecialchars($_POST["nameClient"], ENT_QUOTES, 'UTF-8');
+    $comment = htmlspecialchars($_POST["comment"], ENT_QUOTES, 'UTF-8');
     $date = $_POST["date"];
     $note = $_POST["note"];
 

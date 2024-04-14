@@ -21,13 +21,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
         $errors[] = 'Erreur CSRF : tentative de requête non autorisée.';
     }else{
-        $name = $_POST["name"];
-        $surname = $_POST["surname"];
-        $mail = $_POST["mail"];
-        $model = $_POST["model"];
-        $subject = $_POST["subject"];
-        $message = $_POST["message"];
-        $date = $_POST["date"];
+        $name = htmlspecialchars($_POST["name"], ENT_QUOTES, 'UTF-8');
+        $surname = htmlspecialchars($_POST["surname"], ENT_QUOTES, 'UTF-8');
+        $mail = htmlspecialchars($_POST["mail"], ENT_QUOTES, 'UTF-8');
+        $model = htmlspecialchars($_POST["model"], ENT_QUOTES, 'UTF-8');
+        $subject = htmlspecialchars($_POST["subject"], ENT_QUOTES, 'UTF-8');
+        $message = htmlspecialchars($_POST["message"], ENT_QUOTES, 'UTF-8');
+        $date = htmlspecialchars($_POST["date"], ENT_QUOTES, 'UTF-8');
         
         // Validation des données
         if (empty($name) || empty($surname) || empty($mail) || empty($model) || empty($subject) || empty($message) || empty($date)) {

@@ -62,7 +62,7 @@ function getCarById(PDO $pdo, $id):array|bool
 {
   $sql = "SELECT c.*, p.* 
           FROM cars c 
-          INNER JOIN pictures p ON c.car_id = p.car_id 
+          LEFT JOIN pictures p ON c.car_id = p.car_id 
           WHERE c.car_id = :id";
 
   $query = $pdo->prepare($sql);
@@ -202,3 +202,4 @@ function deleteCar(PDO $pdo, int $id) :bool
   return ($rowsAffectedPictures > 0 && $rowsAffectedCar > 0);
 }
   ?>
+

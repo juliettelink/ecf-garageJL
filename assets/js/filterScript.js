@@ -1,6 +1,7 @@
 
 
 document.addEventListener("DOMContentLoaded", function () {
+
     const yearInput = $("#year");
     const kilometerInput = $("#kilometer");
     const priceInput = $("#price");
@@ -30,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const year = yearInput.val();
         const kilometer = roundValue(kilometerInput.val());
         const price = roundValue(priceInput.val());
+        
 
     // donne la valeur réelle en fonction du filtre
         yearValue.text(year);
